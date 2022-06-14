@@ -4,7 +4,7 @@
     "tutorials": [
         {
             "title": "Introduction",
-            "filename": "../../lab1-introduction-to-application-development/connect-provision-adb/connect-provision-adb.md"
+            "filename": "../lab1-introduction-to-application-development/connect-provision-adb/connect-provision-adb.md"
         }
     ]
 }
