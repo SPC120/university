@@ -21,22 +21,18 @@
         },
         {
             "title": "Lab 3: Create Virtual Cloud Networks",
-            "type": "freetier",
             "filename": "../../../virtual-cloud-networks/vcn/virtual-cloud-networks.md"
         },
         {
             "title": "Lab 4: Create a Compute Service",
-            "type": "freetier",
             "filename": "../../../compute-service/cs/compute-service.md"
         },
         {
             "title": "Lab 5: Create and Attach a Block Volume",
-            "type": "freetier",
             "filename": "../../../block-volume/bv/block-volume.md"
         },
         {
             "title": "Lab 6: Create an Object Storage",
-            "type": "freetier",
             "filename": "../../../object-storage/object-storage/object-storage.md"
         },
         {
