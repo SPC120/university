@@ -3,8 +3,44 @@
     "help": "eugenio.galiano@oracle.com",
     "tutorials": [
         {
-            "title": "Introduction",
-            "filename": "../lab1-introduction-to-application-development/connect-provision-adb/connect-provision-adb.md"
+            "title": "Introduction to Application Development",
+            "filename": "../lab1-introduction-to-application-development/intro-app-dev.md"
+        },
+        {
+            "title": "Introduction to OCI",
+            "filename": "../lab2-introduction-to-oci/intro-to-oci.md"
+        },
+        {
+            "title": "Terraform and Resource Manager",
+            "filename": "../lab3-terraform-and-resourcemanager/terraform.md"
+        },
+        {
+            "title": "Oracle APEX and ADW",
+            "filename": "../lab4-oracleapex-and-adw/apex-adw.md"
+        },
+        {
+            "title": "Oracle Vision Service",
+            "filename": "../lab5-oraclevisionservice/vision.md"
+        },
+        {
+            "title": "Visual Builder Cloud Service",
+            "filename": "../lab6-visualbuildercloudservice/visualbuilder.md"
+        },
+        {
+            "title": "Oracle Digital Assistant",
+            "filename": "../lab7-oracledigitalassistant/oracledigitalassistant.md"
+        },
+        {
+            "title": "Oracle Content Management",
+            "filename": "../lab8-oraclecontentmanagement/content-management.md"
+        },
+        {
+            "title": "Oracle Analytics Cloud",
+            "filename": "../lab9-oracleanalyticscloud/oracleanalyticscloud.md"
+        },
+        {
+            "title": "Data Science",
+            "filename": "../lab10-datascience/datascience.md"
         }
     ]
 }
