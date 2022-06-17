@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This lab will introduce you to Oracle Cloud Infrastructure (OCI).
+This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you through the console and cover a few of the foundational services that are frequently used with IaaS and PaaS services.  You will also create a Virtual Cloud Network and spin up a compute instance and install and access a web server on that instance.
 
 [](youtube:a6Jm7lYaCWI)
 
@@ -12,22 +12,28 @@ Estimated lab time: 120 minutes
 
 ### Objectives
 
--   Learn how to access the OCI console.
+-   Learn how to access and navigate the OCI console.
 -   Understand the basic essentials to working with OCI.
+-   Create a VCN and compute instance, and install and access a web server.
 
 ### Prerequisites
 
 -   Access to an OCI tenancy.  
 
-## Task 1: The OCI Console
+## Task 1: Access The OCI Console
 
-1. Log in to the Oracle Cloud.
+1. Log in to the Oracle Cloud.  At the time this workshop was being created OCI was updating it's support for federated identity management, and so the log-in screens will be different from these screen shots.  This [blog](https://blogs.oracle.com/cloudsecurity/post/oci-federation-with-oci-iam-identity-domains) and this [whitepaper](https://www.oracle.com/a/ocom/docs/security/what-oci-iam-customers-should-expect.pdf) explains the current (June 2022) and near future approach to federating OCI users and groups, which most developer customers will likely adopt.
 2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
+
+https://blogs.oracle.com/cloudsecurity/post/oci-federation-with-oci-iam-identity-domains
+https://www.oracle.com/a/ocom/docs/security/what-oci-iam-customers-should-expect.pdf
+
 
     ![](./images/picture100-36.png " ")
 
+Regions:  https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
     
-## Task 2: Identity and Access Management
+## Task 2: Learn Identity and Access Management Basics
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
