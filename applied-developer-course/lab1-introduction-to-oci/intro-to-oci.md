@@ -43,17 +43,86 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
 1. As noted at the start of this lab, imminent changes to Identity Access Manager (OCI Console login - IAM) and Identity Cloud Service (IDCS) precludes covering users and groups, and navigating through related screens that have or will change.  Review the links provided above to understand more about identity management.  That said, policies will continue to be used to grant access to users and groups to OCI services.  In the Data Science lab you will need to create a policy to allow access to the Data Science service.
 
-2.  Create a Compartment.  Compartments are the primary means to organize, segregate, and management access to OCI resources.  Every tenancy has a root compartment under which you create additional sub-compartments and sub-sub compartments (maximum six levels deep).  Compartments are tenancy-wide across regions. When you create a compartment, it is available in every region that your tenancy is subscribed to. You can get a cross-region view of your resources in a specific compartment with the tenancy explorer. See [Viewing All Resources in a Compartment](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/compartmentexplorer.htm#Viewing_All_Resources_in_a_Compartment).  We will create a compartment for this course/workshop and create all related services in this compartment.  Navigate to the menu in the upper left and select Identity and Security, and then Compartments.
+## Task 3: Create a Compartment
+
+1. Compartments are the primary means to organize, segregate, and management access to OCI resources.  Every tenancy has a root compartment under which you create additional sub-compartments and sub-sub compartments (maximum six levels deep).  Compartments are tenancy-wide across regions. When you create a compartment, it is available in every region that your tenancy is subscribed to. You can get a cross-region view of your resources in a specific compartment with the tenancy explorer. See [Viewing All Resources in a Compartment](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/compartmentexplorer.htm#Viewing_All_Resources_in_a_Compartment).  We will create a compartment called **CareClinic** for this course/workshop and create all related services in this compartment.  Navigate to the menu in the upper left and select Identity and Security, and then Compartments.
 
     ![](./images/006.png " ")
 
     ![](./images/007.png " ")
 
-2.  
+- Create the new compartment.
 
-## Task 3: Learn Networking Basics
+    ![](./images/008.png " ")
 
-Although you can connect to your autonomous database from local PC desktop tools like Oracle SQL Developer, you can conveniently access the browser-based SQL Worksheet directly from your Autonomous Data Warehouse or Autonomous Transaction Processing console.
+    ![](./images/009.png " ")
+
+## Task 4: Use the Oracle Cloud Shell to Create SSH keys
+
+1. Later in this lab you will be creating a compute instance.  Developers typically access compute instances using a SSH key.  A SSH key can be generated a few different ways (eg: puttygen on Windows or ssh-keygen on a mac or Linux), but the easiest way to do this in OCI is to use Cloud Shell.  The SSH (Secure Shell) protocol is a method for secure remote login from one computer to another. SSH enables secure system administration and file transfers over insecure networks using encryption to secure the connections between endpoints. SSH keys are an important part of securely accessing Oracle Cloud Infrastructure compute instances in the cloud.
+
+- Oracle Cloud Shell is browser-based, does not require installation or configuration of software on your laptop, and works independently of your network setup.  The Cloud Shell machine is a small virtual machine with five GB of storage running a Bash shell which you access through the OCI Console (Homepage). Cloud Shell comes with a pre-authenticated OCI CLI (Command Line Interface), set to the Console tenancy home page region, as well as up-to-date tools and utilities. To use the Cloud Shell machine, your tenancy administrator must grant the required IAM (Identity and Access Management) policy.  More information about Cloud Shell can be found [here](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm).
+
+- **IMPORTANT: If the SSH key is not created correctly, you will not be able to connect to your environment and will get errors. Please ensure you create your key properly.**
+
+2. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page.  The shell will take several seconds to initialize and appear at the bottom of the console.
+
+    ![](./images/010.png " ")
+
+    ![](./images/011.png " ")
+
+3. Once the cloud shell has started, enter the following commands. Choose the key name you can remember. This will be the keyname you will use to connect to any compute instances you create. Press Enter twice for no passphrase.
+
+    ```
+    <copy>
+    mkdir .ssh
+    cd .ssh
+    ssh-keygen -b 2048 -t rsa -f cloudshellkey
+    </copy>
+    ```
+    ![](./images/012.png " ")
+
+- We recommend using the name cloudshellkey for your keyname but feel free to use the name of choice.
+
+4. List the two files that you just created.
+
+    ```
+    <copy>
+    ls
+    </copy>
+    ```
+    ![](./images/013.png " ")
+
+- **Note: In the output, there are two files, a private key: cloudshellkey and a public key: cloudshellkey.pub. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.**
+
+5. Download the public and private keys.  You will need to enter the public key when creating the compute instance later in this lab, and then need the private key to access that instance with a client tool or SSH.  Navigate to the hamburger menu in the upper left of the cloud shell and select Download.
+
+    ![](./images/014.png " ")
+
+- Download the following two files:
+
+    ```
+    <copy>
+    .ssh/cloudshellkey
+    .ssh/cloudshellkey.pub
+    </copy>
+    ```
+    ![](./images/015.png " ")
+    ![](./images/016.png " ")
+
+## Task 3: Create a Virtual Cloud Network (VCN)
+
+1.  Introduction:  Networking, along with compute and storage is a critically important service in OCI, and is required by most if not all services.  It is a very big topic in cloud computing environments, and in this lab we will create a virtual cloud network that we'll use to access a compute instance later in this lab.  A Virtual Cloud Network (VCN) is a software-defined network that you set up in the Oracle Cloud Infrastructure data centers in a particular region. It enables your cloud resources to securely communicate through the internet with other instances running in OCI or your on-premises data centers. Be sure to review [Overview of Networking](https://docs.cloud.oracle.com/iaas/Content/Network/Concepts/overview.htm) to gain a full understanding of the network components and their relationships.  Navigate to networking.
+
+    ![](./images/017.png " ")
+
+2.  Select Virtual Cloud Networks.  Note other network related services that you may wish learn about following this course.
+
+    ![](./images/018.png " ")
+
+3. Create your VCN.  In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select **Start VCN Wizard**.
+
+    ![](./images/019.png " ")
 
 ## Task 4: Learn Storage Basics
 
