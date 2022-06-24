@@ -120,9 +120,29 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/018.png " ")
 
-3. Create your VCN.  In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select **Start VCN Wizard**.
+3. Create your VCN.  In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select the **CareClinic** Compartment you created earlier on the left and then select **Start VCN Wizard**.
 
     ![](./images/019.png " ")
+
+4. Take the default with Internet Connectivity and then select Start VCN Wizard.
+
+    ![](./images/020.png " ")
+
+5. Name the VCN CareClinicVCN, ensure the Compartment is CareClinics, and ensure the CIDR blocks are as follows (these should be the defaults)
+
+    ![](./images/021.png " ")
+
+6. Select Create.  Note the create process will take several seconds.  This will create a VCN with public and private subnets, and Internet Gateway, a NAT Gateway, and a Service Gateway.
+
+    ![](./images/022.png " ")
+
+    ![](./images/023.png " ")
+
+7. When it is complete select View Virtual Cloud Network to see the details.
+
+    ![](./images/024.png " ")
+
+    ![](./images/025.png " ")
 
 ## Task 4: Learn Storage Basics
 
