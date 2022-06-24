@@ -3,12 +3,12 @@
     "help": "eugenio.galiano@oracle.com",
     "tutorials": [
         {
-            "title": "Introduction to Application Development",
-            "filename": "../lab1-introduction-to-application-development/intro-app-dev.md"
+            "title": "Introduction to OCI",
+            "filename": "../lab1-introduction-to-oci/intro-to-oci.md"
         },
         {
-            "title": "Introduction to OCI",
-            "filename": "../lab2-introduction-to-oci/intro-to-oci.md"
+            "title": "Introduction to Application Development",
+            "filename": "../lab2-introduction-to-application-development/intro-app-dev.md"
         },
         {
             "title": "Terraform and Resource Manager",
