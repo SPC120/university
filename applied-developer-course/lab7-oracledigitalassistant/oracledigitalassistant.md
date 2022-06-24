@@ -102,5 +102,8 @@ To enable the skill to interpret user input based on the utterances that you jus
 
   ![](images/2-utttester.png " ")
 
-  note: pragmatic suggestion for mental wellbeing - check later 
+  Go ahead and test your own utterances and train your bot.
+
+
+
 
