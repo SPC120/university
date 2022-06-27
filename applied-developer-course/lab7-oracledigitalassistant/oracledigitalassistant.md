@@ -13,14 +13,19 @@ In this lab, you will:
 - Create a custom component to update the database from the chatbot.
 - Validate, debug and test your skill.
 
-Pre-requisites 
+## Pre-requisites 
 
 
 Before we get started:
 
+- Download the Skill template - <a href="files/CareMedicalClinics.zip">download</a> 
+
+- Install your favorite IDE (VScode - preferable)
+
 - Install NodeJS in your local machine.
 
-- Download the Skill template - [download](files/CareMedicalClinics.zip)
+
+(Add documentation - ORDS)
 
 ## Task 1: Create a Digital Assistant Instance and Import the Skill
 1. Log in to the Oracle Cloud at cloud.oracle.com. Cloud Account Name is howarduniversity. Click “Next”.
@@ -87,6 +92,24 @@ Create the Find a Doctor intent:
     </copy>
     ```
 5. Click the +Create button.
+
+### Create the Unresolved intent:
+The unresolved intent in a skill handles messages outside of the domain that a skill is designed to process. For this you usually map a dialog flow state to the *unresolvedIntent* action transition to inform the user that the skill could not handle the request.
+
+1. Click the + Intent button.
+2. Next to the Conversation Name field, click the Edit button, and enter *Unresolved Intent*.
+3. In the Name field, type *unresolvedIntent*.
+4. Select and copy all of the example sentences below to your clipboard and paste in the *Advance Input Mode* section under Examples
+    ```
+    <copy>
+    blah blah
+    buy me a tv
+    play music
+    sing a song
+    </copy>
+    ```
+5. Click the +Create button.
+
 
 ### Train and test the intents:
 
@@ -354,3 +377,237 @@ In this step, you're going to simplify your development efforts using a composit
     Select your preferred time slot
     </copy>
     ```
+
+*Note:* Ensure that all the entities are trained.
+
+
+## Task 4: Create a Dialog Flow
+
+With the NLP model created, you are ready to build a dialog flow for the skill. The dialog flow is a blueprint for the interactions that enable the conversation between the skill and the user. Although you're going to create a single flow in this tutorial, a skill can have multiple flows that support different use cases and functions.
+
+Each flow is made up of one or more states, and each state executes a function: rendering a skill response message, authenticating a user, branching the conversation when certain conditions are met, etc. The Visual Flow Designer provides you with templates for each state.
+
+Let's test the current dialog flow
+
+1. Go ahead and click the preview button to test the current flow.
+
+  ![](images/4-preview.png " ")
+
+2. Start the conversation by typing *Hi* and observe the states and intents in the conversation tester  window.
+
+  ![](images/4-draftconvtest.png " ")
+
+  ![](images/4-draftintents.png " ")
+
+
+Start building the dialog flow
+
+Each state implemented by a
+component
+– Executes logic
+– Receives user input
+– Returns bot responses
+– Determines navigation
+
+1. Go ahead and replace *System.intent* component. This will allow you to conditionally direct a conversation to a logical next dialog flow state for each user utterance.  
+  ```
+  <copy>
+  ########### System intent ###############
+    intent:
+      component: "System.Intent"
+      properties:
+        variable: "iResult"
+      transitions:
+        actions:
+          unresolvedIntent: "unresolvedIntent"
+          greetings: "greetings"
+          findDoctor: "findPatientDetails"
+          positiveHealth: "startTheraphy"
+
+  </copy>
+  ```
+2. Add an unresolved state by selecting *+Add Component* to open the component templates. 
+
+  ![](images/4-addcomp.png " ")
+
+- Now, select *Display text message* from the *Hot Picks*, pick *Greetings* from the drop down under *insert after state*, uncheck include template comments and select *Insert Component*.
+
+  ![](images/4-unresolved.png " ")
+
+- Update the component as follows:
+
+```
+<copy>
+########### Unresolved State ###############
+  unresolvedIntent:
+    component: "System.Output"
+    properties:
+      text: "I don't understand. What do you want to do?"
+    transitions:
+      return: "intent" 
+
+</copy>
+```
+3. We will add the dialog flow for *Positive Health* intent. Here we are going to display a card carousal with images, text and links to redirect to different videos.
+
+- Select *+ Add component* and pick *Display Action Button Message* (under User messaging -> Display Multimedia Messages).
+- Pick "unresolved" from the drop down under *insert after state*, Uncheck include template comments and select *Insert Component*.
+
+  ![](images/4-cardlayout.png " ")
+
+- Update the component as follows:
+```
+<copy>
+######## Begin Theraphy ############ 
+
+  startTheraphy:    
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      keepTurn: "false"
+      metadata:
+        responseItems:
+        - type: "cards"
+          cardLayout: "horizontal"
+          name: "Cards"
+          actions: []
+          cards:
+          - title: "${theraphy.name}"
+            description: "${theraphy.description}"
+            imageUrl: "${theraphy.image}"
+            name: "theraphy"
+            iteratorVariable: "theraphy"
+            actions:
+            - label: "Practice Excercise"
+              type: "url"
+              payload:
+                url: "${theraphy.action}"
+        globalActions: []
+    transitions: 
+      return: "done"
+</copy>
+```
+
+- Also, add transition for *startTheraphy* under the *greetings* component as follows:      
+```
+<copy>
+    transitions:
+      actions:
+        textReceived: "intent"
+        startTheraphy: "startTheraphy"
+</copy>
+```
+- Go ahead and test the flow. 
+
+  ![](images/4-startTheraphy.png " ")
+
+4. Now we will request the user if they already have a provider or if they wish to register. 
+
+- Declare a PatientType variable under context variables.     
+
+```
+<copy>
+PatientType: "string"
+</copy>
+```
+
+- Paste the following YAML code in your dialog flow.
+
+```
+<copy>
+########### Find a doctor and schedule appointment ###############
+
+  findPatientDetails:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      variable: "PatientType"
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Do you have a provider or are you a new patient?"
+          footerText:
+          actions:
+          - label: "New Patient"
+            type: "postback"
+            keyword: "New Patient"
+            payload:
+              action: "registerPatient" 
+          - label: "I have a provider"
+            type: "postback"
+            keyword: "provider"
+            payload:
+              action: "I have a provider" 
+    transitions:
+      actions:
+        registerPatient: "registerPatient"
+        I have a provider: "chooseProvider"
+        textReceived: "intent"
+</copy>
+```
+
+- Also, add transition for *findPatientDetails* under the *greetings* component as follows:      
+```
+<copy>
+    transitions:
+      actions:
+        startTheraphy: "startTheraphy"
+        findPatientDetails: "findPatientDetails"
+        textReceived: "intent"
+</copy>
+```
+5. Now, we will go ahead and ask for patient details by leveraging the composite bag entity we created in the previous section.
+
+- Let us declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+RegisterPatientBag: "RegisterPatientBag"
+</copy>
+```
+- Add the following YAML code under the *findPatientDetails* component.
+
+```
+<copy>
+##############Ask for Patient details##################
+
+  registerPatient:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true 
+      variable: "RegisterPatientBag"
+      nlpResultVariable: "iResult"    
+      cancelPolicy: "immediate"
+      transitionAfterMatch: "false"    
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "${system.entityToResolve.value.prompt}"
+          actions:
+          - label: "${enumValue.value!enumValue.originalString}"
+            type: "postback"
+            iteratorVariable: "system.entityToResolve.value.enumValues"
+            payload:
+              variables:
+                RegisterPatientBag: "${enumValue.value!enumValue.originalString}" 
+        globalActions: 
+        - label: "Send Location"
+          type: "location"
+          visible:
+            entitiesToResolve:
+              include: "Location"
+    transitions:
+      actions:
+        textReceived: "intent"
+      next: "registerUserDB"
+</copy>
+```
+*Note:* You should still be able to test even though you see there are errors in your validation
+
+  ![](images/4-testconv.png)
+
+6. Register the patients details in the database
+
+Create a custom component
+
+---- under construction
