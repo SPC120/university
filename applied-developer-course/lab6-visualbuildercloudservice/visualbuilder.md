@@ -25,19 +25,28 @@ Estimated lab time: 2 hours
 ![](images/4.png " ")
 ![](images/5.png " ")
 ![](images/6.png " ")
-![](images/7.png " ")
+
+
+## Task 2: Configure Service Connections
+
+In this task, we will create 4 service connections. Prior to creating service connections to OCI services, you first have to get details to generace OCI signature tenancy OCID, user OCID, fingerprint and key.
+
+### OCI Signature details
+
 ![](images/8.png " ")
 ![](images/9.png " ")
 ![](images/10.png " ")
 ![](images/11.png " ")
+
+### Object Storage
+
+![](images/7.png " ")
 ![](images/12.png " ")
 ![](images/13.png " ")
 ![](images/14.png " ")
 ![](images/15.png " ")
 ![](images/16.png " ")
 ![](images/17.png " ")
-
-## Task 2: Configure Service Connections
 
 [OCI Rest APIs](https://docs.oracle.com/en-us/iaas/api/)
 
