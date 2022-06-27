@@ -47,7 +47,7 @@ Before we get started:
 
   ![](images/1-imp.png " ")
 
-## Task 2: Create and test an intent
+## Task 2: Create and Test an Intent
 Oracle Digital Assistant's underlying natural language processing (NLP) engine doesn't inherently know about the business or task that a skill is supposed to assist with. For the skill to understand what it should react to, you need to define intents and examples (utterances) for how a user would request a specific intent.
 
 You will create intents for finding a doctor and positive health therapy tips. 
@@ -127,7 +127,7 @@ To enable the skill to interpret user input based on the utterances that you jus
 
   Go ahead and test your own utterances and train your bot.
 
-## Task 3: Create entities
+## Task 3: Create Entities
 
 Now it's time to add entities, which detect information in the user input that can help the intent fulfill a user request. We will be creating entities with regular expression, value lists and add them to a composite bag. 
 
@@ -1051,7 +1051,7 @@ In this task, we will configure and publish the ODA through a web channel.
 
 Congratulations! You have successfully completed this lab.
 
-## Homework: Create a custom component
+## Homework: Create a Custom Component
 
 Go ahead and create a custom component to send out an email with the VBCS url using the Oracle Digital Assistant if the Patient chooses to upload the insurance card later.
 
