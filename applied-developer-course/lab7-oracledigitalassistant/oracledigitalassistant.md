@@ -18,7 +18,7 @@ In this lab, you will:
 
 Before we get started:
 
-- Download the Skill template - <a href="files/CareMedicalClinics.zip">download</a> 
+- Download the Skill template - <a href="files/CareClinics_Template.zip">download</a> 
 
 - Install your favorite IDE (VScode - preferable)
 
@@ -340,7 +340,7 @@ In this step, you're going to simplify your development efforts using a composit
       ![](images/3-dateentry.png " ")
 
     Ambiguity Resolution Rule: 
-    <br/>
+<br/>
     Switch on toggle - Consider End User Locale
     Default Date Format - MM/DD/YY
     Resolve Date as *Default* in intents
