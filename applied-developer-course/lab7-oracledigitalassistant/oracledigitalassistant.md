@@ -606,8 +606,454 @@ RegisterPatientBag: "RegisterPatientBag"
 
   ![](images/4-testconv.png)
 
-6. Register the patients details in the database
+6. Create a custom component
 
-Create a custom component
+  Custom components are reusable units of custom code that you can call from your skill's dialog flow. In order to register the patients details in the database, we will call the REST API using the NodeJS. 
 
----- under construction
+  Follow these steps to install the Oracle Node.js Bots SDK to your local machine.
+  - Open a terminal window.
+  - To install Oracle Bots Node.js SDK for global access on your laptop, enter this command:
+
+```
+<copy>
+npm install -g @oracle/bots-node-sdk
+</copy>
+```
+
+On a Mac, you use the sudo command:
+
+```
+<copy>
+sudo npm install -g @oracle/bots-node-sdk
+</copy>
+```
+
+To verify the success of your installation, enter this command:
+
+```
+<copy>
+bots-node-sdk -v
+</copy>
+```
+
+- Open the directory where you wish to create a custom component and paste the following command in your terminal.
+```
+<copy>
+bots-node-sdk init carecliniccs --component-name registerpatient 
+</copy>
+```
+ ![](images/4-install.png " ")
+
+- Now, open the registerpatient.js file under components and replace the contents with the following code: 
+
+
+```
+<copy>
+'use strict';
+const fetch = require("node-fetch")
+
+module.exports = {
+  metadata: () => ({
+    name: 'registerpatient',
+    properties: {
+      first_name: { required: true, type: 'string' },
+      last_name: { required: true, type: 'string' },
+      address: { required: true, type: 'string' },
+      city: { required: true, type: 'string' },
+      state: { required: true, type: 'string' },
+      zipcode: { required: true, type: 'string' },
+      longitude: { required: true, type: 'int' },
+      latitude: { required: true, type: 'string' }, 
+      phonenumber: {required: true, type: 'string'}, 
+      ordsUrl: {required: true, type: 'string'}, 
+      keepTurn: {required: false, type: 'string'}
+    },
+
+    supportedActions: ['success', 'failure']
+  }),
+
+  invoke: (context, done) => {
+    const { first_name } = context.properties()
+    const { last_name } = context.properties()
+    const { address } = context.properties()
+    const { city } = context.properties()
+    const { state } = context.properties()
+    const { longitude } = context.properties()
+    const { latitude } = context.properties()
+    const { phonenumber } = context.properties()
+    const { zipcode } = context.properties()
+    const { ordsUrl } = context.properties()
+
+    var myHeaders = new fetch.Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "patient_id": Math.floor(Math.random() * 100) + 30000,
+      "first_name": first_name,
+      "last_name": last_name,
+      "address": address,
+      "city": city,
+      "state": state,
+      "county": "ALAMEDA",
+      "zipcode": zipcode,
+      "longitude": longitude,
+      "latitude": latitude,
+      "practitioner_id": "930",
+      "phonenumber": phonenumber
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(ordsUrl, requestOptions)
+      .then(response => {
+        return response.json();    
+      })
+      .then((data) => {    
+        context.reply("Registered the user successfully!"); 
+        context.transition('success');
+        context.keepTurn(true);
+        done();
+        })
+      .catch((err) => {
+        done(err);
+        });  
+      }
+    };
+</copy>
+```
+- Paste the following commands in your terminal
+
+```
+<copy>
+cd carecliniccs
+npm install
+npm pack
+</copy>
+```
+- Go back to the ODA console and create a custom component and add the service as given in the following picture.
+  ![](images/4-createservice.png)
+
+- Go to settings icon in the navigation pane on the left and select the configuration tab. 
+
+  ![](images/4-settings.png)
+
+- Go ahead and update the ordsUrl which you saved in your *Notepad*.
+
+  ![](images/4-ordsurl.png)
+
+- Paste the following YAML code in the dialog flow below *registerPatient*.
+
+```
+<copy>
+  registerUserDB:
+    component: "registerpatient"
+    properties: 
+      ordsUrl: ${system.config.ordsUrl}
+      first_name: ${RegisterPatientBag.value.FirstName}
+      last_name: ${RegisterPatientBag.value.LastName}
+      address: ${RegisterPatientBag.value.StreetAddress.originalString}
+      city: ${RegisterPatientBag.value.City}
+      state: ${RegisterPatientBag.value.State}
+      zipcode:  ${RegisterPatientBag.value.Zipcode.originalString}
+      longitude: ${RegisterPatientBag.value.Location.longitude}
+      latitude: ${RegisterPatientBag.value.Location.latitude} 
+      phonenumber: ${RegisterPatientBag.value.PhoneNumber}
+      keepTurn: true
+    transitions: 
+      actions: 
+        success: "chooseProvider"
+        textReceived: "intent"
+</copy>
+```
+7. After registration, the next step for the patient is to select the specialization for which we will use the System.ResolveEntities component.
+
+- Select *+ Add component* and pick *Display Action Button Message* (under Hot Picks -> Resolve Entities).
+- Pick "registerUserDB" from the drop down under *insert after state*, Uncheck include template comments and select *Insert Component*.
+
+  ![](images/4-resolve.png " ")
+
+- Let us declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+    Provider: "Provider"
+</copy>
+```
+
+- Update the component as follows:
+
+```
+<copy>
+  chooseProvider:
+    component: "System.ResolveEntities"
+    properties:
+      variable: "Provider"
+      nlpResultVariable: "iResult"      
+      cancelPolicy: "immediate" 
+    transitions:
+      next: scheduleDate
+      actions: 
+        textReceived: intent
+</copy>
+```
+8. After we select the specialization, we should now select a scheduled date. 
+
+*Note:* ODA cannot display the calendar widget, so we will create custom properties specific to the web channel and add the javascript code to display the calendar widget to the bot deployed on a web page.
+
+- Declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+    selectedDate: "DatePickerBag"
+</copy>
+```
+
+- Add the following code below *chooseProvider* component.
+
+```
+<copy>
+  scheduleDate:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      nlpResultVariable: "iResult"
+      cancelPolicy: "immediate"
+      transitionAfterMatch: "false"
+      variable: "selectedDate"
+      metadata:
+        responseItems:            
+        - type: "text" 
+          text: "${system.entityToResolve.value.prompt}"
+          channelCustomProperties:
+          - channel: "websdk"
+            properties:
+              uiComponent:
+                type: calendar
+                properties:
+                  minDate: "${(.now?long + 1*24*3600*1000)?number_to_date?iso_utc}" #today 
+                  maxDate: "${(.now?long + 15*24*3600*1000)?number_to_date?iso_utc}" #next 15 days
+                  variable: "selectedDate"
+          visible:
+            entitiesToResolve:
+              include: "dateEntry"     
+    transitions:
+      actions:
+        cancel: "intent"    
+      next: "selectTime"
+</copy>
+```
+9. After which Patient needs to select the preferred time slot.
+
+- Declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+    TimePickerBag: "TimePickerBag"
+</copy>
+```
+- Add the following code below *scheduleDate* component.
+
+```
+<copy>
+  selectTime:
+    component: "System.ResolveEntities"
+    properties:
+      variable: "TimePickerBag"
+      nlpResultVariable: "iResult"      
+      cancelPolicy: "immediate" 
+    transitions:
+      next: findDoctor
+      actions: 
+        textReceived: intent
+</copy>
+```
+
+10. Display the list of Doctors to the patients and show an appointment summary report. Here, we will use free marker expressions to show the summary of the appointment.
+
+```
+<copy>
+  findDoctor:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      keepTurn: false
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Here are the best in class doctors for you!"
+          footerText:
+        - type: "cards"
+          cardLayout: "horizontal"
+          name: "Doctor"
+          actions: []
+          cards:
+          - title: "${Doctor.name} (ID - ${Doctor.practitionerid})"
+            description: "${Doctor.description}"
+            imageUrl: "${Doctor.image}"
+            name: "Doctor"
+            iteratorVariable: "Doctor"             
+            actions:
+            - label: "Book Appointment"
+              type: "postback"
+              payload:
+                action: "${Doctor.action}" 
+                variables: 
+                  DoctorName: "${Doctor.name}"
+                  practitionerid: "${Doctor.practitionerid}"
+        globalActions: []
+    transitions: 
+      next: "apptSummary"  
+      
+ 
+  apptSummary:
+    component: "System.CommonResponse"
+    properties:
+      keepTurn: true
+      metadata:
+        responseItems:
+          - type: "text"
+            text: "You have successfully scheduled your appointment with the doctor ${DoctorName.value} (ID - ${practitionerid.value}) for on ${selectedDate.value.dateEntry.date?number_to_date?string['yyyy-MM-dd']} at ${TimePickerBag.value.TimePicker}"
+    transitions:
+      next: "promptInsurance"
+</copy>
+```
+
+11. After successfully scheduling the appointment, patient will be given a choice to upload their insurance card from the phone. 
+
+- In this step, we will prompt the Patient to upload the insurance. 
+- They will display a QR code to upload your health insurance card from your phone. Here, Patients can use thier camera app on your phone to scan the QR code.
+- The bot prompts for a confirmation.
+
+*Note:* Update the QR code with the one generated by your VBCS application. 
+
+```
+<copy>
+
+  promptInsurance:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Would you like to upload your insurance now or later?"
+          footerText:
+          actions:
+          - label: "Yes! I can upload now"
+            type: "postback"
+            keyword: "Yes"
+            payload:
+              action: "Yes" 
+          - label: "I will do it later"
+            type: "postback"
+            keyword: "later"
+            payload:
+              action: "Later" 
+    transitions:
+      actions:
+        Yes: "uploadHealthInsurance"
+        Later: "uploadLater"
+        textReceived: "intent"
+
+      
+  uploadHealthInsurance:
+    component: "System.CommonResponse"
+    properties:
+      keepTurn: true
+      metadata:
+        responseItems:        
+        - type: "attachment"
+          attachmentType: "image"
+          attachmentTitle: "Use the following QR code to upload your health insurance card from your phone"
+          attachmentUrl: "<<QRcode>>"      
+          headerText: "Upload Health Insurance"
+          footerText: "Use your camera app on your phone to scan the QR code"
+    transitions:
+      next: confirmUpload
+
+  confirmUpload:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Have you uploaded the insurance card?"
+          footerText:
+          actions:
+          - label: "Yes"
+            type: "postback"
+            keyword: "Y"
+            payload:
+              action: "Yes" 
+          - label: "No"
+            type: "postback"
+            keyword: "N"
+            payload:
+              action: "No" 
+    transitions:
+      actions:
+        Yes: "confirmSuccessUpload"
+        No: "uploadLater"
+        textReceived: "intent"
+
+  confirmSuccessUpload: 
+    component: "System.CommonResponse"
+    properties:
+      metadata:
+        responseItems:
+          - type: "text"
+            text: "You are all set! Thank you and have a great day!"
+    transitions:
+      return: "done"
+      
+      
+  uploadLater: 
+    component: "System.CommonResponse"
+    properties:
+      metadata:
+        responseItems:
+          - type: "text"
+            text: "We will send you a link to the email shortly! Please upload the insurance card in 2-3 business days."
+    transitions:
+      next: "exitFlow"  
+</copy>
+```
+
+## Task 5: Create a Web Channel
+
+In this task, we will configure and publish the ODA through a web channel. 
+
+- Click on the *Navigation menu* on the top left and select *Channels* under *Development*. 
+- Now create a channel with the following properties: 
+  Name: CareClinics_WebChannel
+  Description: Web channel for Care Clinics
+  Channel Type: Oracle Web
+  Allowed Domains: *
+  Client Authentication Enabled: False
+
+ ![](images/5-webchannel.png)
+
+- After creating the channel, we need to route our channel to the skill we have been working on and enable the channel.
+
+  ![](images/5-channel.png)
+
+- Copy the *Channel Id* in a *Notepad*. 
+
+*Note:* We will use this in our next lab to deploy the chat widget on the Content Management Portal.
+
+*Test your Skill*
+
+Congratulations! You have successfully completed this lab.
+
+## Homework: Create a custom component
+
+Go ahead and create a custom component to send out an email with the VBCS url using the Oracle Digital Assistant if the Patient chooses to upload the insurance card later.
+
+Hint: You can go ahead use your gmail smtp server to send out an email 
+
