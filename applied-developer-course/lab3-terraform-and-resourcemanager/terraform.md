@@ -106,13 +106,13 @@
 
 	![](./images/task3/image11.png " ")
 
-10.  The Stack is now **IN PROGRESS**, once completed, the status will change to **SUCCEEDED**
+10.  The Stack is now **IN PROGRESS**, once completed, the status will change to **SUCCEEDED** .
 
 	![](./images/task3/image12.png " ")
 
 	![](./images/task3/image13.png " ")
 
-11.  Let's examine the **Logs** to see what was created. You can see from the **Logs,** the 6 OCI resources were created.
+11.  Let's examine the **Logs** to see what was created. You can see from the **Logs** the 6 OCI resources were created.
 
 	![](./images/task3/image14.png " ")
 
