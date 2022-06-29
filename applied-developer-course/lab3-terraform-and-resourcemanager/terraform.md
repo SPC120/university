@@ -42,4 +42,4 @@
 
 ## Homework: Create an OCI Service Using Terraform - ORM
 
-## Additional Resources - Steve
+## Additional Resources - Steve Nichols
