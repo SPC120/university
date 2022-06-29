@@ -13,14 +13,19 @@ In this lab, you will:
 - Create a custom component to update the database from the chatbot.
 - Validate, debug and test your skill.
 
-Pre-requisites 
+## Pre-requisites 
 
 
 Before we get started:
 
+- Download the Skill template - <a href="files/CareClinics_Template.zip">download</a> 
+
+- Install your favorite IDE (VScode - preferable)
+
 - Install NodeJS in your local machine.
 
-- Download the Skill template - [download](files/CareMedicalClinics.zip)
+
+(Add documentation - ORDS)
 
 ## Task 1: Create a Digital Assistant Instance and Import the Skill
 1. Log in to the Oracle Cloud at cloud.oracle.com. Cloud Account Name is howarduniversity. Click “Next”.
@@ -42,7 +47,7 @@ Before we get started:
 
   ![](images/1-imp.png " ")
 
-## Task 2: Create and test an intent
+## Task 2: Create and Test an Intent
 Oracle Digital Assistant's underlying natural language processing (NLP) engine doesn't inherently know about the business or task that a skill is supposed to assist with. For the skill to understand what it should react to, you need to define intents and examples (utterances) for how a user would request a specific intent.
 
 You will create intents for finding a doctor and positive health therapy tips. 
@@ -88,6 +93,24 @@ Create the Find a Doctor intent:
     ```
 5. Click the +Create button.
 
+### Create the Unresolved intent:
+The unresolved intent in a skill handles messages outside of the domain that a skill is designed to process. For this you usually map a dialog flow state to the *unresolvedIntent* action transition to inform the user that the skill could not handle the request.
+
+1. Click the + Intent button.
+2. Next to the Conversation Name field, click the Edit button, and enter *Unresolved Intent*.
+3. In the Name field, type *unresolvedIntent*.
+4. Select and copy all of the example sentences below to your clipboard and paste in the *Advance Input Mode* section under Examples
+    ```
+    <copy>
+    blah blah
+    buy me a tv
+    play music
+    sing a song
+    </copy>
+    ```
+5. Click the +Create button.
+
+
 ### Train and test the intents:
 
 You've now provided the basic ingredients that allow the skill to recognize user input for both the intents. Currently, the skill can't understand any user input.
@@ -104,7 +127,7 @@ To enable the skill to interpret user input based on the utterances that you jus
 
   Go ahead and test your own utterances and train your bot.
 
-## Task 3: Create entities
+## Task 3: Create Entities
 
 Now it's time to add entities, which detect information in the user input that can help the intent fulfill a user request. We will be creating entities with regular expression, value lists and add them to a composite bag. 
 
@@ -317,7 +340,7 @@ In this step, you're going to simplify your development efforts using a composit
       ![](images/3-dateentry.png " ")
 
     Ambiguity Resolution Rule: 
-    <br/>
+<br/>
     Switch on toggle - Consider End User Locale
     Default Date Format - MM/DD/YY
     Resolve Date as *Default* in intents
@@ -354,3 +377,683 @@ In this step, you're going to simplify your development efforts using a composit
     Select your preferred time slot
     </copy>
     ```
+
+*Note:* Ensure that all the entities are trained.
+
+
+## Task 4: Create a Dialog Flow
+
+With the NLP model created, you are ready to build a dialog flow for the skill. The dialog flow is a blueprint for the interactions that enable the conversation between the skill and the user. Although you're going to create a single flow in this tutorial, a skill can have multiple flows that support different use cases and functions.
+
+Each flow is made up of one or more states, and each state executes a function: rendering a skill response message, authenticating a user, branching the conversation when certain conditions are met, etc. The Visual Flow Designer provides you with templates for each state.
+
+Let's test the current dialog flow
+
+1. Go ahead and click the preview button to test the current flow.
+
+  ![](images/4-preview.png " ")
+
+2. Start the conversation by typing *Hi* and observe the states and intents in the conversation tester  window.
+
+  ![](images/4-draftconvtest.png " ")
+
+  ![](images/4-draftintents.png " ")
+
+
+Start building the dialog flow
+
+Each state implemented by a
+component
+– Executes logic
+– Receives user input
+– Returns bot responses
+– Determines navigation
+
+1. Go ahead and replace *System.intent* component. This will allow you to conditionally direct a conversation to a logical next dialog flow state for each user utterance.  
+  ```
+  <copy>
+  ########### System intent ###############
+    intent:
+      component: "System.Intent"
+      properties:
+        variable: "iResult"
+      transitions:
+        actions:
+          unresolvedIntent: "unresolvedIntent"
+          greetings: "greetings"
+          findDoctor: "findPatientDetails"
+          positiveHealth: "startTheraphy"
+
+  </copy>
+  ```
+2. Add an unresolved state by selecting *+Add Component* to open the component templates. 
+
+  ![](images/4-addcomp.png " ")
+
+- Now, select *Display text message* from the *Hot Picks*, pick *Greetings* from the drop down under *insert after state*, uncheck include template comments and select *Insert Component*.
+
+  ![](images/4-unresolved.png " ")
+
+- Update the component as follows:
+
+```
+<copy>
+########### Unresolved State ###############
+  unresolvedIntent:
+    component: "System.Output"
+    properties:
+      text: "I don't understand. What do you want to do?"
+    transitions:
+      return: "intent" 
+
+</copy>
+```
+3. We will add the dialog flow for *Positive Health* intent. Here we are going to display a card carousal with images, text and links to redirect to different videos.
+
+- Select *+ Add component* and pick *Display Action Button Message* (under User messaging -> Display Multimedia Messages).
+- Pick "unresolved" from the drop down under *insert after state*, Uncheck include template comments and select *Insert Component*.
+
+  ![](images/4-cardlayout.png " ")
+
+- Update the component as follows:
+```
+<copy>
+######## Begin Theraphy ############ 
+
+  startTheraphy:    
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      keepTurn: "false"
+      metadata:
+        responseItems:
+        - type: "cards"
+          cardLayout: "horizontal"
+          name: "Cards"
+          actions: []
+          cards:
+          - title: "${theraphy.name}"
+            description: "${theraphy.description}"
+            imageUrl: "${theraphy.image}"
+            name: "theraphy"
+            iteratorVariable: "theraphy"
+            actions:
+            - label: "Practice Excercise"
+              type: "url"
+              payload:
+                url: "${theraphy.action}"
+        globalActions: []
+    transitions: 
+      return: "done"
+</copy>
+```
+
+- Also, add transition for *startTheraphy* under the *greetings* component as follows:      
+```
+<copy>
+    transitions:
+      actions:
+        textReceived: "intent"
+        startTheraphy: "startTheraphy"
+</copy>
+```
+- Go ahead and test the flow. 
+
+  ![](images/4-startTheraphy.png " ")
+
+4. Now we will request the user if they already have a provider or if they wish to register. 
+
+- Declare a PatientType variable under context variables.     
+
+```
+<copy>
+PatientType: "string"
+</copy>
+```
+
+- Paste the following YAML code in your dialog flow.
+
+```
+<copy>
+########### Find a doctor and schedule appointment ###############
+
+  findPatientDetails:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      variable: "PatientType"
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Do you have a provider or are you a new patient?"
+          footerText:
+          actions:
+          - label: "New Patient"
+            type: "postback"
+            keyword: "New Patient"
+            payload:
+              action: "registerPatient" 
+          - label: "I have a provider"
+            type: "postback"
+            keyword: "provider"
+            payload:
+              action: "I have a provider" 
+    transitions:
+      actions:
+        registerPatient: "registerPatient"
+        I have a provider: "chooseProvider"
+        textReceived: "intent"
+</copy>
+```
+
+- Also, add transition for *findPatientDetails* under the *greetings* component as follows:      
+```
+<copy>
+    transitions:
+      actions:
+        startTheraphy: "startTheraphy"
+        findPatientDetails: "findPatientDetails"
+        textReceived: "intent"
+</copy>
+```
+5. Now, we will go ahead and ask for patient details by leveraging the composite bag entity we created in the previous section.
+
+- Let us declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+RegisterPatientBag: "RegisterPatientBag"
+</copy>
+```
+- Add the following YAML code under the *findPatientDetails* component.
+
+```
+<copy>
+##############Ask for Patient details##################
+
+  registerPatient:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true 
+      variable: "RegisterPatientBag"
+      nlpResultVariable: "iResult"    
+      cancelPolicy: "immediate"
+      transitionAfterMatch: "false"    
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "${system.entityToResolve.value.prompt}"
+          actions:
+          - label: "${enumValue.value!enumValue.originalString}"
+            type: "postback"
+            iteratorVariable: "system.entityToResolve.value.enumValues"
+            payload:
+              variables:
+                RegisterPatientBag: "${enumValue.value!enumValue.originalString}" 
+        globalActions: 
+        - label: "Send Location"
+          type: "location"
+          visible:
+            entitiesToResolve:
+              include: "Location"
+    transitions:
+      actions:
+        textReceived: "intent"
+      next: "registerUserDB"
+</copy>
+```
+*Note:* You should still be able to test even though you see there are errors in your validation
+
+  ![](images/4-testconv.png)
+
+6. Create a custom component
+
+  Custom components are reusable units of custom code that you can call from your skill's dialog flow. In order to register the patients details in the database, we will call the REST API using the NodeJS. 
+
+  Follow these steps to install the Oracle Node.js Bots SDK to your local machine.
+  - Open a terminal window.
+  - To install Oracle Bots Node.js SDK for global access on your laptop, enter this command:
+
+```
+<copy>
+npm install -g @oracle/bots-node-sdk
+</copy>
+```
+
+On a Mac, you use the sudo command:
+
+```
+<copy>
+sudo npm install -g @oracle/bots-node-sdk
+</copy>
+```
+
+To verify the success of your installation, enter this command:
+
+```
+<copy>
+bots-node-sdk -v
+</copy>
+```
+
+- Open the directory where you wish to create a custom component and paste the following command in your terminal.
+```
+<copy>
+bots-node-sdk init carecliniccs --component-name registerpatient 
+</copy>
+```
+ ![](images/4-install.png " ")
+
+- Now, open the registerpatient.js file under components and replace the contents with the following code: 
+
+
+```
+<copy>
+'use strict';
+const fetch = require("node-fetch")
+
+module.exports = {
+  metadata: () => ({
+    name: 'registerpatient',
+    properties: {
+      first_name: { required: true, type: 'string' },
+      last_name: { required: true, type: 'string' },
+      address: { required: true, type: 'string' },
+      city: { required: true, type: 'string' },
+      state: { required: true, type: 'string' },
+      zipcode: { required: true, type: 'string' },
+      longitude: { required: true, type: 'int' },
+      latitude: { required: true, type: 'string' }, 
+      phonenumber: {required: true, type: 'string'}, 
+      ordsUrl: {required: true, type: 'string'}, 
+      keepTurn: {required: false, type: 'string'}
+    },
+
+    supportedActions: ['success', 'failure']
+  }),
+
+  invoke: (context, done) => {
+    const { first_name } = context.properties()
+    const { last_name } = context.properties()
+    const { address } = context.properties()
+    const { city } = context.properties()
+    const { state } = context.properties()
+    const { longitude } = context.properties()
+    const { latitude } = context.properties()
+    const { phonenumber } = context.properties()
+    const { zipcode } = context.properties()
+    const { ordsUrl } = context.properties()
+
+    var myHeaders = new fetch.Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "patient_id": Math.floor(Math.random() * 100) + 30000,
+      "first_name": first_name,
+      "last_name": last_name,
+      "address": address,
+      "city": city,
+      "state": state,
+      "county": "ALAMEDA",
+      "zipcode": zipcode,
+      "longitude": longitude,
+      "latitude": latitude,
+      "practitioner_id": "930",
+      "phonenumber": phonenumber
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(ordsUrl, requestOptions)
+      .then(response => {
+        return response.json();    
+      })
+      .then((data) => {    
+        context.reply("Registered the user successfully!"); 
+        context.transition('success');
+        context.keepTurn(true);
+        done();
+        })
+      .catch((err) => {
+        done(err);
+        });  
+      }
+    };
+</copy>
+```
+- Paste the following commands in your terminal
+
+```
+<copy>
+cd carecliniccs
+npm install
+npm pack
+</copy>
+```
+- Go back to the ODA console and create a custom component and add the service as given in the following picture.
+  ![](images/4-createservice.png)
+
+- Go to settings icon in the navigation pane on the left and select the configuration tab. 
+
+  ![](images/4-settings.png)
+
+- Go ahead and update the ordsUrl which you saved in your *Notepad*.
+
+  ![](images/4-ordsurl.png)
+
+- Paste the following YAML code in the dialog flow below *registerPatient*.
+
+```
+<copy>
+  registerUserDB:
+    component: "registerpatient"
+    properties: 
+      ordsUrl: ${system.config.ordsUrl}
+      first_name: ${RegisterPatientBag.value.FirstName}
+      last_name: ${RegisterPatientBag.value.LastName}
+      address: ${RegisterPatientBag.value.StreetAddress.originalString}
+      city: ${RegisterPatientBag.value.City}
+      state: ${RegisterPatientBag.value.State}
+      zipcode:  ${RegisterPatientBag.value.Zipcode.originalString}
+      longitude: ${RegisterPatientBag.value.Location.longitude}
+      latitude: ${RegisterPatientBag.value.Location.latitude} 
+      phonenumber: ${RegisterPatientBag.value.PhoneNumber}
+      keepTurn: true
+    transitions: 
+      actions: 
+        success: "chooseProvider"
+        textReceived: "intent"
+</copy>
+```
+7. After registration, the next step for the patient is to select the specialization for which we will use the System.ResolveEntities component.
+
+- Select *+ Add component* and pick *Display Action Button Message* (under Hot Picks -> Resolve Entities).
+- Pick "registerUserDB" from the drop down under *insert after state*, Uncheck include template comments and select *Insert Component*.
+
+  ![](images/4-resolve.png " ")
+
+- Let us declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+    Provider: "Provider"
+</copy>
+```
+
+- Update the component as follows:
+
+```
+<copy>
+  chooseProvider:
+    component: "System.ResolveEntities"
+    properties:
+      variable: "Provider"
+      nlpResultVariable: "iResult"      
+      cancelPolicy: "immediate" 
+    transitions:
+      next: scheduleDate
+      actions: 
+        textReceived: intent
+</copy>
+```
+8. After we select the specialization, we should now select a scheduled date. 
+
+*Note:* ODA cannot display the calendar widget, so we will create custom properties specific to the web channel and add the javascript code to display the calendar widget to the bot deployed on a web page.
+
+- Declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+    selectedDate: "DatePickerBag"
+</copy>
+```
+
+- Add the following code below *chooseProvider* component.
+
+```
+<copy>
+  scheduleDate:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      nlpResultVariable: "iResult"
+      cancelPolicy: "immediate"
+      transitionAfterMatch: "false"
+      variable: "selectedDate"
+      metadata:
+        responseItems:            
+        - type: "text" 
+          text: "${system.entityToResolve.value.prompt}"
+          channelCustomProperties:
+          - channel: "websdk"
+            properties:
+              uiComponent:
+                type: calendar
+                properties:
+                  minDate: "${(.now?long + 1*24*3600*1000)?number_to_date?iso_utc}" #today 
+                  maxDate: "${(.now?long + 15*24*3600*1000)?number_to_date?iso_utc}" #next 15 days
+                  variable: "selectedDate"
+          visible:
+            entitiesToResolve:
+              include: "dateEntry"     
+    transitions:
+      actions:
+        cancel: "intent"    
+      next: "selectTime"
+</copy>
+```
+9. After which Patient needs to select the preferred time slot.
+
+- Declare the variable for *RegisterPatientBag* composite bag entity we created. 
+
+```
+<copy>
+    TimePickerBag: "TimePickerBag"
+</copy>
+```
+- Add the following code below *scheduleDate* component.
+
+```
+<copy>
+  selectTime:
+    component: "System.ResolveEntities"
+    properties:
+      variable: "TimePickerBag"
+      nlpResultVariable: "iResult"      
+      cancelPolicy: "immediate" 
+    transitions:
+      next: findDoctor
+      actions: 
+        textReceived: intent
+</copy>
+```
+
+10. Display the list of Doctors to the patients and show an appointment summary report. Here, we will use free marker expressions to show the summary of the appointment.
+
+```
+<copy>
+  findDoctor:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      keepTurn: false
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Here are the best in class doctors for you!"
+          footerText:
+        - type: "cards"
+          cardLayout: "horizontal"
+          name: "Doctor"
+          actions: []
+          cards:
+          - title: "${Doctor.name} (ID - ${Doctor.practitionerid})"
+            description: "${Doctor.description}"
+            imageUrl: "${Doctor.image}"
+            name: "Doctor"
+            iteratorVariable: "Doctor"             
+            actions:
+            - label: "Book Appointment"
+              type: "postback"
+              payload:
+                action: "${Doctor.action}" 
+                variables: 
+                  DoctorName: "${Doctor.name}"
+                  practitionerid: "${Doctor.practitionerid}"
+        globalActions: []
+    transitions: 
+      next: "apptSummary"  
+      
+ 
+  apptSummary:
+    component: "System.CommonResponse"
+    properties:
+      keepTurn: true
+      metadata:
+        responseItems:
+          - type: "text"
+            text: "You have successfully scheduled your appointment with the doctor ${DoctorName.value} (ID - ${practitionerid.value}) for on ${selectedDate.value.dateEntry.date?number_to_date?string['yyyy-MM-dd']} at ${TimePickerBag.value.TimePicker}"
+    transitions:
+      next: "promptInsurance"
+</copy>
+```
+
+11. After successfully scheduling the appointment, patient will be given a choice to upload their insurance card from the phone. 
+
+- In this step, we will prompt the Patient to upload the insurance. 
+- They will display a QR code to upload your health insurance card from your phone. Here, Patients can use thier camera app on your phone to scan the QR code.
+- The bot prompts for a confirmation.
+
+*Note:* Update the QR code with the one generated by your VBCS application. 
+
+```
+<copy>
+
+  promptInsurance:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Would you like to upload your insurance now or later?"
+          footerText:
+          actions:
+          - label: "Yes! I can upload now"
+            type: "postback"
+            keyword: "Yes"
+            payload:
+              action: "Yes" 
+          - label: "I will do it later"
+            type: "postback"
+            keyword: "later"
+            payload:
+              action: "Later" 
+    transitions:
+      actions:
+        Yes: "uploadHealthInsurance"
+        Later: "uploadLater"
+        textReceived: "intent"
+
+      
+  uploadHealthInsurance:
+    component: "System.CommonResponse"
+    properties:
+      keepTurn: true
+      metadata:
+        responseItems:        
+        - type: "attachment"
+          attachmentType: "image"
+          attachmentTitle: "Use the following QR code to upload your health insurance card from your phone"
+          attachmentUrl: "<<QRcode>>"      
+          headerText: "Upload Health Insurance"
+          footerText: "Use your camera app on your phone to scan the QR code"
+    transitions:
+      next: confirmUpload
+
+  confirmUpload:
+    component: "System.CommonResponse"
+    properties:
+      processUserMessage: true
+      metadata:
+        responseItems:        
+        - type: "text" 
+          text: "Have you uploaded the insurance card?"
+          footerText:
+          actions:
+          - label: "Yes"
+            type: "postback"
+            keyword: "Y"
+            payload:
+              action: "Yes" 
+          - label: "No"
+            type: "postback"
+            keyword: "N"
+            payload:
+              action: "No" 
+    transitions:
+      actions:
+        Yes: "confirmSuccessUpload"
+        No: "uploadLater"
+        textReceived: "intent"
+
+  confirmSuccessUpload: 
+    component: "System.CommonResponse"
+    properties:
+      metadata:
+        responseItems:
+          - type: "text"
+            text: "You are all set! Thank you and have a great day!"
+    transitions:
+      return: "done"
+      
+      
+  uploadLater: 
+    component: "System.CommonResponse"
+    properties:
+      metadata:
+        responseItems:
+          - type: "text"
+            text: "We will send you a link to the email shortly! Please upload the insurance card in 2-3 business days."
+    transitions:
+      next: "exitFlow"  
+</copy>
+```
+
+## Task 5: Create a Web Channel
+
+In this task, we will configure and publish the ODA through a web channel. 
+
+- Click on the *Navigation menu* on the top left and select *Channels* under *Development*. 
+- Now create a channel with the following properties: 
+  Name: CareClinics_WebChannel
+  Description: Web channel for Care Clinics
+  Channel Type: Oracle Web
+  Allowed Domains: *
+  Client Authentication Enabled: False
+
+ ![](images/5-webchannel.png)
+
+- After creating the channel, we need to route our channel to the skill we have been working on and enable the channel.
+
+  ![](images/5-channel.png)
+
+- Copy the *Channel Id* in a *Notepad*. 
+
+*Note:* We will use this in our next lab to deploy the chat widget on the Content Management Portal.
+
+*Test your Skill*
+
+Congratulations! You have successfully completed this lab.
+
+## Homework: Create a Custom Component
+
+Go ahead and create a custom component to send out an email with the VBCS url using the Oracle Digital Assistant if the Patient chooses to upload the insurance card later.
+
+Hint: You can go ahead use your gmail smtp server to send out an email 
+
