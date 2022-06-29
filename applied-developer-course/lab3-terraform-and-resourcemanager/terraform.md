@@ -106,29 +106,29 @@
 
 	![](./images/task3/image11.png " ")
 
-10.  The Stack is now **IN PROGRESS**, once completed, the status will change to **SUCCEEDED** .
+10. The Stack is now **IN PROGRESS**, once completed, the status will change to **SUCCEEDED** .
 
 	![](./images/task3/image12.png " ")
 
 	![](./images/task3/image13.png " ")
 
-11.  Let's examine the **Logs** to see what was created. You can see from the **Logs** the 6 OCI resources were created.
+11. Let's examine the **Logs** to see what was created. You can see from the **Logs** the 6 OCI resources were created.
 
 	![](./images/task3/image14.png " ")
 
-12.  You can also click on **Outputs** the resources listed along with their corresponding OCIDs are listed.
+12. You can also click on **Outputs** the resources listed along with their corresponding OCIDs are listed.
 
 	![](./images/task3/image15.png " ")
 
-13.  To see the VCN resources created within the OCI Console, click on the navigation menu in the upper left, select **Networking**, **Virtual Cloud Networks**
+13. To see the VCN resources created within the OCI Console, click on the navigation menu in the upper left, select **Networking**, **Virtual Cloud Networks**
 
 	![](./images/task3/image16.png " ")
 
-14.  You are presented with the VCN Page where you will see the **testVCN** created by the Oracle Resource Manager (ORM) Stack. Be sure your compartment is **CareClinics.** Click on the **testVCN** name to see the details.
+14. You are presented with the VCN Page where you will see the **testVCN** created by the Oracle Resource Manager (ORM) Stack. Be sure your compartment is **CareClinics.** Click on the **testVCN** name to see the details.
 
 	![](./images/task3/image17.png " ")
 
-15.  Here you will see can see all the information related to the VCN **testVCN**. You can also see and access all the resources that make up this VCN. Feel free to click around and explore.
+15. Here you will see can see all the information related to the VCN **testVCN**. You can also see and access all the resources that make up this VCN. Feel free to click around and explore.
 
 	![](./images/task3/image18.png " ")
 
