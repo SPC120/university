@@ -244,7 +244,33 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
 18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.    
     ![](images/task3/51.png " ")
 
+19. //TO-DO The whole upload action chain:
+    - upload to object storage
+    - call vision API
+    - Parse the response
+    - call DB API to create record in DB.
+    - navigate to main-success in case of success.
+
 ### Page 3: main-success
+
+1. Click on Flex Container and on the right properties panel, select the following:
+![](images/task3/53.png " ")
+
+2. Drag and drop a icon component onto the canvas and click on the icon option in the properties panel.
+![](images/task3/54.png " ")
+
+3. Search for success and select the "Success S" option and then click on select.
+![](images/task3/55.png " ")
+
+4. Add the **oj-icon-color-success** class to the icon.
+![](images/task3/56.png " ")
+
+5. Go to the "All tab" for the icon properties and then search for style. Then add "font-size:100px;". 
+![](images/task3/57.png " ")
+
+6. Drag and drop a text right under the icon component.
+7. Change the value to "Success! You can now return to the Chatbot"
+![](images/task3/58.png " ")
 
 ## Task 4: Publish Application and test
 
