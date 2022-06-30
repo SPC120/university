@@ -70,6 +70,8 @@ In this task, we will create 4 service connections. Prior to creating service co
 
 ### Service Connection 1: Object Storage
 
+This is a service connection to the Object Storage Service. We built this bucket in the "Introduction to OCI" workshop. We will need the "namespaceName" & "bucketName" from that lab for later portions of this lab.
+
 Go to this page to know more about Object Storage REST endpoints [Object Storage API](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/Object/PutObject)
 
 We will use following API to upload Object to Object Storage.
@@ -80,7 +82,7 @@ https://objectstorage.us-{region}-1.oraclecloud.com/n/{namespaceName}/b/{bucketN
 
 1. Click on **services** in left panel and then click on **plus sign** to add new service connection
 
-![](images/7.png " ")
+    ![](images/7.png " ")
 
 2. Select Define by Endpoint to add REST endpoints
    ![](images/12.png " ")
@@ -94,7 +96,7 @@ https://objectstorage.us-{region}-1.oraclecloud.com/n/{namespaceName}/b/{bucketN
 5. Click on **Server**, under Server Variables change region variable to your region, here we are using ashburn and we will change the authentication to `Oracle Cloud Infrastructire API signature 1.0`
    ![](images/15.png " ")
 
-6. Click on **pencil icon** to add API key and Private Key. Click **Save**
+6. Click on **pencil icon** to add API key ( < tenancyocid >/< userocid >/< fingerprint >) and Private Key. Click **Save**
    ![](images/16.png " ")
 
 7. Click on **Request > Body** and change Media Type to `application/octet-stream`
@@ -102,15 +104,17 @@ https://objectstorage.us-{region}-1.oraclecloud.com/n/{namespaceName}/b/{bucketN
 
 ### Service Connection 2: ORDS Autonomous Database
 
+This is a service connection to the Autonomous Database. We built this API in the "Oracle Apex and ADW" workshop (REST Apis for POST - Patient_Insurance and GET - Patient tables). No authentication for these APIs.
+
 Repeat the above process to create another service connection to fetch user information.
 
 1. Here we will have get method and hint will be get one. Click **Next**.
 
-![](images/18.png " ")
+    ![](images/18.png " ")
 
 2. Rename the service if you want and go to test, and enter id value and click on send request. Once we get 200 response, save the example response and then click create.
 
-![](images/19.png " ")
+    ![](images/19.png " ")
 
 ### Service Connection 3: Vision Service
 
@@ -119,6 +123,8 @@ Repeat the above process to create another service connection to fetch user info
 ## Task 3: Create Mobile Application
 
 In this task we will now actually create mobile application that end users can interact with.
+
+### Page 1: main-start
 
 1. Click on **Mobile Applications** in left panel and then click on **plus sign**.
    ![](images/task3/20.png " ")
@@ -131,7 +137,7 @@ In this task we will now actually create mobile application that end users can i
 
 4. Once page is loaded you can see the structure in left panel, by defauly main-start is landing page. In canvas you can see components where we can filter different components and drag and drop in our canvas. Also elements in canvas can be seen under structure.
 
-![](images/task3/23.png " ")
+    ![](images/task3/23.png " ")
 
 5. Search for input and drag and drop to Input Text to canvas
    ![](images/task3/24.png " ")
@@ -147,7 +153,7 @@ In this task we will now actually create mobile application that end users can i
 
 9. Click on Input Text and then under **Properties** go to **Data** and next to value click on **down arrow** and finally click **Create Variable**
 
-![](images/task3/28.png " ")
+    ![](images/task3/28.png " ")
 
 10. Give variable name and then click **Create**
     ![](images/task3/29.png " ")
@@ -175,6 +181,11 @@ In this task we will now actually create mobile application that end users can i
 
 18. Give name to page and select Custom, click Create.
     ![](images/task3/37.png " ")
+
+
+### Page 2: main-cardImage
+
+### Page 3: main-success
 
 ## Task 4: Publish Application and test
 
