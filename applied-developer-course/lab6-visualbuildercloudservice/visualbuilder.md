@@ -118,6 +118,64 @@ Repeat the above process to create another service connection to fetch user info
 
 ## Task 3: Create Mobile Application
 
+In this task we will now actually create mobile application that end users can interact with.
+
+1. Click on **Mobile Applications** in left panel and then click on **plus sign**.
+   ![](images/task3/20.png " ")
+
+2. Give name to application, select **none** as Navigation Style and click **Next**.
+   ![](images/task3/21.png " ")
+
+3. Click **Custom** as template and Click Create.
+   ![](images/task3/22.png " ")
+
+4. Once page is loaded you can see the structure in left panel, by defauly main-start is landing page. In canvas you can see components where we can filter different components and drag and drop in our canvas. Also elements in canvas can be seen under structure.
+
+![](images/task3/23.png " ")
+
+5. Search for input and drag and drop to Input Text to canvas
+   ![](images/task3/24.png " ")
+
+6. On right hand side under properties, rename **Label hint** to Enter Id and check the required field. Also add class of `oj-sm-padding-5x` which make it look bit nicer.
+   ![](images/task3/25.png " ")
+   ![](images/task3/26.png " ")
+
+7. Repeat the same process to add Button.
+
+8. Under structure, click on **Flex Container** and then under properties click on **Center** in Justify and again **Center** in Align
+   ![](images/task3/27.png " ")
+
+9. Click on Input Text and then under **Properties** go to **Data** and next to value click on **down arrow** and finally click **Create Variable**
+
+![](images/task3/28.png " ")
+
+10. Give variable name and then click **Create**
+    ![](images/task3/29.png " ")
+
+11. Click on Button and then under events in Properties click on New Event and on ojAction.
+    ![](images/task3/30.png " ")
+
+12. This will take you to Action page and create new action rename ID to `LoginButtonActionChain` and then drag and drop Call REST to canvas
+    ![](images/task3/31.png " ")
+
+13. Select Call Rest and under Properties click on Select next to Endpoint
+    ![](images/task3/32.png " ")
+
+14. Select getUser endpoint and click Select.
+    ![](images/task3/33.png " ")
+
+15. Under Properties now you should see Input Parameters and click on Assign
+    ![](images/task3/34.png " ")
+
+16. Drag userId from Sources to id under Target.
+    ![](images/task3/35.png " ")
+
+17. Now if our REST call is success we want to Navigate to other page, fo that drag and drop Navigate. Under Properties click Create next to Page.
+    ![](images/task3/36.png " ")
+
+18. Give name to page and select Custom, click Create.
+    ![](images/task3/37.png " ")
+
 ## Task 4: Publish Application and test
 
 ## Troubleshoot Tips
