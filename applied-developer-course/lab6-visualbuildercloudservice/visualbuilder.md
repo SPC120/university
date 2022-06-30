@@ -185,6 +185,65 @@ In this task we will now actually create mobile application that end users can i
 
 ### Page 2: main-cardImage
 
+1. In the left navigation pane, find the newly created page and click on "main-cardimage".
+    ![](images/task3/38-1.png " ")
+
+2. In the main-cardpage, go to **types** and click on +type and then "From Endpoint".
+    ![](images/task3/38.png " ")
+
+3. Select the getUser under services.
+    ![](images/task3/41.png " ")
+
+4. Select the fields you want the type to have, in this example we are going to display only the first and last name but we also need the id for the REST calls to update the database table. Therefore select those three fields.    
+    ![](images/task3/39.png " ")
+    
+5. Then go to **Variables** and click "+Variable", name it **userDetails** and select the type as the one you created in step 4. Then click create.  Create another variable "image" of type Any.  
+    ![](images/task3/40.png " ")
+    ![](images/task3/52.png " ")
+
+6. Choose the option "Required" under the input parameters on the right side of the screen.
+    ![](images/task3/40-2.png " ")
+
+7. Go back to the "main-start" page and open the action chain that will be called on click of the login button. Click on the "navigate to main-cardimage" activity. You should now see under input parameters the newly created input paramater for main-cardimage page i.e. userDetails. Click on Assign. 
+    ![](images/task3/43.png " ")    
+
+8. Assign the userDetails on the right side the following code:
+
+``{
+"patient_id": $chain.results.callRestGetPatientId.body.patient_id,
+"first_name": $chain.results.callRestGetPatientId.body.first_name,
+"last_name": $chain.results.callRestGetPatientId.body.last_name
+}``
+
+Then click Save.
+
+Note: callRestGetPatientId could be different for you if you changed the rest call id step right above the navigate step. The idea is to assign the returned fields from the rest call to your next page's input parameter.
+    ![](images/task3/42.png " ")
+
+9. Go back to your "main-cardimage" page, drag and drop a form layout to the canvas. 
+10. Also add **oj-sm-padding-4x-horizontal** class on the right side properties panel.
+    ![](images/task3/44.png " ")
+
+11. Next drag and drop an "Input Text" inside the form layout and on the right properties panel goto data.
+12. For the value field under the data tab, hover over the field and you will see an arrow on the far right. Click on that arrow and select "first_name" under the userDetails variable.
+13. Repeat step 12 for the "Last Name" field.
+    ![](images/task3/46.png " ")
+
+14. Drag and drop a camera component under the form layout in the canvas. In the properties panel on the right, deselect video as the app will only accept images. Also align it centrally.
+    ![](images/task3/47.png " ")
+
+15. Then in the properties panel, go to "events" tab and click on "+New Event" and select "On Selected Files". This will open up an action chain.
+    ![](images/task3/48.png " ")
+
+16. Drag and drop an assign varibale option to the canvas. Then click Assign.
+    ![](images/task3/49.png " ")
+
+17. From the left assign Files.item[0] to the image variable and make sure to select expression and click save.
+    ![](images/task3/50.png " ")
+
+18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.    
+    ![](images/task3/51.png " ")
+
 ### Page 3: main-success
 
 ## Task 4: Publish Application and test
