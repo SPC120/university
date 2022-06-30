@@ -128,20 +128,78 @@
 
 	![](./images/task3/image17.png " ")
 
-15. Here you will see can see all the information related to the VCN **testVCN**. You can also see and access all the resources that make up this VCN. Feel free to click around and explore.
+15.  Here you will see can see all the information related to the VCN **testVCN**. You can also see and access all the resources that make up this VCN. Feel free to click around and explore.
 
 	![](./images/task3/image18.png " ")
 
 
-## Task 4: Create a Compute Instance using the Quick Start Template
+## Task 4: Create a Compute Instance ORM Stack using the Instances Compute Console
 
-## Task 4: Download an ORM Stack and Enhance it
+1. Navigate to the **Compute** Services group and select **Instances**
 
-## Task 5: Create an ORM Stack using the Discover Feature
+	![](./images/task4/image1.png " ")
 
-## Task 6: Explore Advance Features
+2. Be sure the **CareClinics** Compartment is selected and click **Create instance**
 
-## Task 7: Destroy all OCI Resources
+	![](./images/task4/image2.png " ")
+
+3. Enter the name **testCompute**, accept the defaults under the sections **Image and Shape** and **Networking**
+
+	![](./images/task4/image3.png " ")
+
+4. In the **Add SSH keys** section, drop the public SSH Key **cloudshellkey.pub** you created earlier in **Task 4: Use the Oracle Cloud Shell to Create SSH keys** of the **Introduction to OCI** Lab
+
+	![](./images/task4/image4.png " ")
+
+5. Accept the defaults under section **Boot Volume** and click **Save as Stack**
+
+	![](./images/task4/image5.png " ")
+
+6. You are now redirected to ORM **Create Stack** page. Enter the name **Compute-Terraform**, be sure the **CareClinics** compartment is still selected and click **Next**
+
+	![](./images/task4/image6.png " ")
+
+7. There are no Terraform Variables defined, so click **Next**
+
+	![](./images/task4/image7.png " ")
+
+8. This time we will create AND apply the ORM Stack at the same time. To do this, enable the **Run Apply** option and click **Create**.
+
+	![](./images/task4/image8.png " ")
+
+9. The Resource Manager Apply job is now executing, the status will go from **ACCEPTED** to **IN PROGRESS** to **SUCCEEEDED**.
+
+	![](./images/task4/image9.png " ")
+
+10. Examining the **Logs**, you will see **1** resource was added
+
+	![](./images/task4/image10.png " ")
+
+11. Examining the **Job Resources**, you can see the **Attribute** details for **testCompute** by clicking **Show**. Here you will see the **Public** and **Private IP Addresses** assigned to the compute instance.
+
+	![](./images/task4/image11.png " ")
+
+12. If you click on the Resource Name **testCompute**, this will open the **Instance details** page. Here you can see the all the details related to this compute instance.
+
+	![](./images/task4/image12.png " ")
+
+13. Using the desired command prompt, we can test the SSH connection to the newly compute instance by issuing the below command. You will use the private key **cloudshellkey** you created earlier along with **Public IP address** and the user **opc**
+
+    ```
+    <copy>
+	ssh -i cloudshellkey opc@{compute_public_ip_address}
+	</copy>
+    ```
+
+	![](./images/task4/image13.png " ")
+
+## Task 5: Download an ORM Stack and Enhance it
+
+## Task 6: Create an ORM Stack using the Discover Feature
+
+## Task 7: Explore Advance Features
+
+## Task 8: Destroy all OCI Resources
 
 ## Homework: Create an OCI Service Using Terraform - ORM
 
