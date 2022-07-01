@@ -8,7 +8,7 @@
 ### Objectives
 
 -   Create a VCN using the Quick Start Template
--   Create a Compute Instance using the Quick Start Template
+-   Create a Compute Instance ORM Stack using the Instances Compute Console
 -   Download the ORM Stack for the Compute Instance and Enhance it
 -   Create an ORM Stack using the Discover Feature
 -   Explore Advance Features of Terrafrom and Oracle Resource Manager (ORM)
@@ -196,6 +196,32 @@
 ## Task 5: Download an ORM Stack and Enhance it
 
 ## Task 6: Create an ORM Stack using the Discover Feature
+
+1. Navigate to Resource Manager's Stacks page and click **Create Stack**. Be sure you are in the **CareClinics** Compartment.
+
+	![](./images/task6/image1.png " ")
+
+2. On the **Create Stack** page, select **Existing Compartment**, be sure the **CareClinics** compartment is selected, select **Selected** for the services we want to discover and then **database** for the filter. Lastly, update the name by adding the prefix **databases-** and click **Next**
+
+	![](./images/task6/image2.png " ")
+
+3. Click **Next** on the Configure Variables page
+
+	![](./images/task6/image3.png " ")
+
+4. Click **Create** on the Review Page
+
+	![](./images/task6/image4.png " ")
+
+5. The status of the stack will go from **CREATING** to **ACTIVE**
+
+	![](./images/task6/image5.png " ")
+
+	![](./images/task6/image6.png " ")
+
+6. Scroll down and select **Stack Resources** to see the databases discoverer. You can **Show** the Terraform Attributes to the details for the **CareClinicsDB**.
+
+	![](./images/task6/image7.png " ")
 
 ## Task 7: Explore Advance Features
 
