@@ -323,6 +323,8 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
     </copy>
     ```
 
+    ![](./images/061.png " ")
+
 7. Terminate the compute image.
 
     Navigate to the instance and select delete.
