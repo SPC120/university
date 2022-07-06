@@ -20,7 +20,9 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
 ## Task 1: Access The OCI Console
 
-1. Log in to the Oracle Cloud.  At the time this workshop was being created OCI was updating it's support for federated identity management, and so the log-in screens will be different from these screen shots.  This [blog](https://blogs.oracle.com/cloudsecurity/post/oci-federation-with-oci-iam-identity-domains) and this [whitepaper](https://www.oracle.com/a/ocom/docs/security/what-oci-iam-customers-should-expect.pdf) explains the current (June 2022) and near future approach to federating OCI users and groups, which most developer customers will likely adopt.
+1. Log in to the Oracle Cloud.  
+    
+    At the time this workshop was being created OCI was updating it's support for federated identity management, and so the log-in screens will be different from these screen shots.  This [blog](https://blogs.oracle.com/cloudsecurity/post/oci-federation-with-oci-iam-identity-domains) and this [whitepaper](https://www.oracle.com/a/ocom/docs/security/what-oci-iam-customers-should-expect.pdf) explains the current (June 2022) and near future approach to federating OCI users and groups, which most developer customers will likely adopt.
 
     ![](./images/001.png " ")
 
@@ -110,9 +112,11 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
     ![](./images/015.png " ")
     ![](./images/016.png " ")
 
-## Task 3: Create a Virtual Cloud Network (VCN)
+## Task 5: Create a Virtual Cloud Network (VCN)
 
-1.  Introduction:  Networking, along with compute and storage is a critically important service in OCI, and is required by most if not all services.  It is a very big topic in cloud computing environments, and in this lab we will create a virtual cloud network that we'll use to access a compute instance later in this lab.  A Virtual Cloud Network (VCN) is a software-defined network that you set up in the Oracle Cloud Infrastructure data centers in a particular region. It enables your cloud resources to securely communicate through the internet with other instances running in OCI or your on-premises data centers. Be sure to review [Overview of Networking](https://docs.cloud.oracle.com/iaas/Content/Network/Concepts/overview.htm) to gain a full understanding of the network components and their relationships.  
+1.  Introduction:  
+
+    Networking, along with compute and storage is a critically important service in OCI, and is required by most if not all services.  It is a very big topic in cloud computing environments, and in this lab we will create a virtual cloud network that we'll use to access a compute instance later in this lab.  A Virtual Cloud Network (VCN) is a software-defined network that you set up in the Oracle Cloud Infrastructure data centers in a particular region. It enables your cloud resources to securely communicate through the internet with other instances running in OCI or your on-premises data centers. Be sure to review [Overview of Networking](https://docs.cloud.oracle.com/iaas/Content/Network/Concepts/overview.htm) to gain a full understanding of the network components and their relationships.  
 
     Network VCN Architecture:
 
@@ -126,7 +130,9 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/018.png " ")
 
-3. Create your VCN.  In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select the **CareClinic** Compartment you created earlier on the left and then select **Start VCN Wizard**.
+3. Create your VCN.  
+
+    In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select the **CareClinic** Compartment you created earlier on the left and then select **Start VCN Wizard**.
 
     ![](./images/019.png " ")
 
@@ -138,7 +144,9 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/021.png " ")
 
-6. Select Create.  Note the create process will take several seconds.  This will create a VCN with public and private subnets, and Internet Gateway, a NAT Gateway, and a Service Gateway.
+6. Select Create.  
+
+    Note the create process will take several seconds.  This will create a VCN with public and private subnets, and Internet Gateway, a NAT Gateway, and a Service Gateway.
 
     ![](./images/022.png " ")
 
@@ -148,9 +156,11 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/024.png " ")
 
-## Task 4: Review OCI Cloud Storage Options 
+## Task 6: Review OCI Cloud Storage Options 
 
-1. Introduction.  This task is an awareness exercise but should be covered as part of OCI's foundation services.  As with other foundational OCI services storage is big topic and you are encouraged to explore this topic beyond this course.  Here are the different types of storage and their durability, capacity, unit size, and use case.  Note the following storage types.
+1. Introduction.  
+
+    This task is an awareness exercise but should be covered as part of OCI's foundation services.  As with other foundational OCI services storage is big topic and you are encouraged to explore this topic beyond this course.  Here are the different types of storage and their durability, capacity, unit size, and use case.  Note the following storage types.
 
     ![](./images/027.png " ")
 
@@ -183,10 +193,142 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
     - Used by Big Data as a storage service, and provides high speed read/write/query with predicate push down using Big Data SQL.
     - Used by Vision AI service for storage and processing of images.  Later in this workshop you will use Vision AI to do just that.
 
-## Task 5: Create a Compute Service
+## Task 7: Create a Compute Service
 
-    ![](./images/030.png " ")
+1. Introduction:  
+    
+    Oracle Cloud Infrastructure Compute lets you provision and manage compute hosts, known as instances. You can launch instances as needed to meet your compute and application requirements. After you launch an instance, you can access it securely from your computer, restart it, attach and detach volumes, and terminate it when you're done with it. Any changes made to the instance's local drives are lost when you terminate it. Any saved changes to volumes attached to the instance are retained. 
 
+2. Navigate to Compute.
 
+    ![](./images/035.png " ")
 
+    ![](./images/036.png " ")  
 
+3. Click on each service to view a brief description (awareness exercise).
+
+    ![](./images/037.png " ") 
+
+4. Create a Compute Instance.  Oracle Cloud Infrastructure offers both Bare Metal and Virtual Machine instances:
+
+    - Bare Metal - A bare metal compute instance gives you dedicated physical server access for highest performance and strong isolation.
+    - Virtual Machine - A Virtual Machine (VM) is an independent computing environment that runs on top of physical bare metal hardware. The virtualization makes it possible to run multiple VMs that are isolated from each other. VMs are ideal for running applications that do not require the performance and resources (CPU, memory, network bandwidth, storage) of an entire physical machine.
+
+    Click on Instances, and then **Create Instance**
+
+    ![](./images/038.png " ") 
+
+    ![](./images/039.png " ") 
+
+    Call the image **Careclinic_instance**.  Be sure you are in the CareClinics Compartment.  Next scroll down to view the image and shape.  We will accept the defaults but note the various images and image shapes that are available.
+
+    ![](./images/041.png " ") 
+
+    ![](./images/042.png " ")
+
+    ![](./images/043.png " ")
+
+    Scoll down further to Networking.  Select the **CareClinicVCN** VCN and ensure the public subnet is selected.
+
+    ![](./images/045.png " ")
+
+    Scroll down again to add your ssh public key.  Select **Upload public key files** and select the public key file you downloaded in Task 4.
+
+    ![](./images/046.png " ")  
+
+    ![](./images/047.png " ")
+
+    Take the remaining defaults and select **Create**.
+
+    ![](./images/048.png " ")
+
+    The create process will take less than a minute.  Once the instance state changes from **PROVISIONING** to **RUNNING** you will be able to connect to it.
+
+    ![](./images/049.png " ")
+
+5. Connect to the Instance using Cloud Shell.  Select Cloud Shell in the upper right.
+
+    ![](./images/050.png " ")
+
+    In the cloud shell window enter the following:
+
+    ```
+    <copy>
+    .ssh/cloudshellkey opc@<your public IP address from the console>
+    </copy>
+    ```
+
+    ![](./images/051.png " ")
+
+6. Install httpd on compute instance and configure the image firewall and VCN to allow access.
+
+    Enter the following in cloud shell:
+
+    ```
+    <copy>
+    sudo yum -y install httpd
+    </copy>
+    ```
+
+    ![](./images/052.png " ")
+
+    ![](./images/053.png " ")
+
+    Configure the compute firewall.  Enter the following:
+
+    ```
+    <copy>
+    sudo firewall-cmd --permanent --add-port=80/tcp
+    </copy>
+    ```
+    (Open port 80 on the firewall to allow http and https traffic).
+
+    *NOTE: Despite the line wrapping, the --add-port flag has no spaces.*
+    ```
+    <copy>
+    sudo firewall-cmd --reload
+    </copy>
+    ```
+    (Reload the firewall to activate the rules).
+
+   ![](./images/054.png " ")
+
+   Start httpd.  Enter the following:
+
+   ```
+    <copy>
+    sudo systemctl start httpd
+    </copy>
+    ```
+    
+    Navigate the VCN public subnet to allow incoming traffic on port 80.
+
+    ![](./images/055.png " ")
+
+    Edit the security list to add ingress port 80.
+
+    ![](./images/056.png " ")
+
+    ![](./images/057.png " ")
+
+    Add the following Ingress Rule.  After saving the rule will take a few seconds to be active.
+
+    ![](./images/058.png " ")
+
+    Test the webserver by entering the following in a browser on your desktop.
+
+    ```
+    <copy>
+    http://<your compute image public IP>
+    </copy>
+    ```
+
+    ![](./images/061.png " ")
+
+7. Terminate the compute image.
+
+    Navigate to the instance and select delete.
+
+    ![](./images/059.png " ")
+
+    ![](./images/060.png " ")
