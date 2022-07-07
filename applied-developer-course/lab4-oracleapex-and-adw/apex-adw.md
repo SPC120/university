@@ -1,220 +1,434 @@
 <!-- Updated June 15, 2022 -->
 
-# Provision Visual Builder Cloud Service Instance
+# Build APEX Application on ATP
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Visual Builder Cloud Service on Oracle Cloud. In this lab we will create Mobile application which will take photo of ID card and then store it in Object Storage. Further we will also use Vision service to get required detail from the image that user took and store it in Autonomous Database.
+This lab walks you through the steps to quickly provision an Autonomous Transaction Processing instance on Oracle Cloud. In this lab we will create web application which will take medical documents and store them in the Autonomous Database. Further we will also use Oracle Text to allow users to filter, search, and view those documents with one-click.
 
 Estimated lab time: 2 hours
 
 ### Objectives
 
-- Provision a new Visual Builder Cloud Service Instance
-- Learn how to connect to your new autonomous database using ORDS and Vision Service.
+- Create a new APEX workspace 
+- Build a web application
+- Explore Oracle Text 
 
 ### Prerequisites
 
 - This lab requires completion of the **Get Started** section in the Contents menu on the left.
 
-## Task 1: Create Visual Builder Cloud Service Instance
-1.  Login to Oracle Cloud Tenancy and click the menu in the top left![Graphical user interface, application, Teams Description automatically generated
-![](images/image1.png " ")
+## Task 1: Create Autonomous Transaction Processing Database
+1.  Login to your Oracle Cloud Tenancy and open the side menu
 
-2.  ![](images/image2.png)Access Autonomous Transaction Processing
+![](images/image1.png  " ")
 
-3.  Select the correct compartment (Ex: Care Clinic)
+2.  Navigate Autonomous Transaction Processing
 
-4.  ![](images/image3.png)Give a prefered Display Name (Ex: DB-Username-CareClinic) and select Transaction Processing![Graphical user interface, application Description automatically generated](images/image4.png)
+![](images/image2.png  " ")
 
-5.  Create the ADMIN password for the DB, following Password Requirements. Leave everything else as default.![Graphical user interface, text, application, Teams Description automatically generated](images/image5.png){width="6.493121172353455in" height="3.54in"}
+3.  Select the correct compartment (Ex: Care Clinic) and click **Create an Autonomous Database**
 
-6.  Create Autonomous Database![Graphical user interface, application, Teams Description automatically generated](images/image6.png)
+![](images/image3.png  " ")
 
-7.  Provisioning will take about 5 minutes![Graphical user interface, text, application, email Description automatically generated](images/image7.png)
+4.  Give a prefered Display Name (Ex: CareClinicsDB) and click **Transaction Processing** for the workload type
 
-8.  Under Tools, open Oracle APEX ![Graphical user interface, text, application, email Description automatically generated](images/image8.png)
+![](images/image4.png " ")
 
-9.  Enter ADMIN password and Sign In![Graphical user interface, application Description automatically generated](images/image9.png)
+5.  Create the ADMIN password for the DB, following the database password requirements. Leave everything else as default
 
-10. Create Workspace ![Graphical user interface, website Description automatically generated](images/image10.png)
+    *Note:* Make sure to save this password, you will need it later in this lab
 
-11. Create a Database User and new password for user (Ex: CareClinic)![A screenshot of a computer Description automatically generated](images/image11.png)
+![](images/image5.png  " ")
 
-12. After creating click here to sign out of the admin(internal) workspace and into the workspace that was just created![Graphical user interface, website Description automatically generated](images/image12.png)
+6.  Click **Create Autonomous Database**
 
-13. Enter Password for new dabase user (Ex: CareClinic) and Sign in![Graphical user interface, application Description automatically generated](images/image13.png)
+![](images/image6.png  " ")
 
-14. This is the oracle apex workspace for the DB that was created. Visit the SQL Workshop![A screenshot of a computer Description automatically generated with medium confidence](images/image14.png)
+7.  Database provisioning will take about 5 minutes. Once the Lifecycle State is ***Available***, you can continue to the next task
 
-15. Visit the SQL Workshop -\> Object Browser to view any objects in the databse. Note: It should be empty. Uploading a Script will create the tables we need.![Graphical user interface, text, application Description automatically generated](images/image15.png)
+![](images/image7.png " ")
 
-16. Go to SQL Scripts and upload the contents of the ***Create\_Tables.sql*** file ![Graphical user interface, application, Teams Description automatically generated](images/image16.png)
+## Task 2: Create an APEX Workspace
+1.  Under Tools, click **Oracle APEX**
 
-17. Upload the Script![A screenshot of a computer Description automatically generated with medium confidence](images/image17.png)
+![](images/image8.png " ")
 
-18. Run th Script![Graphical user interface, application Description automatically generated](images/image18.png)
+2.  Enter ADMIN password (Step 5) and sign in
 
-19. Ensure there are 19 Statements processed with 0 errors![Graphical user interface, application Description automatically generated](images/image19.png)
+![](images/image9.png " ")
 
-20. You are now able to view all 7 tables that were just created. Just need to upload the data into them.![A screenshot of a computer Description automatically generated](images/image20.png)
+3. Create a new Workspace
 
-21. Click Load Data and upload the .csv file for HEALTHCARE\_FACILITY. ­­![Graphical user interface, application Description automatically generated](images/image21.png)
+![](images/image10.png " ")
 
-22. Repeat for 5 more tables (Exclude PATIENT\_DOCUMENTS)![A screenshot of a computer Description automatically generated](images/image22.png)­­
+4. Create a Database User and new password for this user (Ex: CareClinic)
 
-23. There should now be data in 6/7 tables.![Graphical user interface Description automatically generated](images/image23.png)
+    *Note:* Make sure to save this database user password, you will need it later
 
-24. Let's create a new application using the Healthcare\_Facility Table![A screenshot of a computer Description automatically generated with medium confidence](images/image24.png
+![](images/image11.png " ")
 
-25. Give your application a name, and click create application. You can leave everything else as defult![A screenshot of a computer Description automatically generated with medium confidence](images/image25.png)
+5. After creating the workspace, click **CARECLINIC** to sign out of the admin(internal) workspace and into the workspace that you have just created
 
-26. Run the application and sign in with your database user (Step 11)![A screenshot of a computer Description automatically generated with medium confidence](images/image26.png)
+![](images/image12.png " ")
 
-27. These are two sample application pages created for you. Let's click Application 100 and create a page to upload our sample documents to our Patients Documents Table![Graphical user interface, application Description automatically generated](images/image27.png)
+## Task 3: Upload Sample Data and Create a new Application
 
-28. Create new Page![A screenshot of a computer Description automatically generated with medium confidence](images/image28.png)
+1. Enter password for new dabase user (Ex: CareClinic) and sign into the workspace
 
-29. Select Form![Graphical user interface, application Description automatically generated](images/image29.png)
+![](images/image13.png " ")
 
-30. Select Report with Form![A screenshot of a computer Description automatically generated with medium confidence](images/image30.png)
+2. This is the oracle apex workspace running on inside the database you created. Let's visit the SQL Workshop!
 
-31. Give the report and form a unique name. Use a classic report with a Modal Dialog Page.![A screenshot of a computer Description automatically generated with medium confidence](images/image31.png)
+![](images/image14.png " ")
 
-32. Create a new navigation menu entry![](images/image32.png)
+3. Inside the SQL Workshop > Object Browser to view any objects in the databse. 
 
-33. Select the Patient\_Documents table![A screenshot of a computer Description automatically generated with medium confidence](images/image33.png)
+    *Note:* It should be empty i.e no tables currently in the databse. Uploading a DDL script will create the table structure you need, and then you can inset the data from .csv files
 
-34. Select Primary Key Column as "ID (Number)" and create page![A screenshot of a computer Description automatically generated with medium confidence](images/image34.png){width="6.494917979002625in" height="3.55in"}
+![](images/image15.png " ")
 
-35. Let's hide some columns we do not want showing in the report. You can Ctrl+Click these columns and change their type to Hidden Column![A screenshot of a computer Description automatically generated with medium confidence](images/image35.png){width="6.507341426071741in" height="3.57in"}
+4. Go to SQL Scripts and upload the contents of the ***Create\_Tables.sql*** file !
 
-36. Select the DOCUMENT Column and in the right side pannel change the Mime Type, Filename Column, and Last Updated Column to match the column in our Patient\_Documents table![A screenshot of a computer Description automatically generated with medium confidence](images/image36.png)
+![](images/image16.png " ")
 
-37. We will need to repeat the same steps for Page 6. Change the unneeded columns to type Hidden![Graphical user interface, application Description automatically generated](images/image37.png)
+5. Upload the Script!
 
-38. Select the P6\_Documents page item, and change the MIME Type, Filename Column, and BLOB Last Updated Column, and Save. (You will need to type these out to match exactly to the database columns.![A screenshot of a computer Description automatically generated](images/image38.png)
+![](images/image17.png " ")
 
-39. Let's create a Popup LOV on our P6\_PATIENT\_VISIT\_ID help us assign the correct Patiend ID visit for the document we are uploading.![A screenshot of a computer Description automatically generated with medium confidence](images/image39.png)
+6. Run th Script!
 
-40. Change the Type to SQL Query and add this code. 'Select PV.PATIENT\_VISIT\_ID \|\| \' - \' \|\| P.FIRST\_NAME \|\| \' \' \|\| P.LAST\_NAME d, PATIENT\_VISIT\_ID r from PATIENT\_VISIT PV, PATIENT P where PV.PATIENT\_ID = P.PATIENT\_ID'\
-    ![Graphical user interface, application Description automatically generated](images/image40.png)
+![](images/image18.png " ")
 
-41. Go to Page 5 and run the application (Modal Pages cannot be run directly from the page designer i.e Page 6)![A screenshot of a computer Description automatically generated](images/image41.png)
+7. Ensure there are 19 Statements processed with 0 errors!
 
-42. Sign Into the application, if prompeted, and click create to inset new record into Patient\_Documents Table![Graphical user interface, text, application, Word Description automatically generated](images/image42.png)
+![](images/image19.png " ")
 
-43. Upload all 6 PDF documents ensuring that the Patient Visit ID matches the document that is being uploaded![Graphical user interface, application Description automatically generated](images/image43.png)
+8. You are now able to view all 7 tables that were just created. Just need to upload the data into them.!
 
-44. Now there will be 6 documents in the Patient\_Document Table. ![Graphical user interface, text, application Description automatically generated](images/image44.png)
+![](images/image20.png " ")
 
-45. This will also be reflected in the SQL Workshop -\> Object Browser -\> Patient\_Document ![Graphical user interface Description automatically generated](images/image45.png)
+9. Click Load Data and upload the .csv file for HEALTHCARE\_FACILITY. ­­!
 
-46. Return to the Cloud Console, and inside the ATP you have created, click Database Actions![Graphical user interface, text, application, email Description automatically generated](images/image46.png)
+![](images/image21.png " ")
 
-47. Click Database Users![Graphical user interface, application Description automatically generated](images/image47.png)
+10. Repeat for 5 more tables (Exclude PATIENT\_DOCUMENTS)!
 
-48. Edit the new user you have created![Graphical user interface, application, Teams Description automatically generated](images/image48.png)
+![](images/image22.png " ")­­
 
-49. Under Granted Roles, search for "CTX" and check "CTXAPP" and apply changes.![Graphical user interface, application, Teams Description automatically generated](images/image49.png)
+11. There should now be data in 6/7 tables.!
 
-50. To verify the role was granted, return to Database Actions.![Graphical user interface, application, Teams Description automatically generated](images/image50.png)
+![](images/image23.png " ")
 
-51. Under Development Click SQL![Graphical user interface, application, Teams Description automatically generated](images/image51.png)
+12. Let's create a new application using the Healthcare\_Facility Table!
 
-52. Execute the query, ensuring to chage the code to match your database user that was created (Step 11)![Graphical user interface, text, application, email Description automatically generated](images/image52.png)
+![](images/image24.png " ")
 
-53. Return to Database Actions -\> Database Users. Enable REST on the Databse User you created by clicking the more actions and enabling rest![Graphical user interface, application, Teams Description automatically generated](images/image53.png)
+13. Give your application a name, and click create application. You can leave everything else as defult!
 
-54. Open a new window by clicking below and sign in with the user that was created (Step 11)![Graphical user interface, application Description automatically generated](images/image54.png)
+![](images/image25.png " ")
 
-55. Open SQL Web Developer![Graphical user interface, application, Teams Description automatically generated](images/image55.png)
+14. Run the application and sign in with your database user (Step 11)!
 
-56. Enable REST on both PATIENT and PATIENT\_INSURANCE tables by right clicking them. Leave all settings as defult![Graphical user interface, text, application, Word Description automatically generated](images/image56.png)
+![](images/image26.png " ")
 
-57. Ensure are both enables, you will need this later for the other labs.![Graphical user interface, text, application, Word Description automatically generated](images/image57.png)
+15. These are two sample application pages created for you. Let's click Application 100 and create a page to upload our sample documents to our Patients Documents Table!
 
-58. Now visit thew APEX workspace. Go to SQL Commands under SQL Workshop![Graphical user interface Description automatically generated](images/image58.png)
+![](images/image27.png " ")
 
-59. Create an Index on the Patient\_Documents Table, where the visit summaries are stored![A screenshot of a computer Description automatically generated](images/image59.png)
+## Task 3: Add Pages to Application
 
-60. Core query inside the document to see if it contains a keyword. In this first example we are looking for all documents who have the work MRN inside the after visit summary. The greater than zero means a score is detected, and therefore the information is inside![A screenshot of a computer Description automatically generated with medium confidence](images/image60.png)
+1. Create new Page!
 
-61. Find all documents that have the word ABC with a score \> 1 and also contains the word Medical Center.![A screenshot of a computer Description automatically generated with medium confidence](images/image61.png)
+![](images/image28.png " ")
 
-62. This is a proximity search to look for the word ADULT near the word EXERCISES![A screenshot of a computer Description automatically generated with medium confidence](images/image62.png)
+2. Select Form!
 
-63. Fuzzy Search on a term, this gives the ability to find the work medications in the document without correct spelling. ![A screenshot of a computer Description automatically generated](images/image63.png)
+![](images/image29.png " ")
 
-64. Soundex Search on a term, giving the ability to find words that sound like the term provided, in this case "pressure". ![A screenshot of a computer Description automatically generated](images/image64.png)
+3. Select Report with Form!
 
-65. Stem search on a term. For example if we are looking for documents with that stem of Jounal, then it will return words like Journaling.![A screenshot of a computer Description automatically generated with medium confidence](images/image65.png)
+![](images/image30.png " ")
 
-66. Accumulation Search on two or more terms. This is looking for both terms in the document and assigning a score. Higher if both terms are present.![A screenshot of a computer Description automatically generated](images/image66.png)
+4. Give the report and form a unique name. Use a classic report with a Modal Dialog Page.!
 
-67. You can also weight each term as seen here. The word phyiscal carries 3x the weight of the work exercises. ![A screenshot of a computer Description automatically generated](images/image67.png)
+![](images/image31.png " ")
 
-68. Construct Themes Tables: To build themes for your documents you will first need to create a table to hold the themes.Run each statement individually by highlingting the the statement then clicking Run.![A screenshot of a computer Description automatically generated](images/image68.png)
+5. Create a new navigation menu entry
 
-69. Create Themes index for the documents currently in the PATIENT\_DOCUMENTS table.![A screenshot of a computer Description automatically generated](images/image69.png)
+![](images/image32.png " ")
 
-70. Query all themes. Show all themes with weight over 25![A screenshot of a computer Description automatically generated](images/image70.png)
+6. Select the Patient\_Documents table!
 
-71. Repeat for the Gist Table. Note: Run each of the 3 statements individually. ![Graphical user interface, text, application Description automatically generated](images/image71.png)
+![](images/image33.png " ")
 
-72. Repeat for the Filtered Docs Table. Note: Run each of the 3 statements individually. ![Graphical user interface, text Description automatically generated](images/image72.png)
+7. Select Primary Key Column as "ID (Number)" and create page!
 
-73. Finally repeat for the Full Themes tables. Note: Run each of the 3 statements individually. ![A screenshot of a computer Description automatically generated](images/image73.png)
+![](images/image34.png " ")
 
-74. We can vertify all 4 tables were created by visitng the Object Browser. ![Graphical user interface Description automatically generated](images/image74.png)
+8. Let's hide some columns we do not want showing in the report. You can Ctrl+Click these columns and change their type to Hidden Column!
 
-75. Now let's create a new page to let end users view document gists with 1 click. Create Page -\> Report -\> Classic Report![Graphical user interface, application, Teams Description automatically generated](images/image75.png)
+![](images/image35.png " ")
 
-76. Give the Classic Report a name, and select Modal Dialog (this will allow the page to be a pop-up instead of a redirect)![A screenshot of a computer Description automatically generated with medium confidence](images/image76.png)
+9. Select the DOCUMENT Column and in the right side pannel change the Mime Type, Filename Column, and Last Updated Column to match the column in our Patient\_Documents table!
 
-77. Finally select the source as SQL Query and enter the query as shown.![](images/image77.png)
+![](images/image36.png " ")
 
-78. On the new page, create two page items (P7\_QUERY\_ID and P7\_TITLE) by right-clicking on the content body region. ![Graphical user interface, application Description automatically generated](images/image78.png)
+10. We will need to repeat the same steps for Page 6. Change the unneeded columns to type Hidden!
 
-79. Set the Type of both new page items to "Hidden"![Graphical user interface, application Description automatically generated](images/image79.png)
+![](images/image37.png " ")
 
-80. Return to page 5. Right-Click Columns and Create Virual Column on this "Report 1"![A screenshot of a computer Description automatically generated](images/image80.png)
+11. Select the P6\_Documents page item, and change the MIME Type, Filename Column, and BLOB Last Updated Column, and Save. (You will need to type these out to match exactly to the database columns.!
 
-81. While Selecting the new virtual column you created, change the Heading to Document Gist. Under Link, click "No Link Defined" to define a new link for this virtual column. Set the link to page 7. Under Set Items, ensure you add both P7\_Query\_ID and P7\_TITLE, with values of \#ID\# and \#TITLE\# respectivly. Note: Use the menu to the right of the text box makes this easier.![Graphical user interface, application Description automatically generated](images/image81.png)
+![](images/image38.png " ")
 
-82. Add a Link Text by expanding the menu and selecting any of the defult optoions shown.![A screenshot of a computer Description automatically generated with medium confidence](images/image82.png)
+12. Let's create a Popup LOV on our P6\_PATIENT\_VISIT\_ID help us assign the correct Patiend ID visit for the document we are uploading.!
 
-83. Save and Run the application. Test this new feature by clicking on the pencil icon under Document Gist.![Graphical user interface, application Description automatically generated](images/image83.png)
+![](images/image39.png " ")
 
-84. You now have a gist of the PDF documents with just one click. Now lets see how we can replicate this to add Fildered Docs in plain text to the table as well.![](images/image84.png)
+13. Change the Type to SQL Query and add this code. 'Select PV.PATIENT\_VISIT\_ID \|\| \' - \' \|\| P.FIRST\_NAME \|\| \' \' \|\| P.LAST\_NAME d, PATIENT\_VISIT\_ID r from PATIENT\_VISIT PV, PATIENT P where PV.PATIENT\_ID = P.PATIENT\_ID'\
 
-85. Navigate to Page 7 using the developent tool bar below. Choose the "+" icon and select Page as Copy. Select "Page in this application"![A screenshot of a computer Description automatically generated](images/image85.png)
+![](images/image40.png " ")
 
-86. Select the new page as page 8, and provide a new page name. On the next page select "Do not associate with a navigation menu entry"![A screenshot of a computer Description automatically generated with medium confidence](images/image86.png)
+14. Go to Page 5 and run the application (Modal Pages cannot be run directly from the page designer i.e Page 6)!
 
-87. Give the Page Region a new name ![Graphical user interface, application Description automatically generated](images/image87.png)
+![](images/image41.png " ")
 
-88. You now have a new page (Page 8) where you can alter the SQL query to reflect that of Full Text. Let's create another virtual column link to this page.![Graphical user interface, application Description automatically generated](images/image88.png)
+15. Sign Into the application, if prompeted, and click create to inset new record into Patient\_Documents Table!
 
-89. Save and return to Page 5. Right- Click columns and Create Virtual Column![Graphical user interface, application, Teams Description automatically generated](images/image89.png)
+![](images/image42.png " ")
 
-90. Make changes similar to before, but instead redirecting to Page 8![Graphical user interface, application Description automatically generated](images/image90.png)
+16. Upload all 6 PDF documents ensuring that the Patient Visit ID matches the document that is being uploaded!
 
-91. Change the link text to a defult icon. Save and run the page.![A screenshot of a computer Description automatically generated with medium confidence](images/image91.png)
+![](images/image43.png " ")
 
-92. By clicking the manifying glass icon we can see the full text for that individual document.![Graphical user interface, text, application Description automatically generated](images/image92.png)
+17. Now there will be 6 documents in the Patient\_Document Table. 
 
-93. Click Edit App 100 down in the development tool bar. Let's create one more page for our patients appointments.This time we will create a Calandar page![](images/image93.png)
+![](images/image44.png " ")
 
-94. Give the new page a name, and select Next. ![Graphical user interface, application Description automatically generated](images/image94.png)
+18. This will also be reflected in the SQL Workshop -\> Object Browser -\> Patient\_Document !
 
-95. Select "Create a new nagivation menu entry" and enter a naviagation menu entry name![A screenshot of a computer Description automatically generated with medium confidence](images/image95.png)
+![](images/image45.png " ")
 
-96. Enter the source and a SQL Query and paste the code provided. Click Next.![A screenshot of a computer Description automatically generated with medium confidence](images/image96.png)
+## Task 4: Explore Oracle Text
 
-97. For Display Column select Last\_Name, and for Start Data Column select Date\_Time.![A screenshot of a computer Description automatically generated with medium confidence](images/image97.png)
+1. Return to the Cloud Console, and inside the ATP you have created, click Database Actions!
 
-98. Lastly under attributed for the Patient Appointments Region. Activate Show time, and add some supplemental information for each of the events on the calendar.Save and Run.![Graphical user interface, application Description automatically generated](images/image98.png)
+![](images/image46.png " ")
 
-99. Use this navigation to return to the end of 2021/start of 2022 where data is present in out tables. Note you can hover over the appointments to view the supplemental information about each one. ![A screenshot of a computer Description automatically generated](images/image99.png)
+2. Click Database Users!
+
+![](images/image47.png " ")
+
+3. Edit the new user you have created!
+
+![](images/image48.png " ")
+
+4. Under Granted Roles, search for "CTX" and check "CTXAPP" and apply changes.!
+
+![](images/image49.png " ")
+
+5. To verify the role was granted, return to Database Actions.!
+
+![](images/image50.png " ")
+
+6. Under Development Click SQL!
+
+![](images/image51.png " ")
+
+7. Execute the query, ensuring to chage the code to match your database user that was created (Step 11)!
+
+![](images/image52.png " ")
+
+8. Return to Database Actions -\> Database Users. Enable REST on the Databse User you created by clicking the more actions and enabling rest!
+
+![](images/image53.png " ")
+
+9. Open a new window by clicking below and sign in with the user that was created (Step 11)!
+
+![](images/image54.png " ")
+
+10. Open SQL Web Developer!
+
+![](images/image55.png " ")
+
+11. Enable REST on both PATIENT and PATIENT\_INSURANCE tables by right clicking them. Leave all settings as defult!
+
+![](images/image56.png " ")
+
+12. Ensure are both enables, you will need this later for the other labs.!
+
+![](images/image57.png " ")
+
+13. Now visit thew APEX workspace. Go to SQL Commands under SQL Workshop!
+
+![](images/image58.png " ")
+
+14. Create an Index on the Patient\_Documents Table, where the visit summaries are stored!
+
+![](images/image59.png " ")
+
+15. Core query inside the document to see if it contains a keyword. In this first example we are looking for all documents who have the work MRN inside the after visit summary. The greater than zero means a score is detected, and therefore the information is inside!
+
+![](images/image60.png " ")
+
+16. Find all documents that have the word ABC with a score \> 1 and also contains the word Medical Center.!
+
+![](images/image61.png " ")
+
+17. This is a proximity search to look for the word ADULT near the word EXERCISES!
+
+![](images/image62.png " ")
+
+18. Fuzzy Search on a term, this gives the ability to find the work medications in the document without correct spelling. !
+
+![](images/image63.png " ")
+
+19. Soundex Search on a term, giving the ability to find words that sound like the term provided, in this case "pressure". !
+
+![](images/image64.png " ")
+
+20. Stem search on a term. For example if we are looking for documents with that stem of Jounal, then it will return words like Journaling.!
+
+![](images/image65.png " ")
+
+21. Accumulation Search on two or more terms. This is looking for both terms in the document and assigning a score. Higher if both terms are present.!
+
+![](images/image66.png " ")
+
+22. You can also weight each term as seen here. The word phyiscal carries 3x the weight of the work exercises. !
+
+![](images/image67.png " ")
+
+23. Construct Themes Tables: To build themes for your documents you will first need to create a table to hold the themes.Run each statement individually by highlingting the the statement then clicking Run.!
+
+![](images/image68.png " ")
+
+24. Create Themes index for the documents currently in the PATIENT\_DOCUMENTS table.!
+
+![](images/image69.png " ")
+
+25. Query all themes. Show all themes with weight over 25!
+
+![](images/image70.png " ")
+
+26. Repeat for the Gist Table. Note: Run each of the 3 statements individually. !
+![](images/image71.png " ")
+
+27. Repeat for the Filtered Docs Table. Note: Run each of the 3 statements individually. ![Graphical user interface, text Description automatically generated]![](images/image72.png " ")
+
+28. Finally repeat for the Full Themes tables. Note: Run each of the 3 statements individually. !
+
+![](images/image73.png " ")
+
+29. We can vertify all 4 tables were created by visitng the Object Browser. !
+
+![](images/image74.png " ")
+
+## Task 5: Implement Oracle Text for End Users
+
+1. Now let's create a new page to let end users view document gists with 1 click. Create Page -\> Report -\> Classic Report!
+
+![](images/image75.png " ")
+
+2. Give the Classic Report a name, and select Modal Dialog (this will allow the page to be a pop-up instead of a redirect)!
+
+![](images/image76.png " ")
+
+3. Finally select the source as SQL Query and enter the query as shown.
+
+![](images/image77.png " ")
+
+4. On the new page, create two page items (P7\_QUERY\_ID and P7\_TITLE) by right-clicking on the content body region. 
+
+![](images/image78.png " ")
+
+5. Set the Type of both new page items to "Hidden"
+
+![](images/image79.png " ")
+
+6. Return to page 5. Right-Click Columns and Create Virual Column on this "Report 1"!
+
+![](images/image80.png " ")
+
+7. While Selecting the new virtual column you created, change the Heading to Document Gist. Under Link, click "No Link Defined" to define a new link for this virtual column. Set the link to page 7. Under Set Items, ensure you add both P7\_Query\_ID and P7\_TITLE, with values of \#ID\# and \#TITLE\# respectivly. Note: Use the menu to the right of the text box makes this easier.
+
+![](images/image81.png " ")
+
+8. Add a Link Text by expanding the menu and selecting any of the defult optoions shown.
+
+![](images/image82.png " ")
+
+9. Save and Run the application. Test this new feature by clicking on the pencil icon under Document Gist.
+
+![](images/image83.png " ")
+
+10. You now have a gist of the PDF documents with just one click. Now lets see how we can replicate this to add Fildered Docs in plain text to the table as well.
+
+![](images/image84.png " ")
+
+11. Navigate to Page 7 using the developent tool bar below. Choose the "+" icon and select Page as Copy. Select "Page in this application"!
+
+![](images/image85.png " ")
+
+12. Select the new page as page 8, and provide a new page name. On the next page select "Do not associate with a navigation menu entry"!
+
+![](images/image86.png " ")
+
+13. Give the Page Region a new name 
+
+![](images/image87.png " ")
+
+14. You now have a new page (Page 8) where you can alter the SQL query to reflect that of Full Text. Let's create another virtual column link to this page.
+
+![](images/image88.png " ")
+
+15. Save and return to Page 5. Right- Click columns and Create Virtual Column
+
+![](images/image89.png " ")
+
+16. Make changes similar to before, but instead redirecting to Page 8
+
+![](images/image90.png " ")
+
+17. Change the link text to a defult icon. Save and run the page.!
+
+![](images/image91.png " ")
+
+18. By clicking the manifying glass icon we can see the full text for that individual document.!
+
+![](images/image92.png " ")
+## Task 6: Create Calendar Page for Patient Appointments 
+
+1. Click Edit App 100 down in the development tool bar. Let's create one more page for our patients appointments.This time we will create a Calandar page
+
+![](images/image93.png " ")
+
+2. Give the new page a name, and select Next. 
+
+![](images/image94.png " ")
+
+3. Select "Create a new nagivation menu entry" and enter a naviagation menu entry name!
+
+![](images/image95.png " ")
+
+4. Enter the source and a SQL Query and paste the code provided. Click Next.!
+
+![](images/image96.png " ")
+
+5. For Display Column select Last\_Name, and for Start Data Column select Date\_Time.!
+
+![](images/image97.png " ")
+
+6. Lastly under attributed for the Patient Appointments Region. Activate Show time, and add some supplemental information for each of the events on the calendar.Save and Run.
+
+![](images/image98.png " ")
+
+7. Use this navigation to return to the end of 2021/start of 2022 where data is present in out tables. Note you can hover over the appointments to view the supplemental information about each one. !
+
+![](images/image99.png " ")
+
+Congratulations! You have successfully completed this lab.
+
+## Homework: Create a New Page 
 
