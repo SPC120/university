@@ -284,23 +284,25 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
     (Open port 80 on the firewall to allow http and https traffic).
 
     *NOTE: Despite the line wrapping, the --add-port flag has no spaces.*
+
     ```
     <copy>
     sudo firewall-cmd --reload
     </copy>
     ```
+
     (Reload the firewall to activate the rules).
 
-   ![](./images/054.png " ")
+    ![](./images/054.png " ")
 
-   Start httpd.  Enter the following:
+    Start httpd.  Enter the following:
 
-   ```
+    ```
     <copy>
     sudo systemctl start httpd
     </copy>
     ```
-    
+
     Navigate the VCN public subnet to allow incoming traffic on port 80.
 
     ![](./images/055.png " ")
