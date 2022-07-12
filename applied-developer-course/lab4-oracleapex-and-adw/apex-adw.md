@@ -88,39 +88,40 @@ Estimated lab time: 2 hours
 
 ![](images/image15.png " ")
 
-4. Go to SQL Scripts and upload the contents of the ***Create\_Tables.sql*** file !
+4. Go to SQL Scripts and upload the contents of the <a href="files/Create_Tables.sql">Create\_Tables.sql</a> file. This will build the table structure of the tables required. 
+
 
 ![](images/image16.png " ")
 
-5. Upload the Script!
+5. First upload the script
 
 ![](images/image17.png " ")
 
-6. Run th Script!
+6. Once uploaded, run the script
 
 ![](images/image18.png " ")
 
-7. Ensure there are 19 Statements processed with 0 errors!
+7. Ensure there are ***19*** Statements processed with 0 errors **Replace Screen Capture HERE down**
 
 ![](images/image19.png " ")
 
-8. You are now able to view all 7 tables that were just created. Just need to upload the data into them.!
+8. You are now able to view all 8 tables that were just created. You will need to upload the data into them
 
 ![](images/image20.png " ")
 
-9. Click Load Data and upload the .csv file for HEALTHCARE\_FACILITY. ­­!
+9. Click **Load Data** and upload the respective .csv file for HEALTHCARE\_FACILITY
 
 ![](images/image21.png " ")
 
-10. Repeat for 5 more tables (Exclude PATIENT\_DOCUMENTS)!
+10. Repeat this step 5 more tables (Exclude PATIENT\_DOCUMENTS and PATIENT\_INSURANCE)
 
 ![](images/image22.png " ")­­
 
-11. There should now be data in 6/7 tables.!
+11. There should now be data in 6/8 tables
 
 ![](images/image23.png " ")
 
-12. Let's create a new application using the Healthcare\_Facility Table!
+12. Let's create a new application using the Healthcare\_Facility Table
 
 ![](images/image24.png " ")
 
@@ -136,7 +137,7 @@ Estimated lab time: 2 hours
 
 ![](images/image27.png " ")
 
-## Task 3: Add Pages to Application
+## Task 4: Add Pages to Application
 
 1. Create new Page!
 
@@ -210,7 +211,7 @@ Estimated lab time: 2 hours
 
 ![](images/image45.png " ")
 
-## Task 4: Explore Oracle Text
+## Task 5: Explore Oracle Text
 
 1. Return to the Cloud Console, and inside the ATP you have created, click Database Actions!
 
@@ -268,7 +269,7 @@ Estimated lab time: 2 hours
 
 ![](images/image59.png " ")
 
-15. Core query inside the document to see if it contains a keyword. In this first example we are looking for all documents who have the work MRN inside the after visit summary. The greater than zero means a score is detected, and therefore the information is inside!
+15. Core query inside the document to see if it contains a keyword. In this first example we are looking for all documents who have the work MRN inside the after visit summary. A score greater than 0 means the text is found inside the document.
 
 ![](images/image60.png " ")
 
@@ -325,7 +326,7 @@ Estimated lab time: 2 hours
 
 ![](images/image74.png " ")
 
-## Task 5: Implement Oracle Text for End Users
+## Task 6: Implement Oracle Text for End Users
 
 1. Now let's create a new page to let end users view document gists with 1 click. Create Page -\> Report -\> Classic Report!
 
@@ -398,7 +399,7 @@ Estimated lab time: 2 hours
 18. By clicking the manifying glass icon we can see the full text for that individual document.!
 
 ![](images/image92.png " ")
-## Task 6: Create Calendar Page for Patient Appointments 
+## Task 7: Create Calendar Page for Patient Appointments 
 
 1. Click Edit App 100 down in the development tool bar. Let's create one more page for our patients appointments.This time we will create a Calandar page
 
