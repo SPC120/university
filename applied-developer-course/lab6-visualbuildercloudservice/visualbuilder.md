@@ -118,7 +118,36 @@ Repeat the above process to create another service connection to fetch user info
 
 ### Service Connection 3: Vision Service
 
-[OCI Rest APIs](https://docs.oracle.com/en-us/iaas/api/)
+This is a service connection to the OCI Vision Service. The APIs are available out of the box. OCI Signature is the authentication scheme for these APIs (similar to what we did in Service Connection 1).
+
+Go to this page to know more about OCI Vision REST endpoints [OCI Vision APIs](https://docs.oracle.com/en-us/iaas/api/#/en/vision/20220125/AnalyzeDocumentResult/AnalyzeDocument)
+
+We will use following API to extract text from the insurance cards.
+
+```copy
+https://vision.aiservice.us-ashburn-1.oci.oraclecloud.com/20220125/actions/analyzeDocument
+```
+
+1. Repeat Steps **1-2** from the "Service Connection 1: Object Storage". Enter the Vision Service URL. Method will be **POST**.
+
+2. Repeat Steps **4-6 for authentication** from the "Service Connection 1: Object Storage". Click on **Request > Body** and paste the following:
+
+```copy
+{
+     "features" : [ {
+    "featureType" : "TEXT_DETECTION"
+  } ],
+  "language" : "ENG",
+      document: {
+        source: "OBJECT_STORAGE",
+        namespaceName: "EXAMPLE-namespaceName-Value",
+        bucketName: "EXAMPLE-bucketName-Value",
+        objectName: "EXAMPLE-objectName-Value"
+      }
+}
+```
+
+ ![](images/59.png " ")
 
 ## Task 3: Create Mobile Application
 
