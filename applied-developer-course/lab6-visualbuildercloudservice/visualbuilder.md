@@ -426,7 +426,11 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
 
    ![](images/task4/08.png " ")
 
-4. Verify the details of the user, click on **Take Photo** and then capture an image of your health insurance card. Once that is done, you should see a notification saying that photo was taken successfully.
+4. Verify the details of the user, click on **Take Photo** and then capture an image of your health insurance card. Now you can either take a picture of your own health insurance card or take a picture of the sample below.
+
+Once that is done, you should see a notification saying that photo was taken successfully.
+
+   ![](images/task4/HealthCardSample.png " ")
 
    ![](images/task4/09.png " ")
 
@@ -438,10 +442,18 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
 
    ![](images/task4/011.png " ")
 
+## Homework
+
+1. In Task 3 Page 2, we are not updating the **RxBin**, there number is coming in the array of lines returned from the vision service. Figure out a way to parse that and extract the RxBin number. Hint: Go to the JS code and make another condition similar to the one we have for member ID and group number.
+
+2. In Task 3, on click of any button we are not showing a spinner or loader. Figure out a way to show that spinner while the action chains are running and to hide it once the action chain finished running.
+
+3. Show the memberId and groupNumber to the user in text fields?
+
 ## Troubleshoot Tips
 
 ### Using Dev Tools
 
-You can always use chrome dev tools to debug issues if you get stuck. The network tab and console are always useful to see what's going on behind the app.
+You can always use chrome dev tools to debug issues if you get stuck. The network tab and console are always useful to see what's going on behind the app. There is blog explaining in more detail. [How To Debug VBCS Applications](https://blogs.oracle.com/vbcs/post/debugging-and-troubleshooting-visual-builder-logic)
 
     If you are having problems with any of the labs, please visit the Need Help? tab.
