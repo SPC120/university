@@ -116,7 +116,12 @@ Repeat the above process to create another service connection to fetch user info
 
    ![](images/19.png " ")
 
+3. We need to add another endpoint under the same server to create an entry in the ATP DB for the patient's insurance details. Therefore, click **+Endpoint**.
+
    ![](images/20.png " ")
+
+4. This time the method is **POST**, url is as per your configuration of the ATP ORDS Endpoint and action hint is **CREATE**. Then click Save.
+
    ![](images/21.png " ")
 
 ### Service Connection 3: Vision Service
@@ -127,30 +132,34 @@ Go to this page to know more about OCI Vision REST endpoints [OCI Vision APIs](h
 
 We will use following API to extract text from the insurance cards.
 
-```copy
-https://vision.aiservice.us-ashburn-1.oci.oraclecloud.com/20220125/actions/analyzeDocument
-```
+   ```
+   <copy>
+   https://vision.aiservice.us-ashburn-1.oci.oraclecloud.com/20220125/actions/analyzeDocument
+   </copy>
+   ```
 
 1. Repeat Steps **1-2** from the "Service Connection 1: Object Storage". Enter the Vision Service URL. Method will be **POST**.
 
 2. Repeat Steps **4-6 for authentication** from the "Service Connection 1: Object Storage". Click on **Request > Body** and paste the following:
 
-```copy
-{
-     "features" : [ {
-    "featureType" : "TEXT_DETECTION"
-  } ],
-  "language" : "ENG",
-      document: {
-        source: "OBJECT_STORAGE",
-        namespaceName: "EXAMPLE-namespaceName-Value",
-        bucketName: "EXAMPLE-bucketName-Value",
-        objectName: "EXAMPLE-objectName-Value"
-      }
-}
-```
+   ```
+   <copy>
+   {
+      "features" : [ {
+      "featureType" : "TEXT_DETECTION"
+   } ],
+   "language" : "ENG",
+         document: {
+         source: "OBJECT_STORAGE",
+         namespaceName: "EXAMPLE-namespaceName-Value",
+         bucketName: "EXAMPLE-bucketName-Value",
+         objectName: "EXAMPLE-objectName-Value"
+         }
+   }
+   </copy>
+   ```
 
-![](images/59.png " ")
+   ![](images/59.png " ")
 
 ## Task 3: Create Mobile Application
 
@@ -244,7 +253,7 @@ In this task we will now actually create mobile application that end users can i
 Then click Save.
 
 Note: callRestGetPatientId could be different for you if you changed the rest call id step right above the navigate step. The idea is to assign the returned fields from the rest call to your next page's input parameter.
-![](images/task3/page-2/09.png " ")
+      ![](images/task3/page-2/09.png " ")
 
 9. Go back to your "main-cardimage" page, drag and drop a form layout to the canvas.
 10. Also add **oj-sm-padding-4x-horizontal** class on the right side properties panel.
@@ -272,11 +281,11 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
 
 19. Drag and drop button in canvas. Change Label and align center. Add class oj-sm-margin-2x-top
 
-![](images/task3/page-2/017.png " ")
+   ![](images/task3/page-2/017.png " ")
 
 20. Click on Events, and then click on New Event -> ojAction
 
-![](images/task3/page-2/018.png " ")
+   ![](images/task3/page-2/018.png " ")
 
 21. Drag and drop Call Rest in canvas and click on Select Endpoint in properties.
     ![](images/task3/page-2/019.png " ")
@@ -390,6 +399,49 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
 
 ## Task 4: Publish Application and test
 
+### Publish the Application
+
+1. Click on the app name, click on **SETTINGS** and then **PWA**. Enable the Progressive Web App option so that VBCS can generate the barcode for you to scan and test.
+   ![](images/task4/01.png " ")
+
+2. Then click the right hand side top corner menu and click **STAGE**. Then click **STAGE** again.
+   ![](images/task4/02.png " ")
+   ![](images/task4/03.png " ")
+
+3. Then click the right hand side top corner menu and click **PUBLISH**. Then click **PUBLISH** again.
+   ![](images/task4/04.png " ")
+   ![](images/task4/05.png " ")
+
+### Test the application
+
+1. Go to the visual builder top level page where you can see all the applications. Click on **LIVE** and then the app name. This will open another window.
+
+   ![](images/task4/06.png " ")
+
+2. Here on the right side of the screen you can see the barcode to scan to test this on your own mobile device.
+
+   ![](images/task4/07.png " ")
+
+3. Enter the ID, and then click on **LOGIN**.
+
+   ![](images/task4/08.png " ")
+
+4. Verify the details of the user, click on **Take Photo** and then capture an image of your health insurance card. Once that is done, you should see a notification saying that photo was taken successfully.
+
+   ![](images/task4/09.png " ")
+
+5. Next click on the upload button and wait for the notifications to pop up, this might take some time depending on network latency as the image is being uploaded to the bucket. 
+
+   ![](images/task4/010.png " ")
+
+6. If everything goes smooth, it should navigate you to the success page.
+
+   ![](images/task4/011.png " ")
+
 ## Troubleshoot Tips
+
+### Using Dev Tools
+
+You can always use chrome dev tools to debug issues if you get stuck. The network tab and console are always useful to see what's going on behind the app.
 
     If you are having problems with any of the labs, please visit the Need Help? tab.
