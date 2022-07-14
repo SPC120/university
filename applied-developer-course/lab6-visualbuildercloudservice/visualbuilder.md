@@ -270,31 +270,62 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
 18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.  
     ![](images/task3/page-2/016.png " ")
 
-19. //TO-DO The whole upload action chain:
-    - upload to object storage
-    - call vision API
-    - Parse the response
-    - call DB API to create record in DB.
-    - navigate to main-success in case of success.
+19. Drag and drop button in canvas. Change Label and align center. Add class oj-sm-margin-2x-top
 
 ![](images/task3/page-2/017.png " ")
+
+20. Click on Events, and then click on New Event -> ojAction
+
 ![](images/task3/page-2/018.png " ")
-![](images/task3/page-2/019.png " ")
-![](images/task3/page-2/020.png " ")
-![](images/task3/page-2/021.png " ")
-![](images/task3/page-2/022.png " ")
-![](images/task3/page-2/023.png " ")
-![](images/task3/page-2/024.png " ")
-![](images/task3/page-2/025.png " ")
-![](images/task3/page-2/026.png " ")
-![](images/task3/page-2/027.png " ")
-![](images/task3/page-2/028.png " ")
-![](images/task3/page-2/029.png " ")
-![](images/task3/page-2/030.png " ")
-![](images/task3/page-2/031.png " ")
-![](images/task3/page-2/032.png " ")
-![](images/task3/page-2/033.png " ")
-![](images/task3/page-2/034.png " ")
+
+21. Drag and drop Call Rest in canvas and click on Select Endpoint in properties.
+    ![](images/task3/page-2/019.png " ")
+
+22. Select PUT endpoint for uploading image to Object Storage.
+    ![](images/task3/page-2/020.png " ")
+
+23. Enter Bucket Name, Namespace in target and for objectName we will use firstname_lastname.jpeg. Click Save
+    ![](images/task3/page-2/021.png " ")
+    ![](images/task3/page-2/026.png " ")
+
+24. Drag and drop Fire Notification, enter Summary and change display mode to Transient and Notification Type to confirmation
+    ![](images/task3/page-2/022.png " ")
+
+25. Drag and drop Call rest after Fire Notification. Select analyzeDocument API an dthen click on Body.
+    ![](images/task3/page-2/023.png " ")
+
+26. Paste the Body as follow, and replace fields like namespace and bucketname with yours. For objectName copy the syntax we used above for uploading image to Object Storage.
+    ![](images/task3/page-2/024.png " ")
+
+27. Drag and drop Call Function. Here we will write our own javascript function to parse the output we get after analyzing image.
+
+    ![](images/task3/page-2/028.png " ")
+
+    <!-- ![](images/task3/page-2/025.png " ") -->
+
+28. Click on JavaScript Tab and paste the following function inside PageModule class.
+
+    ![](images/task3/page-2/029.png " ")
+
+29. Go back to Actions. and then select the Function Name that we just added.
+
+    ![](images/task3/page-2/030.png " ")
+
+30. We need to pass the output from endpoint to function, click on Assign next to Input Parameters and expand results, look for Lines array and map it to arrOfLines in target
+
+    ![](images/task3/page-2/031.png " ")
+
+31. Add another Rest Call and select patient_insurance endpoint to update patient insurace details in DB.
+
+    ![](images/task3/page-2/032.png " ")
+
+32. Replace all the fields in body. Member id and Group Number we will get from our JS function and patient id is already there in variable. Contruct the URL for image URL
+
+    ![](images/task3/page-2/033.png " ")
+
+33. Add Navigate at the end in Success fork, and select the main-success page.
+
+    ![](images/task3/page-2/034.png " ")
 
 ### Page 3: main-success
 
