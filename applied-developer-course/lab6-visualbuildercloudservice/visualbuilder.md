@@ -82,7 +82,7 @@ https://objectstorage.us-{region}-1.oraclecloud.com/n/{namespaceName}/b/{bucketN
 
 1. Click on **services** in left panel and then click on **plus sign** to add new service connection
 
-    ![](images/7.png " ")
+   ![](images/7.png " ")
 
 2. Select Define by Endpoint to add REST endpoints
    ![](images/12.png " ")
@@ -110,11 +110,14 @@ Repeat the above process to create another service connection to fetch user info
 
 1. Here we will have get method and hint will be get one. Click **Next**.
 
-    ![](images/18.png " ")
+   ![](images/18.png " ")
 
 2. Rename the service if you want and go to test, and enter id value and click on send request. Once we get 200 response, save the example response and then click create.
 
-    ![](images/19.png " ")
+   ![](images/19.png " ")
+
+   ![](images/20.png " ")
+   ![](images/21.png " ")
 
 ### Service Connection 3: Vision Service
 
@@ -147,7 +150,7 @@ https://vision.aiservice.us-ashburn-1.oci.oraclecloud.com/20220125/actions/analy
 }
 ```
 
- ![](images/59.png " ")
+![](images/59.png " ")
 
 ## Task 3: Create Mobile Application
 
@@ -166,7 +169,7 @@ In this task we will now actually create mobile application that end users can i
 
 4. Once page is loaded you can see the structure in left panel, by defauly main-start is landing page. In canvas you can see components where we can filter different components and drag and drop in our canvas. Also elements in canvas can be seen under structure.
 
-    ![](images/task3/23.png " ")
+   ![](images/task3/23.png " ")
 
 5. Search for input and drag and drop to Input Text to canvas
    ![](images/task3/24.png " ")
@@ -182,7 +185,7 @@ In this task we will now actually create mobile application that end users can i
 
 9. Click on Input Text and then under **Properties** go to **Data** and next to value click on **down arrow** and finally click **Create Variable**
 
-    ![](images/task3/28.png " ")
+   ![](images/task3/28.png " ")
 
 10. Give variable name and then click **Create**
     ![](images/task3/29.png " ")
@@ -211,67 +214,61 @@ In this task we will now actually create mobile application that end users can i
 18. Give name to page and select Custom, click Create.
     ![](images/task3/37.png " ")
 
-
 ### Page 2: main-cardImage
 
 1. In the left navigation pane, find the newly created page and click on "main-cardimage".
-    ![](images/task3/38-1.png " ")
+   ![](images/task3/page-2/01.png " ")
 
 2. In the main-cardpage, go to **types** and click on +type and then "From Endpoint".
-    ![](images/task3/38.png " ")
+   ![](images/task3/page-2/02.png " ")
 
 3. Select the getUser under services.
-    ![](images/task3/41.png " ")
+   ![](images/task3/page-2/03.png " ")
 
-4. Select the fields you want the type to have, in this example we are going to display only the first and last name but we also need the id for the REST calls to update the database table. Therefore select those three fields.    
-    ![](images/task3/39.png " ")
-    
-5. Then go to **Variables** and click "+Variable", name it **userDetails** and select the type as the one you created in step 4. Then click create.  Create another variable "image" of type Any.  
-    ![](images/task3/40.png " ")
-    ![](images/task3/52.png " ")
+4. Select the fields you want the type to have, in this example we are going to display only the first and last name but we also need the id for the REST calls to update the database table. Therefore select those three fields.  
+   ![](images/task3/page-2/04.png " ")
+5. Then go to **Variables** and click "+Variable", name it **userDetails** and select the type as the one you created in step 4. Then click create. Create another variable "image" of type Any.  
+   ![](images/task3/page-2/05.png " ")
+   ![](images/task3/page-2/06.png " ")
 
 6. Choose the option "Required" under the input parameters on the right side of the screen.
-    ![](images/task3/40-2.png " ")
+   ![](images/task3/page-2/07.png " ")
 
-7. Go back to the "main-start" page and open the action chain that will be called on click of the login button. Click on the "navigate to main-cardimage" activity. You should now see under input parameters the newly created input paramater for main-cardimage page i.e. userDetails. Click on Assign. 
-    ![](images/task3/43.png " ")    
+7. Go back to the "main-start" page and open the action chain that will be called on click of the login button. Click on the "navigate to main-cardimage" activity. You should now see under input parameters the newly created input paramater for main-cardimage page i.e. userDetails. Click on Assign.
+   ![](images/task3/page-2/08.png " ")
 
 8. Assign the userDetails on the right side the following code:
 
-``{
-"patient_id": $chain.results.callRestGetPatientId.body.patient_id,
-"first_name": $chain.results.callRestGetPatientId.body.first_name,
-"last_name": $chain.results.callRestGetPatientId.body.last_name
-}``
+`{ "patient_id": $chain.results.callRestGetPatientId.body.patient_id, "first_name": $chain.results.callRestGetPatientId.body.first_name, "last_name": $chain.results.callRestGetPatientId.body.last_name }`
 
 Then click Save.
 
 Note: callRestGetPatientId could be different for you if you changed the rest call id step right above the navigate step. The idea is to assign the returned fields from the rest call to your next page's input parameter.
-    ![](images/task3/42.png " ")
+![](images/task3/page-2/09.png " ")
 
-9. Go back to your "main-cardimage" page, drag and drop a form layout to the canvas. 
+9. Go back to your "main-cardimage" page, drag and drop a form layout to the canvas.
 10. Also add **oj-sm-padding-4x-horizontal** class on the right side properties panel.
-    ![](images/task3/44.png " ")
+    ![](images/task3/page-2/010.png " ")
 
 11. Next drag and drop an "Input Text" inside the form layout and on the right properties panel goto data.
 12. For the value field under the data tab, hover over the field and you will see an arrow on the far right. Click on that arrow and select "first_name" under the userDetails variable.
 13. Repeat step 12 for the "Last Name" field.
-    ![](images/task3/46.png " ")
+    ![](images/task3/page-2/011.png " ")
 
 14. Drag and drop a camera component under the form layout in the canvas. In the properties panel on the right, deselect video as the app will only accept images. Also align it centrally.
-    ![](images/task3/47.png " ")
+    ![](images/task3/page-2/012.png " ")
 
 15. Then in the properties panel, go to "events" tab and click on "+New Event" and select "On Selected Files". This will open up an action chain.
-    ![](images/task3/48.png " ")
+    ![](images/task3/page-2/013.png " ")
 
 16. Drag and drop an assign varibale option to the canvas. Then click Assign.
-    ![](images/task3/49.png " ")
+    ![](images/task3/page-2/014.png " ")
 
 17. From the left assign Files.item[0] to the image variable and make sure to select expression and click save.
-    ![](images/task3/50.png " ")
+    ![](images/task3/page-2/015.png " ")
 
-18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.    
-    ![](images/task3/51.png " ")
+18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.  
+    ![](images/task3/page-2/016.png " ")
 
 19. //TO-DO The whole upload action chain:
     - upload to object storage
@@ -280,26 +277,45 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
     - call DB API to create record in DB.
     - navigate to main-success in case of success.
 
+![](images/task3/page-2/017.png " ")
+![](images/task3/page-2/018.png " ")
+![](images/task3/page-2/019.png " ")
+![](images/task3/page-2/020.png " ")
+![](images/task3/page-2/021.png " ")
+![](images/task3/page-2/022.png " ")
+![](images/task3/page-2/023.png " ")
+![](images/task3/page-2/024.png " ")
+![](images/task3/page-2/025.png " ")
+![](images/task3/page-2/026.png " ")
+![](images/task3/page-2/027.png " ")
+![](images/task3/page-2/028.png " ")
+![](images/task3/page-2/029.png " ")
+![](images/task3/page-2/030.png " ")
+![](images/task3/page-2/031.png " ")
+![](images/task3/page-2/032.png " ")
+![](images/task3/page-2/033.png " ")
+![](images/task3/page-2/034.png " ")
+
 ### Page 3: main-success
 
 1. Click on Flex Container and on the right properties panel, select the following:
-![](images/task3/53.png " ")
+   ![](images/task3/53.png " ")
 
 2. Drag and drop a icon component onto the canvas and click on the icon option in the properties panel.
-![](images/task3/54.png " ")
+   ![](images/task3/54.png " ")
 
 3. Search for success and select the "Success S" option and then click on select.
-![](images/task3/55.png " ")
+   ![](images/task3/55.png " ")
 
 4. Add the **oj-icon-color-success** class to the icon.
-![](images/task3/56.png " ")
+   ![](images/task3/56.png " ")
 
-5. Go to the "All tab" for the icon properties and then search for style. Then add "font-size:100px;". 
-![](images/task3/57.png " ")
+5. Go to the "All tab" for the icon properties and then search for style. Then add "font-size:100px;".
+   ![](images/task3/57.png " ")
 
 6. Drag and drop a text right under the icon component.
 7. Change the value to "Success! You can now return to the Chatbot"
-![](images/task3/58.png " ")
+   ![](images/task3/58.png " ")
 
 ## Task 4: Publish Application and test
 
