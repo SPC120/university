@@ -66,3 +66,27 @@ Before you start using OCI Vision, your tenancy administrator should set up the 
     ```
 
     ![](images/policy4.png " ")
+
+
+## Task 1: Understand the data requirements for OCI AI Vision service
+
+The vision service works with multiple formats of image data in order to detect objects, assign labels to images, extract text, and more. The service accepts data through Object Storage and locally stored images (if using via OCI console).
+
+The service offers sync and async APIs to analyze images, with data requirements for each detailed below:
+
+| API | Description | Supported Input Format |
+| -------- |:-------:| -----:|
+| sync API (analyzeImage, analyzeDocument) | Analyzes individual images |<p>* JPG, PNG, (PDF and Tiff for analyzeDocument) <br>*Up to 8 MB<br> *Single image input<br></p>|
+| async API/jobs/startImageAnalysisjob/jobs/start | Analyze multiple images or multi-page PDFs |<p>* JPG, PNG (PDF and Tiff for analyzeDocument)<br>* Up to 2000 images input<br> * Supports multi-page PDF<br></p>| 
+
+
+## Task 2: Upload Data to Object Storage 
+
+1. Create an Object Storage Bucket (This step is optional in case the bucket is already created)
+
+a. First, From the OCI Services menu, click Object Storage.
+
+![](images/cloud-storage-bucket.png " ")
+
+
+## Task 3: Demo Vision Service using the OCI Console
