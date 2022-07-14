@@ -285,6 +285,13 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
     ![](images/task3/page-2/020.png " ")
 
 23. Enter Bucket Name, Namespace in target and for objectName we will use firstname_lastname.jpeg. Click Save
+
+    ```
+     <copy>
+    `${$page.variables.userDetails.first_name}_${$page.variables.userDetails.last_name}.jpeg`
+     </copy>
+    ```
+
     ![](images/task3/page-2/021.png " ")
     ![](images/task3/page-2/026.png " ")
 
@@ -295,15 +302,48 @@ Note: callRestGetPatientId could be different for you if you changed the rest ca
     ![](images/task3/page-2/023.png " ")
 
 26. Paste the Body as follow, and replace fields like namespace and bucketname with yours. For objectName copy the syntax we used above for uploading image to Object Storage.
+
     ![](images/task3/page-2/024.png " ")
 
 27. Drag and drop Call Function. Here we will write our own javascript function to parse the output we get after analyzing image.
 
     ![](images/task3/page-2/028.png " ")
 
-    <!-- ![](images/task3/page-2/025.png " ") -->
-
 28. Click on JavaScript Tab and paste the following function inside PageModule class.
+
+    ```
+    <copy>
+        getDetailsFromCard(arrOfLines) {
+        let currLine;
+        let returnVar = { "memberId": null, "groupNum": null };
+
+        for (let i = 0; i < arrOfLines.length; i++) {
+            currLine = arrOfLines[i].text;
+
+            if (returnVar.memberId != null && returnVar.groupNum != null)
+            break;
+
+            if (currLine.toLowerCase().indexOf("id") > -1) {
+            if (currLine.indexOf(":") > -1 && currLine.split(":")[1].trim().length > 0) {
+                returnVar.memberId = currLine.split(":")[1].trim();
+            } else {
+                returnVar.memberId = arrOfLines[i + 1].text;
+            }
+            }
+
+            if (currLine.toLowerCase().indexOf("group") > -1) {
+            if (currLine.indexOf(":") > -1 && currLine.split(":")[1].trim().length > 0) {
+                returnVar.groupNum = currLine.split(":")[1].trim();
+            } else {
+                returnVar.groupNum = arrOfLines[i + 1].text;
+            }
+            }
+        }
+
+        return returnVar;
+        }
+    </copy>
+    ```
 
     ![](images/task3/page-2/029.png " ")
 
