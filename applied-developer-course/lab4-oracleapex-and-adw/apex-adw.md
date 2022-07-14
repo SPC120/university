@@ -93,7 +93,7 @@ Estimated lab time: 2 hours
 
 ![](images/image16.png " ")
 
-5. First upload the script
+5. Upload the script
 
 ![](images/image17.png " ")
 
@@ -101,19 +101,21 @@ Estimated lab time: 2 hours
 
 ![](images/image18.png " ")
 
-7. Ensure there are ***19*** Statements processed with 0 errors **Replace Screen Capture HERE down**
+7. Ensure the statements are processed with no errors **REPLACE Screen Capture HERE down**
 
 ![](images/image19.png " ")
 
-8. You are now able to view all 8 tables that were just created. You will need to upload the data into them
+8. You are now able to view all 8 tables that were just created in the object browser. Now you will need to upload the data into them
 
 ![](images/image20.png " ")
 
-9. Click **Load Data** and upload the respective .csv file for HEALTHCARE\_FACILITY
+9. Click **Load Data** and upload the respective .csv file for HEALTHCARE\_FACILITY. The full data set can be found <a href="files/CareClinicData.zip">here.</a>
 
 ![](images/image21.png " ")
 
-10. Repeat this step 5 more tables (Exclude PATIENT\_DOCUMENTS and PATIENT\_INSURANCE)
+10. Repeat this step for 5 more tables (Exclude the PATIENT\_DOCUMENTS and the PATIENT\_INSURANCE tables)
+
+**Note:** After each load, click view table to return to the object browser
 
 ![](images/image22.png " ")­­
 
@@ -133,7 +135,7 @@ Estimated lab time: 2 hours
 
 ![](images/image26.png " ")
 
-15. These are two sample application pages created for you. Let's click Application 100 and create a page to upload our sample documents to our Patients Documents Table!
+15. These are two sample pages created for you that show the **Health Care Facility** table. Let's click Application 100 and create a page to upload our sample documents to our **Patients Documents** Table
 
 ![](images/image27.png " ")
 
@@ -141,73 +143,75 @@ Estimated lab time: 2 hours
 
 1. Create new Page!
 
+*Note:* This is on version APEX 21.2, 22.1 will look slightly different.
+
 ![](images/image28.png " ")
 
-2. Select Form!
+2. Select **Classic Report**
 
 ![](images/image29.png " ")
 
-3. Select Report with Form!
+3. Select **Include Form Page** and give both the classic report and form page unique names. Select the source for this report as the **PATIENT\_DOCUMENTS** table
 
 ![](images/image30.png " ")
 
-4. Give the report and form a unique name. Use a classic report with a Modal Dialog Page.!
+4. Keep the Primary Key Column as ID(Number)
 
 ![](images/image31.png " ")
 
-5. Create a new navigation menu entry
-
-![](images/image32.png " ")
-
-6. Select the Patient\_Documents table!
-
-![](images/image33.png " ")
-
-7. Select Primary Key Column as "ID (Number)" and create page!
-
-![](images/image34.png " ")
-
-8. Let's hide some columns we do not want showing in the report. You can Ctrl+Click these columns and change their type to Hidden Column!
+5. Let's hide some columns we do not want showing in the report. You can Ctrl/Cmd+Click these columns and change their type to Hidden Column
 
 ![](images/image35.png " ")
 
-9. Select the DOCUMENT Column and in the right side pannel change the Mime Type, Filename Column, and Last Updated Column to match the column in our Patient\_Documents table!
+6. Select the DOCUMENT Column and in the right side pannel change the **Mime Type**, **Filename Column**, and **Last Updated Column** to match the columns in our **Patient\_Documents** table!
+
+    *Note:* Don't forget to save!
 
 ![](images/image36.png " ")
 
-10. We will need to repeat the same steps for Page 6. Change the unneeded columns to type Hidden!
+7. You will need to repeat the same steps for the form page (Page 6). Change the unwanted columns to type **Hidden**
 
 ![](images/image37.png " ")
 
-11. Select the P6\_Documents page item, and change the MIME Type, Filename Column, and BLOB Last Updated Column, and Save. (You will need to type these out to match exactly to the database columns.!
+8. Select the **P6\_Documents** page item, and change the **MIME Type Column**, **Filename Column**, and **BLOB Last Updated Column**, and Save. 
+
+*Note: *You will need to type these out to match exactly to the database columns.
 
 ![](images/image38.png " ")
 
-12. Let's create a Popup LOV on our P6\_PATIENT\_VISIT\_ID help us assign the correct Patiend ID visit for the document we are uploading.!
+9. Let's create a Popup LOV on our **P6\_PATIENT\_VISIT\_ID**. This will help you assign the correct **Patiend Visit ID** for the documents you are going to upload.
 
 ![](images/image39.png " ")
 
-13. Change the Type to SQL Query and add this code. 'Select PV.PATIENT\_VISIT\_ID \|\| \' - \' \|\| P.FIRST\_NAME \|\| \' \' \|\| P.LAST\_NAME d, PATIENT\_VISIT\_ID r from PATIENT\_VISIT PV, PATIENT P where PV.PATIENT\_ID = P.PATIENT\_ID'\
+10. Scroll down and change the Type to **SQL Query** and add this code under. 
+ 
+ ```
+    <copy>
+    Select PV.PATIENT_VISIT_ID || ' - ' || P.FIRST_NAME || ' ' || P.LAST_NAME d, PATIENT_VISIT_ID r from PATIENT_VISIT PV, PATIENT P where PV.PATIENT_ID = P.PATIENT_ID
+    </copy>
+```
 
 ![](images/image40.png " ")
 
-14. Go to Page 5 and run the application (Modal Pages cannot be run directly from the page designer i.e Page 6)!
+11. Go back to Page 5 and run the application 
+
+    *Note:* Modal Pages cannot be run directly from the page designer, for example Page 6
 
 ![](images/image41.png " ")
 
-15. Sign Into the application, if prompeted, and click create to inset new record into Patient\_Documents Table!
+12. Sign into the application, if prompeted, and click **Create** to inset new record into Patient\_Documents Table. All sample documents can be found <a href="files/Patient_Documents.zip">here.</a>
 
 ![](images/image42.png " ")
 
-16. Upload all 6 PDF documents ensuring that the Patient Visit ID matches the document that is being uploaded!
+13. Upload all 6 PDF documents ensuring that the **Patient Visit ID** matches the document name that is being uploaded
 
 ![](images/image43.png " ")
 
-17. Now there will be 6 documents in the Patient\_Document Table. 
+14. Now there will be 6 documents in the Patient\_Document Table. 
 
 ![](images/image44.png " ")
 
-18. This will also be reflected in the SQL Workshop -\> Object Browser -\> Patient\_Document !
+15. This will also be reflected in the SQL Workshop -\> Object Browser -\> Patient\_Document !
 
 ![](images/image45.png " ")
 
@@ -316,7 +320,9 @@ Estimated lab time: 2 hours
 26. Repeat for the Gist Table. Note: Run each of the 3 statements individually. !
 ![](images/image71.png " ")
 
-27. Repeat for the Filtered Docs Table. Note: Run each of the 3 statements individually. ![Graphical user interface, text Description automatically generated]![](images/image72.png " ")
+27. Repeat for the Filtered Docs Table. Note: Run each of the 3 statements individually. 
+
+![](images/image72.png " ")
 
 28. Finally repeat for the Full Themes tables. Note: Run each of the 3 statements individually. !
 
@@ -399,7 +405,10 @@ Estimated lab time: 2 hours
 18. By clicking the manifying glass icon we can see the full text for that individual document.!
 
 ![](images/image92.png " ")
-## Task 7: Create Calendar Page for Patient Appointments 
+
+Congratulations! You have successfully completed this lab.
+
+## Homework: Create a Caledar Page for Patient Appointments  
 
 1. Click Edit App 100 down in the development tool bar. Let's create one more page for our patients appointments.This time we will create a Calandar page
 
@@ -409,27 +418,59 @@ Estimated lab time: 2 hours
 
 ![](images/image94.png " ")
 
-3. Select "Create a new nagivation menu entry" and enter a naviagation menu entry name!
+3. Select "Create a new nagivation menu entry" and enter a naviagation menu entry name
 
 ![](images/image95.png " ")
 
-4. Enter the source and a SQL Query and paste the code provided. Click Next.!
+4. Enter the source as a SQL Query and paste the sql query. Click Next.
+
+```
+    <copy>
+    select 
+        PATIENT_VISIT.DATE_TIME as DATE_TIME,
+        PATIENT.FIRST_NAME as FIRST_NAME,
+        PATIENT.LAST_NAME as LAST_NAME,
+        PRACTITIONER.PRACTITIONER_NAME as PRACTITIONER_NAME,
+        HEALTHCARE_FACILITY.FACILITY_NAME as FACILITY_NAME 
+    from 
+        HEALTHCARE_FACILITY HEALTHCARE_FACILITY,
+        PRACTITIONER PRACTITIONER,
+        PATIENT PATIENT,
+        PATIENT_VISIT PATIENT_VISIT 
+    where 
+    PATIENT_VISIT.PATIENT_VISIT_ID=PATIENT.PATIENT_ID
+    and PATIENT_VISIT.PRACTITIONER_ID=PRACTITIONER.PRACTITIONER_ID
+    and PATIENT_VISIT.HEALTHCARE_FACILITY_ID=HEALTHCARE_FACILITY.HEALTHCARE_FACILITY_ID
+    </copy>
+```
 
 ![](images/image96.png " ")
 
-5. For Display Column select Last\_Name, and for Start Data Column select Date\_Time.!
+5. For Display Column select Last\_Name, and for Start Data Column select Date\_Time.
 
 ![](images/image97.png " ")
 
-6. Lastly under attributed for the Patient Appointments Region. Activate Show time, and add some supplemental information for each of the events on the calendar.Save and Run.
+6. Lastly under attributed for the Patient Appointments Region. Toggle the **Show Time**, and add some supplemental information for each of the events on the calendar. You may now save and run the application.
+
+```
+    <copy>
+    <html>
+    <body>
+    <p>PATIENT: &FIRST_NAME. &LAST_NAME.</p>  
+    <p>PRACTITIONER: &PRACTITIONER_NAME.</p>
+    <p>FACILITY: &FACILITY_NAME.</p>
+    </body>
+    </html> 
+    </copy>
+```
 
 ![](images/image98.png " ")
 
-7. Use this navigation to return to the end of 2021/start of 2022 where data is present in out tables. Note you can hover over the appointments to view the supplemental information about each one. !
+7. Use this navigation to return to the end of 2021/start of 2022 where data already exist in out tables. Note you can hover over the appointments to view the supplemental information that was added about each one. 
 
 ![](images/image99.png " ")
 
-Congratulations! You have successfully completed this lab.
+Congratulations! You have successfully completed the homework
 
-## Homework: Create a New Page 
+
 
