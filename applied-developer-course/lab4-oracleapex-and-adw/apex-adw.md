@@ -217,7 +217,7 @@ Estimated lab time: 2 hours
 
 ## Task 5: Explore Oracle Text
 
-1. Return to the Cloud Console, and inside the ATP you have created, click Database Actions!
+1. Return to the Cloud Console, and inside the ATP DB you created, click **Database Actions**
 
 ![](images/image46.png " ")
 
@@ -237,11 +237,17 @@ Estimated lab time: 2 hours
 
 ![](images/image50.png " ")
 
-6. Under Development Click SQL!
+6. Under Development, click **SQL**
 
 ![](images/image51.png " ")
 
-7. Execute the query, ensuring to chage the code to match your database user that was created (Step 11)!
+7. Execute the following query, ensuring to chage the statement to match your database user that was created in Task 2 
+
+    ```
+     <copy>
+    Select * From DBA_ROLE_PRIVS WHERE GRANTEE = 'CARECLINIC';
+     </copy>
+    ```
 
 ![](images/image52.png " ")
 
