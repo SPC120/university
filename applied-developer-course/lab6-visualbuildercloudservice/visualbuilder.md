@@ -82,7 +82,7 @@ https://objectstorage.us-{region}-1.oraclecloud.com/n/{namespaceName}/b/{bucketN
 
 1. Click on **services** in left panel and then click on **plus sign** to add new service connection
 
-    ![](images/7.png " ")
+   ![](images/7.png " ")
 
 2. Select Define by Endpoint to add REST endpoints
    ![](images/12.png " ")
@@ -110,15 +110,56 @@ Repeat the above process to create another service connection to fetch user info
 
 1. Here we will have get method and hint will be get one. Click **Next**.
 
-    ![](images/18.png " ")
+   ![](images/18.png " ")
 
 2. Rename the service if you want and go to test, and enter id value and click on send request. Once we get 200 response, save the example response and then click create.
 
-    ![](images/19.png " ")
+   ![](images/19.png " ")
+
+3. We need to add another endpoint under the same server to create an entry in the ATP DB for the patient's insurance details. Therefore, click **+Endpoint**.
+
+   ![](images/20.png " ")
+
+4. This time the method is **POST**, url is as per your configuration of the ATP ORDS Endpoint and action hint is **CREATE**. Then click Save.
+
+   ![](images/21.png " ")
 
 ### Service Connection 3: Vision Service
 
-[OCI Rest APIs](https://docs.oracle.com/en-us/iaas/api/)
+This is a service connection to the OCI Vision Service. The APIs are available out of the box. OCI Signature is the authentication scheme for these APIs (similar to what we did in Service Connection 1).
+
+Go to this page to know more about OCI Vision REST endpoints [OCI Vision APIs](https://docs.oracle.com/en-us/iaas/api/#/en/vision/20220125/AnalyzeDocumentResult/AnalyzeDocument)
+
+We will use following API to extract text from the insurance cards.
+
+   ```
+   <copy>
+   https://vision.aiservice.us-ashburn-1.oci.oraclecloud.com/20220125/actions/analyzeDocument
+   </copy>
+   ```
+
+1. Repeat Steps **1-2** from the "Service Connection 1: Object Storage". Enter the Vision Service URL. Method will be **POST**.
+
+2. Repeat Steps **4-6 for authentication** from the "Service Connection 1: Object Storage". Click on **Request > Body** and paste the following:
+
+   ```
+   <copy>
+   {
+      "features" : [ {
+      "featureType" : "TEXT_DETECTION"
+   } ],
+   "language" : "ENG",
+         document: {
+         source: "OBJECT_STORAGE",
+         namespaceName: "EXAMPLE-namespaceName-Value",
+         bucketName: "EXAMPLE-bucketName-Value",
+         objectName: "EXAMPLE-objectName-Value"
+         }
+   }
+   </copy>
+   ```
+
+   ![](images/59.png " ")
 
 ## Task 3: Create Mobile Application
 
@@ -137,7 +178,7 @@ In this task we will now actually create mobile application that end users can i
 
 4. Once page is loaded you can see the structure in left panel, by defauly main-start is landing page. In canvas you can see components where we can filter different components and drag and drop in our canvas. Also elements in canvas can be seen under structure.
 
-    ![](images/task3/23.png " ")
+   ![](images/task3/23.png " ")
 
 5. Search for input and drag and drop to Input Text to canvas
    ![](images/task3/24.png " ")
@@ -153,7 +194,7 @@ In this task we will now actually create mobile application that end users can i
 
 9. Click on Input Text and then under **Properties** go to **Data** and next to value click on **down arrow** and finally click **Create Variable**
 
-    ![](images/task3/28.png " ")
+   ![](images/task3/28.png " ")
 
 10. Give variable name and then click **Create**
     ![](images/task3/29.png " ")
@@ -182,98 +223,237 @@ In this task we will now actually create mobile application that end users can i
 18. Give name to page and select Custom, click Create.
     ![](images/task3/37.png " ")
 
-
 ### Page 2: main-cardImage
 
 1. In the left navigation pane, find the newly created page and click on "main-cardimage".
-    ![](images/task3/38-1.png " ")
+   ![](images/task3/page-2/01.png " ")
 
 2. In the main-cardpage, go to **types** and click on +type and then "From Endpoint".
-    ![](images/task3/38.png " ")
+   ![](images/task3/page-2/02.png " ")
 
 3. Select the getUser under services.
-    ![](images/task3/41.png " ")
+   ![](images/task3/page-2/03.png " ")
 
-4. Select the fields you want the type to have, in this example we are going to display only the first and last name but we also need the id for the REST calls to update the database table. Therefore select those three fields.    
-    ![](images/task3/39.png " ")
-    
-5. Then go to **Variables** and click "+Variable", name it **userDetails** and select the type as the one you created in step 4. Then click create.  Create another variable "image" of type Any.  
-    ![](images/task3/40.png " ")
-    ![](images/task3/52.png " ")
+4. Select the fields you want the type to have, in this example we are going to display only the first and last name but we also need the id for the REST calls to update the database table. Therefore select those three fields.  
+   ![](images/task3/page-2/04.png " ")
+5. Then go to **Variables** and click "+Variable", name it **userDetails** and select the type as the one you created in step 4. Then click create. Create another variable "image" of type Any.  
+   ![](images/task3/page-2/05.png " ")
+   ![](images/task3/page-2/06.png " ")
 
 6. Choose the option "Required" under the input parameters on the right side of the screen.
-    ![](images/task3/40-2.png " ")
+   ![](images/task3/page-2/07.png " ")
 
-7. Go back to the "main-start" page and open the action chain that will be called on click of the login button. Click on the "navigate to main-cardimage" activity. You should now see under input parameters the newly created input paramater for main-cardimage page i.e. userDetails. Click on Assign. 
-    ![](images/task3/43.png " ")    
+7. Go back to the "main-start" page and open the action chain that will be called on click of the login button. Click on the "navigate to main-cardimage" activity. You should now see under input parameters the newly created input paramater for main-cardimage page i.e. userDetails. Click on Assign.
+   ![](images/task3/page-2/08.png " ")
 
 8. Assign the userDetails on the right side the following code:
 
-``{
-"patient_id": $chain.results.callRestGetPatientId.body.patient_id,
-"first_name": $chain.results.callRestGetPatientId.body.first_name,
-"last_name": $chain.results.callRestGetPatientId.body.last_name
-}``
+`{ "patient_id": $chain.results.callRestGetPatientId.body.patient_id, "first_name": $chain.results.callRestGetPatientId.body.first_name, "last_name": $chain.results.callRestGetPatientId.body.last_name }`
 
 Then click Save.
 
 Note: callRestGetPatientId could be different for you if you changed the rest call id step right above the navigate step. The idea is to assign the returned fields from the rest call to your next page's input parameter.
-    ![](images/task3/42.png " ")
+      ![](images/task3/page-2/09.png " ")
 
-9. Go back to your "main-cardimage" page, drag and drop a form layout to the canvas. 
+9. Go back to your "main-cardimage" page, drag and drop a form layout to the canvas.
 10. Also add **oj-sm-padding-4x-horizontal** class on the right side properties panel.
-    ![](images/task3/44.png " ")
+    ![](images/task3/page-2/010.png " ")
 
 11. Next drag and drop an "Input Text" inside the form layout and on the right properties panel goto data.
 12. For the value field under the data tab, hover over the field and you will see an arrow on the far right. Click on that arrow and select "first_name" under the userDetails variable.
 13. Repeat step 12 for the "Last Name" field.
-    ![](images/task3/46.png " ")
+    ![](images/task3/page-2/011.png " ")
 
 14. Drag and drop a camera component under the form layout in the canvas. In the properties panel on the right, deselect video as the app will only accept images. Also align it centrally.
-    ![](images/task3/47.png " ")
+    ![](images/task3/page-2/012.png " ")
 
 15. Then in the properties panel, go to "events" tab and click on "+New Event" and select "On Selected Files". This will open up an action chain.
-    ![](images/task3/48.png " ")
+    ![](images/task3/page-2/013.png " ")
 
 16. Drag and drop an assign varibale option to the canvas. Then click Assign.
-    ![](images/task3/49.png " ")
+    ![](images/task3/page-2/014.png " ")
 
 17. From the left assign Files.item[0] to the image variable and make sure to select expression and click save.
-    ![](images/task3/50.png " ")
+    ![](images/task3/page-2/015.png " ")
 
-18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.    
-    ![](images/task3/51.png " ")
+18. After the assign variable, drag and drop a "fire notification activity" and in the properties panel on the right update the details accordingly.  
+    ![](images/task3/page-2/016.png " ")
 
-19. //TO-DO The whole upload action chain:
-    - upload to object storage
-    - call vision API
-    - Parse the response
-    - call DB API to create record in DB.
-    - navigate to main-success in case of success.
+19. Drag and drop button in canvas. Change Label and align center. Add class oj-sm-margin-2x-top
+
+   ![](images/task3/page-2/017.png " ")
+
+20. Click on Events, and then click on New Event -> ojAction
+
+   ![](images/task3/page-2/018.png " ")
+
+21. Drag and drop Call Rest in canvas and click on Select Endpoint in properties.
+    ![](images/task3/page-2/019.png " ")
+
+22. Select PUT endpoint for uploading image to Object Storage.
+    ![](images/task3/page-2/020.png " ")
+
+23. Enter Bucket Name, Namespace in target and for objectName we will use firstname_lastname.jpeg. Click Save
+
+    ```
+     <copy>
+    `${$page.variables.userDetails.first_name}_${$page.variables.userDetails.last_name}.jpeg`
+     </copy>
+    ```
+
+    ![](images/task3/page-2/021.png " ")
+    ![](images/task3/page-2/026.png " ")
+
+24. Drag and drop Fire Notification, enter Summary and change display mode to Transient and Notification Type to confirmation
+    ![](images/task3/page-2/022.png " ")
+
+25. Drag and drop Call rest after Fire Notification. Select analyzeDocument API an dthen click on Body.
+    ![](images/task3/page-2/023.png " ")
+
+26. Paste the Body as follow, and replace fields like namespace and bucketname with yours. For objectName copy the syntax we used above for uploading image to Object Storage.
+
+    ![](images/task3/page-2/024.png " ")
+
+27. Drag and drop Call Function. Here we will write our own javascript function to parse the output we get after analyzing image.
+
+    ![](images/task3/page-2/028.png " ")
+
+28. Click on JavaScript Tab and paste the following function inside PageModule class.
+
+    ```
+    <copy>
+        getDetailsFromCard(arrOfLines) {
+        let currLine;
+        let returnVar = { "memberId": null, "groupNum": null };
+
+        for (let i = 0; i < arrOfLines.length; i++) {
+            currLine = arrOfLines[i].text;
+
+            if (returnVar.memberId != null && returnVar.groupNum != null)
+            break;
+
+            if (currLine.toLowerCase().indexOf("id") > -1) {
+            if (currLine.indexOf(":") > -1 && currLine.split(":")[1].trim().length > 0) {
+                returnVar.memberId = currLine.split(":")[1].trim();
+            } else {
+                returnVar.memberId = arrOfLines[i + 1].text;
+            }
+            }
+
+            if (currLine.toLowerCase().indexOf("group") > -1) {
+            if (currLine.indexOf(":") > -1 && currLine.split(":")[1].trim().length > 0) {
+                returnVar.groupNum = currLine.split(":")[1].trim();
+            } else {
+                returnVar.groupNum = arrOfLines[i + 1].text;
+            }
+            }
+        }
+
+        return returnVar;
+        }
+    </copy>
+    ```
+
+    ![](images/task3/page-2/029.png " ")
+
+29. Go back to Actions. and then select the Function Name that we just added.
+
+    ![](images/task3/page-2/030.png " ")
+
+30. We need to pass the output from endpoint to function, click on Assign next to Input Parameters and expand results, look for Lines array and map it to arrOfLines in target
+
+    ![](images/task3/page-2/031.png " ")
+
+31. Add another Rest Call and select patient_insurance endpoint to update patient insurace details in DB.
+
+    ![](images/task3/page-2/032.png " ")
+
+32. Replace all the fields in body. Member id and Group Number we will get from our JS function and patient id is already there in variable. Contruct the URL for image URL
+
+    ![](images/task3/page-2/033.png " ")
+
+33. Add Navigate at the end in Success fork, and select the main-success page.
+
+    ![](images/task3/page-2/034.png " ")
 
 ### Page 3: main-success
 
 1. Click on Flex Container and on the right properties panel, select the following:
-![](images/task3/53.png " ")
+   ![](images/task3/53.png " ")
 
 2. Drag and drop a icon component onto the canvas and click on the icon option in the properties panel.
-![](images/task3/54.png " ")
+   ![](images/task3/54.png " ")
 
 3. Search for success and select the "Success S" option and then click on select.
-![](images/task3/55.png " ")
+   ![](images/task3/55.png " ")
 
 4. Add the **oj-icon-color-success** class to the icon.
-![](images/task3/56.png " ")
+   ![](images/task3/56.png " ")
 
-5. Go to the "All tab" for the icon properties and then search for style. Then add "font-size:100px;". 
-![](images/task3/57.png " ")
+5. Go to the "All tab" for the icon properties and then search for style. Then add "font-size:100px;".
+   ![](images/task3/57.png " ")
 
 6. Drag and drop a text right under the icon component.
 7. Change the value to "Success! You can now return to the Chatbot"
-![](images/task3/58.png " ")
+   ![](images/task3/58.png " ")
 
 ## Task 4: Publish Application and test
 
+### Publish the Application
+
+1. Click on the app name, click on **SETTINGS** and then **PWA**. Enable the Progressive Web App option so that VBCS can generate the barcode for you to scan and test.
+   ![](images/task4/01.png " ")
+
+2. Then click the right hand side top corner menu and click **STAGE**. Then click **STAGE** again.
+   ![](images/task4/02.png " ")
+   ![](images/task4/03.png " ")
+
+3. Then click the right hand side top corner menu and click **PUBLISH**. Then click **PUBLISH** again.
+   ![](images/task4/04.png " ")
+   ![](images/task4/05.png " ")
+
+### Test the application
+
+1. Go to the visual builder top level page where you can see all the applications. Click on **LIVE** and then the app name. This will open another window.
+
+   ![](images/task4/06.png " ")
+
+2. Here on the right side of the screen you can see the barcode to scan to test this on your own mobile device.
+
+   ![](images/task4/07.png " ")
+
+3. Enter the ID, and then click on **LOGIN**.
+
+   ![](images/task4/08.png " ")
+
+4. Verify the details of the user, click on **Take Photo** and then capture an image of your health insurance card. Now you can either take a picture of your own health insurance card or take a picture of the sample below.
+
+Once that is done, you should see a notification saying that photo was taken successfully.
+
+   ![](images/task4/HealthCardSample.png " ")
+
+   ![](images/task4/09.png " ")
+
+5. Next click on the upload button and wait for the notifications to pop up, this might take some time depending on network latency as the image is being uploaded to the bucket. 
+
+   ![](images/task4/010.png " ")
+
+6. If everything goes smooth, it should navigate you to the success page.
+
+   ![](images/task4/011.png " ")
+
+## Homework
+
+1. In Task 3 Page 2, we are not updating the **RxBin**, there number is coming in the array of lines returned from the vision service. Figure out a way to parse that and extract the RxBin number. Hint: Go to the JS code and make another condition similar to the one we have for member ID and group number.
+
+2. In Task 3, on click of any button we are not showing a spinner or loader. Figure out a way to show that spinner while the action chains are running and to hide it once the action chain finished running.
+
+3. Show the memberId and groupNumber to the user in text fields?
+
 ## Troubleshoot Tips
+
+### Using Dev Tools
+
+You can always use chrome dev tools to debug issues if you get stuck. The network tab and console are always useful to see what's going on behind the app. There is blog explaining in more detail. [How To Debug VBCS Applications](https://blogs.oracle.com/vbcs/post/debugging-and-troubleshooting-visual-builder-logic)
 
     If you are having problems with any of the labs, please visit the Need Help? tab.
