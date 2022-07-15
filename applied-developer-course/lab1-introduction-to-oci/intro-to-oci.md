@@ -28,7 +28,7 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/002.png " ")
 
-2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.  Note you can search for a service across all the menu items and also pin you favorites.  When you're done reviewing the menu items click the X to close the window.
+2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.  Note you can search for a service across all the menu items and also pin your favorites.  When you're done reviewing the menu items click the X to close the window.
 
     ![](./images/003.png " ")
 
@@ -38,7 +38,7 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/005.png " ")
 
-    [Oracle Regions as at June 2022](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+    [Oracle Regions](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 
 
 ## Task 2: Learn Identity and Access Management Basics
@@ -47,7 +47,7 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
 ## Task 3: Create a Compartment
 
-1. Compartments are the primary means to organize, segregate, and manage access to OCI resources.  Every tenancy has a root compartment under which you create additional sub-compartments and sub-sub compartments (maximum six levels deep).  Compartments are tenancy-wide across regions. When you create a compartment, it is available in every region that your tenancy is subscribed to. You can get a cross-region view of your resources in a specific compartment with the tenancy explorer. See [Viewing All Resources in a Compartment](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/compartmentexplorer.htm#Viewing_All_Resources_in_a_Compartment).  We will create a compartment called **CareClinic** for this course/workshop and create all related services in this compartment.  Navigate to the menu in the upper left and select Identity and Security, and then Compartments.
+1. Compartments are the primary means to organize, segregate, and manage access to OCI resources.  Every tenancy has a root compartment under which you create additional sub-compartments and sub-sub compartments (maximum six levels deep).  Compartments are tenancy-wide across regions. When you create a compartment, it is available in every region that your tenancy is subscribed to. You can get a cross-region view of your resources in a specific compartment with the tenancy explorer. See [Viewing All Resources in a Compartment](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/compartmentexplorer.htm#Viewing_All_Resources_in_a_Compartment).  We will create a compartment called **CareClinics** for this course/workshop and create all related services in this compartment.  Navigate to the menu in the upper left and select Identity and Security, and then Compartments.
 
     ![](./images/006.png " ")
 
@@ -132,7 +132,7 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
 3. Create your VCN.  
 
-    In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select the **CareClinic** Compartment you created earlier on the left and then select **Start VCN Wizard**.
+    In this lab we will use the wizard to create our VCN.  However in the future developers would be advised to use the manual approach to creating VCNs as this will facilitate a greater understanding of the underlying components and give greater freedom to creating custom VCNs.  Select the **CareClinics** Compartment you created earlier on the left and then select **Start VCN Wizard**.
 
     ![](./images/019.png " ")
 
@@ -160,7 +160,7 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
 1. Introduction.  
 
-    This task is an awareness exercise but should be covered as part of OCI's foundation services.  As with other foundational OCI services storage is big topic and you are encouraged to explore this topic beyond this course.  Here are the different types of storage and their durability, capacity, unit size, and use case.  Note the following storage types.
+    This task is an awareness exercise but should be covered as part of OCI's foundation services.  As with other foundational OCI services storage is big topic and you are encouraged to explore this topic beyond this course.  Here are the different types of storage and their durability, capacity, unit size, and use case. 
 
     ![](./images/027.png " ")
 
@@ -172,7 +172,7 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
 3. Create an Object Storage Bucket
 
-    Since we will be working with Object Storage later in this workshop we'll create a new bucket called **CareClinic** in the CareClinic Compartment.  Navigate to Object Storage
+    Since we will be working with Object Storage later in this workshop we'll create a new bucket called **CareClinic** in the CareClinics Compartment.  Navigate to Object Storage
 
     ![](./images/031.png " ")
 
@@ -327,10 +327,21 @@ This lab will introduce you to Oracle Cloud Infrastructure (OCI), and take you t
 
     ![](./images/061.png " ")
 
-7. Terminate the compute image.
+7. Do the homework noted below.
+
+8. Terminate the compute image.
 
     Navigate to the instance and select delete.
 
     ![](./images/059.png " ")
 
     ![](./images/060.png " ")
+
+## Homework: Attach a Block Volume to your Compute Image
+
+The Oracle Cloud Infrastructure Block Volume service lets you dynamically provision and manage block storage volumes. You can create, attach, connect and move volumes as needed to meet your storage and application requirements. Once attached and connected to an instance, you can use a volume like a regular hard drive. Volumes can also be disconnected and attached to another instance without the loss of data.
+
+For homework you will:
+- Create a Block Volume
+- Attach the Block Volume to your instance
+- Mount the Block Volume
