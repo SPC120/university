@@ -3,15 +3,21 @@
 
 ## Introduction
 
+Oracle Cloud Infrastructure (OCI) Resource Manager is an Oracle-managed service that automates deployment and operations for all Oracle Cloud Infrastructure resources. Unlike Infrastructure-as-Code (IaC) offerings from other cloud vendors, the service is based on Terraform, a widely used, open source industry standard that allows DevOps engineers to develop and deploy their infrastructure anywhere. **Source:** [Oracle Resource Manager](https://www.oracle.com/devops/resource-manager/)
+
+Please take a couple minutes to watch the following Introduction to Resource Manager.
+
+[![Watch Recource Manager Overview](./images/intro_youtube.png)](https://youtu.be/ghOW03Dkrdg)
+
 **Estimated lab time: 120 minutes**
 
 ### Objectives
 
 -   Create a VCN using the Quick Start Template
 -   Create a Compute Instance ORM Stack using the Instances Compute Console
--   Download the ORM Stack for the Compute Instance and Enhance it
+-   Create an ORM Stack using the Template Feature
 -   Create an ORM Stack using the Discover Feature
--   Explore Advance Features of Terrafrom and Oracle Resource Manager (ORM)
+-   Download an ORM Stack, Review and Enhance it
 -   Destroy all OCI Resources 
 
 ### Prerequisites
@@ -193,7 +199,8 @@
 
 	![](./images/task4/image13.png " ")
 
-## Task 5: Download an ORM Stack and Enhance it
+
+## Task 5: Create an ORM Stack using the Template Feature
 
 ## Task 6: Create an ORM Stack using the Discover Feature
 
@@ -223,10 +230,20 @@
 
 	![](./images/task6/image7.png " ")
 
-## Task 7: Explore Advance Features
+
+## Task 7: Download an ORM Stack, Review and Enhance it
 
 ## Task 8: Destroy all OCI Resources
 
-## Homework: Create an OCI Service Using Terraform - ORM
+## Homework: Create an OCI Service Using ORM - Terraform
 
-## Additional Resources - Steve
+## Additional Resources
+
+[Oracle Resource Manager Product Page](https://www.oracle.com/devops/resource-manager/)
+
+[Oracle Resource Manager Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/home.htm)
+
+[Terraform Documentation for Oracle Cloud Infrastructure (OCI)](https://registry.terraform.io/providers/oracle/oci/latest/docs)
+
+
+
