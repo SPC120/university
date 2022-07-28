@@ -279,6 +279,8 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 ## Task 7: Download an ORM Stack, Review and Enhance it
 
+We are now going to revisit the ORM Stack we created in **Task 5**.  In this task, we will download the Terraform Configuration files, review and edit the files to allow the user the ability to select the desired Availability Domain.  Documentation can be referenced in section [Task 1b: Create Your Own Terraform Configuration](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Concepts/samplecomputeinstance.htm)
+
 1. Navigate to Resource Manager's **Stacks** page and click on the stack **Compute Instance-Template**. Be sure you are in the **CareClinics** Compartment.
 
 	![](images/task7/image1.png " ")
@@ -291,7 +293,12 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 	![](images/task7/image3.png " ")
 
-4. Edit **variables.tf** using your desired text editor.
+	* **main.tf** - Contains the Provider along with all OCI Resources that will be provisioned.
+	* **outputs.tf** - Allows you to define what outputs are displayed in the Oracle Cloud Infrastructure Console. 
+	* **schema.yaml** - Schema documents are recommended for Terraform configurations when using Resource Manager. Including a schema document allows you to extend pages in the Oracle Cloud Infrastructure Console. Facilitate variable entry in the Create Stack page by surfacing SSH key controls and by naming, grouping, dynamically prepopulating values, and more.
+	* **variables.tf** - Define the variables you want to use when provisioning your resources. A best practice is to create a "variables" file in the configuration package that you upload.
+
+4. Edit **variables.tf** using your desired text editor and add the follow line.
 
 	```
     <copy>
@@ -301,7 +308,7 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 	![](images/task7/image4.png " ")
 
-5. Edit **schema.yaml** using your desired text editor under the **requiredConfig** section
+5. Edit **schema.yaml** using your desired text editor under the **requiredConfig** section and add the following line
 
 	```
     <copy>
@@ -311,7 +318,7 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 	![](images/task7/image5.png " ")
 
-6. Edit **schema.yaml** using your desired text editor under the **variables** section
+6. Edit **schema.yaml** using your desired text editor under the **variables** section and add the following lines
 
 	```
     <copy>
@@ -327,7 +334,7 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 	![](images/task7/image6.png " ")
 
-7. Edit **main.tf** using your desired text editor under the **variables** section
+7. Edit **main.tf** using your desired text editor under the **variables** section and add the following line **AND** comment out the existing **availability_domain** line.
 
 	```
     <copy>
@@ -353,7 +360,7 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 11. Enter the name **Compute-Template**, select the **-AD-3** Availability Domain, select the **CareClinicVCN** and select the Subnet **Public Subnet-CareClinicVCN (Regional)**.
 
-	**Note:** The ***Always-Free*** shape **VM.Standard.E2.1.Micro** is only available in the **AD-3** Availability Domain.
+	**Note:** The **[Always-Free](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm)** shape **VM.Standard.E2.1.Micro** is only available in the **AD-3** Availability Domain.
 
 	![](images/task7/image12.png " ")
 
