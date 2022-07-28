@@ -202,6 +202,53 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 ## Task 5: Create an ORM Stack using the Template Feature
 
+1. Navigate to Resource Manager's Stacks page and click **Create Stack**. Be sure you are in the **CareClinics** Compartment.
+
+	![](./images/task5/image1.png " ")
+
+2. On the **Create Stack** page, select **Template**, be sure the **CareClinics** compartment is selected, click on **Select Template** to select the desired OCI resource to create.
+
+	![](./images/task5/image2.png " ")
+
+3. On the **Browse templates** pop-out, select the **Service** tab, **Compute Instance**, click the expand icon to read what will be deployed. Lastly, click the **Select Template** button to proceed.
+
+	**Note:** You can also select **Quickstarts** and **Architecture** templates for deploying out-of-the-box OCI environments.
+
+	![](./images/task5/image3.png " ")
+
+4. Scroll down and enter the Stack name **Compute Instance-Template.** Be sure you are in the **CareClinics** Compartment and click **Next**.
+
+	![](./images/task5/image4.png " ")
+
+5. Enter the compute instance name **ComputeTemplate**, select the **CareClinicVCN** VCN, select the subnet **Public Subnet-CareClinicVCN (Regional)** under the **Required Configuration** section
+
+	![](./images/task5/image5.png " ")
+
+6. Scroll down and enable **Assign Public IP** and choose the SSH Key file **cloudshellkey.pub** under the **Optional Configuration** section and click **Next**.
+
+	![](./images/task5/image7.png " ")
+
+7. Click **Create** on the Review screen
+
+	![](./images/task5/image8.png " ")
+
+8. The ORM Stack is now created. Let's run a **Plan** and see what would be created if we were to Apply it. Click on the **Plan** button on top of the page, then click **Plan** on the pop-out.
+
+	![](./images/task5/image9.png " ")
+
+9. The status of the plan job will change from **IN PROGRESS** to **SUCCEEDED**. Click on **Logs** and scroll to the bottom. You will notice, 3 items will be created, and **OCI Compute Instance**, **OCI Boot Volume** and **OCI Boot Volume Attachment**.
+
+	![](./images/task5/image10.png " ")
+
+10. At this point, if you were to **Apply** this ORM stack, it would fail since the **VM.Standard.E2.1.Micro** Compute Shapes are only available in **Availability Domain 3 (AD3)** and this ORM Stack was written to leverage **AD1**. In **Task 7**, we will download the **Terraform Configuration** and edit it accordingly to allow the Availability Domain to be selected.
+
+	```
+	Error: Service error:NotAuthorizedOrNotFound. shape VM.Standard.E2.1.Micro not found. http status code: 404.
+	```
+
+	![](./images/task5/image11.png " ")
+
+
 ## Task 6: Create an ORM Stack using the Discover Feature
 
 1. Navigate to Resource Manager's Stacks page and click **Create Stack**. Be sure you are in the **CareClinics** Compartment.
@@ -230,10 +277,123 @@ Please take a couple minutes to watch the following Introduction to Resource Man
 
 	![](./images/task6/image7.png " ")
 
-
 ## Task 7: Download an ORM Stack, Review and Enhance it
 
-## Task 8: Destroy all OCI Resources
+1. Navigate to Resource Manager's **Stacks** page and click on the stack **Compute Instance-Template**. Be sure you are in the **CareClinics** Compartment.
+
+	![](images/task7/image1.png " ")
+
+2. Click **Download** to download the Terraform Configuration (Scripts) to your local machine.
+
+	![](images/task7/image2.png " ")
+
+3. Once downloaded, locate the ZIP file, and extract it to your local file system. The ORM Stack file name should look similar to this one below. It will contain the following files.
+
+	![](images/task7/image3.png " ")
+
+4. Edit **variables.tf** using your desired text editor.
+
+	```
+    <copy>
+	variable "availability_domain_name" {}
+	</copy>
+    ```
+
+	![](images/task7/image4.png " ")
+
+5. Edit **schema.yaml** using your desired text editor under the **requiredConfig** section
+
+	```
+    <copy>
+	- availability_domain_name
+	</copy>
+    ```
+
+	![](images/task7/image5.png " ")
+
+6. Edit **schema.yaml** using your desired text editor under the **variables** section
+
+	```
+    <copy>
+	availability_domain_name:
+	  type: oci:identity:availabilitydomain:name
+	  dependsOn:
+	    compartmentId: compartment_ocid
+	  required: true
+	  title: ${Messages.solutionsHub.genericVariables.availability_domain_name.title()}
+	  description: ${Messages.solutionsHub.genericVariables.availability_domain_name.description()}
+	</copy>
+    ```
+
+	![](images/task7/image6.png " ")
+
+7. Edit **main.tf** using your desired text editor under the **variables** section
+
+	```
+    <copy>
+	availability_domain = var.availability_domain_name
+	<copy>
+	```
+	
+	![](images/task7/image7.png " ")
+
+8. Create a new ZIP file with the name **Compute-Instance-Template-New.zip**. Make sure it contains the following files. Some of which you just updated.
+
+	![](images/task7/image8.png " ")
+
+9. Create new ORM Stack from the file **Compute-Instance-Template-New.zip**. Click on the **Create Stack**. Be sure you are in the **CareClinics** Compartment.
+
+	![](images/task7/image9.png " ")
+
+10. Select **My configuration**, select **.Zip file** and drag/drop the file **Compute-Instance-Template-New.zip.** Also, scroll down and enter the Stack Name of **Compute-Instance-Template-New** and verify the Compartment is **CareClinics** and click **Next**
+
+	![](images/task7/image10.png " ")
+
+	![](images/task7/image11.png " ")
+
+11. Enter the name **Compute-Template**, select the **-AD-3** Availability Domain, select the **CareClinicVCN** and select the Subnet **Public Subnet-CareClinicVCN (Regional)**.
+
+	**Note:** The ***Always-Free*** shape **VM.Standard.E2.1.Micro** is only available in the **AD-3** Availability Domain.
+
+	![](images/task7/image12.png " ")
+
+12. Select **Assign Public IP**, drag/drop the SSH Public Key **cloudshellkey.pub** and click **Next**
+
+	![](images/task7/image13.png " ")
+
+13. Click **Create**
+
+	![](images/task7/image14.png " ")
+
+14. Click **Plan**, then **Plan**
+
+	![](images/task7/image15.png " ")
+
+15. After a **SUCCEEDED** Plan, Click **Stack Details**
+
+	![](images/task7/image16.png " ")
+
+16. Click **Apply**, then **Apply**
+
+	![](images/task7/image17.png " ")
+
+17. Once the **Apply** Job has **SUCCEEDED**, click on **Outputs**, here you can see the **public** and **private** **IP Address** of the Compute Instance that was just provisioned.
+
+	![](images/task7/image18.png " ")
+
+18. You can also click on **Job resources** and see the 3 Cloud Services provisioned by this ORM Stack. Click on **Compute-Template**.
+
+	![](images/task7/image19.png " ")
+
+19. You are now in the **Compute-\>Instances-\>Instance details** page. Here you can also see details such as **Public IP Address, VCN, Availability Domain**, etc.
+
+	![](images/task7/image20.png " ")
+
+## Task 8: Advanced Feature: remote-exec
+
+[Using Remote Exec Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/usingremoteexec.htm)
+
+## Task 9: Destroy all OCI Resources
 
 ## Homework: Create an OCI Service Using ORM - Terraform
 
