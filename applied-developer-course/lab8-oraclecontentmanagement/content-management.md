@@ -108,5 +108,128 @@ Add the Taxonomy and Content types to the Repository:
 
 ### Task 4: Add Assets to the repository
 
+Oracle Content Management's structure starts with repositories. A repository is a storage location for assets that you need for building web, mobile, or other user experiences in your organization. An asset can be a content item that represents an individual piece of content, such as a blog post, case study, or product information; or a digital asset that represents an image, video, or other type of media that you need in your experiences.
 
-  
+
+We will now see the process to create the assets in a repository: 
+
+1. Go to the left navigation pane and select *Assets*. You will observe that there are CareClinics repository which already contains a few assets. 
+ ![](images/4-assets.png " ")
+2. We will select *Create* button and select Create Content Item from the dropdown. 
+ ![](images/4-createcontentitem.png " ")
+3. Now, we will start creating content items as follows: 
+
+*Specialization:* 
+
+1. Select Specialization from the dropdown. 
+ ![](images/4-spec.png " ")
+2. Content Item Properties: 
+  - Name: Emergency Care
+  - Specialization name: Emergency Care
+  - Click the *Save* and *Done* button.
+ ![](images/4-specer.png.png " ")
+
+3. Repeat step 1 and 2 for the following specializations: 
+  - Name: Cardiology, Specialization name: Cardiology
+  - Name: Neurology, Specialization name: Neurology
+  - Name: Radiology, Specialization name: Radiology
+  - Name: Rehabilitation, Specialization name: Rehabilitation
+  - Name: Surgery, Specialization name: Surgery
+  - Name: Stroke Care, Specialization name: Strxoke Care
+  - Name: Spiritual Care, Specialization name: Spiritual Care
+
+*Personal Information:*
+
+*Note: * Use the images from the PatientInfo folder which you downloaded. 
+
+1. Select Bio from the dropdown. 
+2. Content Item Properties:
+- Name: Health Insurance
+- Image: InsuranceCard.jpeg
+- Select category (PatientInfo(PAT)>InsuranceCard)
+ ![](images/4-ic.png " ") 
+- Email: Enter your email- Ex: sp@careclinics.org
+3. Repeat step 1 and 2 to create another Content Item: 
+- Name: Covid Vaccination Proof
+- Image: covidvaccination.jpeg 
+- Select category - (PatientInfo(PAT)- VaccinationProof)
+- Email: Enter your email- Ex: sp@careclinics.org
+4. Ensure the Vaccination Proof and Insurance Card is added to the right category.
+ ![](images/4-bioasset.png " ") 
+
+*News Article:*
+
+*Note: * Use the images from the Testimonials folder which you downloaded. 
+
+1. Select NewsArticle from the dropdown. 
+2. Content Item Properties: 
+  - Name: Justin Lester
+  - Author: Justin Lester
+  - Date: 07/09/2022
+  - Content: Patient with COVID-19, pneumonia and heart failure survives with the help of ECMO.
+  - Image: JustinLester.jpg
+  - Category: CareClinicsInfo > Testimonials
+    ![](images/4-justin.png " ") 
+  - Click the *Save* and *Done* button.
+3. Repeat step 1 and 2 to create another Content Item: 
+  - Name: Kathy Maden
+  - Author: Kathy Maden
+  - Date: 03/01/2022
+  - Content: Kathy came to Clinics Hospital for a total right hip replacement using an anterior approach. The next day, she was able to return home. Within three days of her surge...
+  - Image: KathyMaden.jpg
+  - Category: CareClinicsInfo > Testimonials
+  - Click the *Save* and *Done* button.
+4. Ensure the NewsArticle Assets are added to the right category.
+  ![](images/4-news.png" ")
+
+
+*Health Talks*
+
+*Note: * Use the images from the HealthTalks folder which you downloaded. 
+
+1. Select SE2-Story from the dropdown. 
+2. Content Item Properties: 
+  - Name: Mental Health and Motherhood
+  - Summary:  The isolation, loss and fear we’ve experienced during the COVID-19 pandemic has taken its toll on everyone’s mental health. Just ask any mom who’s experienced the weight of the pandemic on top of the everyday stresses of parenthood.
+  - Media: motherhood.png | Category (CareClinicsInfo > HealthTalks)
+  - Title: Mental Health and Motherhood
+  - Content Description: The isolation, loss and fear we’ve experienced during the COVID-19 pandemic has taken its toll on everyone’s mental health. Just ask any mom who’s experienced the weight of the pandemic on top of the everyday stresses of parenthood.
+  ![](images/4-motherhood.png " ")
+  - Asset Category: CareClinicsInfo > HealthTalks
+3. Repeat step 1 and 2 to create another Content Item: 
+  - Name: Focusing on Preventive Care During a Pandemic
+  - Summary:  Keeping up to date on preventative screenings and wellness visits is the most important thing you can do to stay healthy.
+  - Media: preventive.png | Category (CareClinicsInfo > HealthTalks)
+  - Title: Focusing on Preventive Care During a Pandemic
+  - Content Description: A health care facility is one of the safest places you can go to right now because everyone who's working there is taking safety so seriously.
+  - Asset Category: CareClinicsInfo > HealthTalks
+4. Ensure the Health Talks Assets are added to the right category.
+  ![](images/4-healthtalk.png " ")
+
+*Blogs*
+
+*Note:* Use the images from the HealthTalks folder which you downloaded. 
+
+1. Select SE2-Story from the dropdown. 
+2. Content Item Properties: 
+  - Name: Decentralized clinical trials - avoiding the snapback
+  - Summary:  Winston Churchill was quoted as saying, “Never let a good crisis go to waste”. The on-going pandemic is a global crisis that has forced most physical activities to be made remotely, including clinical trial activities. What we must avoid is the snapback to the pre-pandemic practice of requiring the study participant to physically visit the investigator site location.
+  - Media: clinicaltrial.jpg | Category (CareClinicsInfo > Blogs)
+  - Title: Decentralized clinical trials - avoiding the snapback
+  - Content Description: (Copy the content from here - https://blogs.oracle.com/health-sciences/post/decentralized-clinical-trials-avoiding-the-snapback)
+  - CreatedByName: Elvin Thalund
+  - CreatedByEmail: et@careclinics.org
+  - Asset Category: CareClinicsInfo > Blogs
+  ![](images/4-clinic.png " ")
+3. Repeat step 1 and 2 to create another Content Item: 
+  - Name: The Larger Pandemic - Disparities in Healthcare
+  - Summary:  Earlier this year I asked the Oracle Health team if they or someone they love have had a healthcare experience that connects them to our mission. Unsurprisingly, everyone has. Also unsurprising is that many of those experiences could have been improved if those involved had access to better data, tools, and resources. These stories galvanize my desire to explore how the intersection of science, technology, and the HUMAN can improve health equity and create a better healthcare experience for all.
+  - Media: pandemic.jpg | Category (CareClinicsInfo > Blogs)
+  - Title: The Larger Pandemic: Disparities in Healthcare
+  - Content Description: (Copy the content from here - https://blogs.oracle.com/healthcare/post/the-larger-pandemic)
+  - CreatedByName: Stephanie Trunzo
+  - CreatedByEmail: st@careclinics.org
+  - Asset Category: CareClinicsInfo > Blogs
+4. Ensure the Blogs Assets are added to the right category.
+  ![](images/4-blog.png " ")
+
