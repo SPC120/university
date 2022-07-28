@@ -106,5 +106,7 @@ Add the Taxonomy and Content types to the Repository:
   ![](images/3-editrepo.png " ") 
 2. Click the *Save* button.
 
+### Task 4: Add Assets to the repository
+
 
   
