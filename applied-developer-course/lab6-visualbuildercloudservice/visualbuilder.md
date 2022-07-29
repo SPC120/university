@@ -470,7 +470,7 @@ Once that is done, you should see a notification saying that photo was taken suc
 
 2. In Task 3, on click of any button we are not showing a spinner or loader. Figure out a way to show that spinner while the action chains are running and to hide it once the action chain finished running.
 
-3. Show the memberId and groupNumber to the user in text fields?
+3. Build a web application with a table containing patient visit data from the ATP database (Patient_visit table). Refer to [this link](https://www.youtube.com/watch?v=9DNBAh0UTeY&t=941s&ab_channel=OracleDevelopers) to learn how to create a web application.
 
 ## Troubleshoot Tips
 
