@@ -21,7 +21,25 @@ In this lab, you will learn how to:
 
 ## Pre-requisites
 
-Template: 
+1. Download the folder: 
+2. Install your favorite IDE (Preferred - Visual Studio Code)
+3. Follow the below steps to download the Oracle Content in your local machine:
+- Click the *Avatar* icon on th top right of the page and select *Download Apps*.
+- Copy the *Service Url* from the page.
+  ![](images/0-downloadapps.png " ")
+- After download, click on *Add account* button and paste your *Service Url*.
+  ![](images/0-account.png " ")
+- Once you click *Next*, it will prompt you to enter your credentials. 
+- Add the *Account name* and click the *Next* button.
+  ![](images/0-confirm.png " ")
+- Sync the site documents you would like. 
+  ![](images/0-sync.png " ")
+- Sync the site theme. 
+  ![](images/0-synctheme.png " ")
+- Go ahead and check your local folder.
+  ![](images/0-local.png" ")
+
+
 
 ## Task 1: Create a Oracle Content Management Instance and Import the template
 
@@ -106,7 +124,7 @@ Add the Taxonomy and Content types to the Repository:
   ![](images/3-editrepo.png " ") 
 2. Click the *Save* button.
 
-### Task 4: Add Assets to the repository
+## Task 4: Add Assets to the repository
 
 Oracle Content Management's structure starts with repositories. A repository is a storage location for assets that you need for building web, mobile, or other user experiences in your organization. An asset can be a content item that represents an individual piece of content, such as a blog post, case study, or product information; or a digital asset that represents an image, video, or other type of media that you need in your experiences.
 
@@ -232,4 +250,212 @@ We will now see the process to create the assets in a repository:
   - Asset Category: CareClinicsInfo > Blogs
 4. Ensure the Blogs Assets are added to the right category.
   ![](images/4-blog.png " ")
+
+Add all assets to the channel: 
+
+1. Select all assets and select the target channel as CareClinics in the properties bar on the right.
+  ![](images/4-allassets.png " ")
+
+## Task 5: Edit your website
+
+In this task, you'll see how easy it is to build your healthcare portal using Site Builder. 
+
+Firstly, we will go ahead and import the component and start working on creating the HomePage.
+
+Import the component:
+
+1. Click *Developer* in the left side bar and select *View all components*. 
+![](images/5-viewcomponents.png " ")
+2. On the Components page, click Create, and choose *Import Component*. Upload the *Minimal-NavMenu.zip* file.
+![](images/5-importcomp.png " ")
+3. Now, you need to publish the Minimal-NavMenu component you imported. On the Components page, select the Minimal-NavMenu component and click Publish from the menu bar or right-click menu.
+![](images/5-publish_component.png " ")
+4. Repeat step 1,2,3 and import another component *SE2-Anchor* and publish the component.
+
+Build the Home Page:
+
+*Note:* Upload the images from HomePage folder to the Documents.
+
+1. Open the newly created website in Site Builder by selecting it and choosing Open from the menu bar or right-click menu. 
+2. In Site Builder, set the switch Edit icon to Edit mode. Enter a name (Ex: HomePage) for the update and click OK.
+![](images/5-createupdate.png " ")
+3. Let's use out-of-the-box components to fill in the Header slot
+  - In the left sidebar, click Components icon and then click Seeded to show the list of out-of-the-box components available with Oracle Content Management.
+  - In the left sidebar, look for an out-of-the-box component called Component Group. Drag and drop it into the Header slot.
+  ![](images/5-cg.png " ")
+  - Click the component group's menu icon Component group's menu icon and then click Settings. Update the settings as follows: 
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Color      | #333333 |
+
+    ![](images/5-cgcolor.png " ")
+  - Drag and drop Image from the seeded components into the Header slot.
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Image      | CareClinicsLogo.png |
+  | Alignment   | left |
+  | Set Width | 200 |
+
+  - Now, let’s add a navigation menu to the home page using the Minimal-NavMenu custom component. Drag and drop a Minimal-NavMenu component into the component group, to the right side of the Image component. 
+  
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Alignment	| Right |
+  | Top | 1.2vw |
+  | Bottom | 0 |
+  | Left | 0 | 
+  | Right |	6vw |
+
+  ![](images/5-nav.png " ")
+
+- Save the component group with the name *Minimal-Header* so that you can reuse this component on multiple pages.
+  ![](images/5-savecompgroup.png " ")
+  ![](images/5-minhealder.png " ")
+  
+- Save the update. 
+
+4. Let's move on to the Body slot:
+
+Create a banner: 
+
+- From the left sidebar, drag and drop a Component Group into the Body slot. We’ll create a banner using this component group and the components (which we’ll be adding into it).
+
+General Settings:
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | First Column Width (%)	| 40 |
+  | Second Column Width (%) | 55 |
+  | Responsive Breakpoint (pixels) | 1023 |
+  | Responsive Behavior | Hide the first column | 
+
+  ![](images/5-2col.png " ")
+
+Background Settings: 
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Image | banner.png |
+  | Position | Center center |
+  | Scale | Stretch | 
+
+- Drag and drop the *Title* component in the second coloumn and click in the Title component and enter "Healing with good health and good life...". 
+General Settings:
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Top | 3vw |
+  | Bottom | 1.8vw |
+  | Left | 7vw | 
+  | Right |	6vw |
+
+- Drag and drop the *Paragraph* component below *Title* and click in the Paragraph component and enter the following text: 
+
+  "We aim to provide the best of care for all of our patients.
+
+  Care Clinics is committed to providing excellent care that is convenient and accessible. Our focus on patient safety and quality is grounded in evidence-based medicine and is delivering better outcomes for our patients every day.". 
+
+General Settings:
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Top | 20px |
+  | Bottom | 50px |
+  | Left | 7vw | 
+  | Right |	6vw |
+  ![](images/5-bannercomplete.png " ")
+- *Save* the update.
+
+Edit your theme:
+
+1. Open the *BlackSiteTemplateTheme* which you synced in your local system in your favorite IDE.
+2. Go to the *designs/default* folder and open *design.css*. 
+3. Add the following code inside *design.css*: 
+    ```
+    <copy>
+    /* Button Style 4: CP Default (no background color)) */
+    .scs-button-style-4 .scs-button-button {
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 400;
+        border-width: 0.138vw;
+        color: #ffffff;
+        border-radius: 1.4375rem;
+        border: 0.5px solid transparent;
+    }
+    .scs-button-style-4 .scs-button-button:hover,
+    .scs-button-style-4 .scs-button-button:focus {
+        background-color: #ab2a1c;
+        border: 0.5px solid #ffffff;
+    }
+    .scs-button-style-4 .scs-button-button:focus {
+        /* outline: 1px auto var(--SE2-outline); */
+    }
+    </copy>
+    ```
+  ![](images/5-design.png " ")
+4. Add the following code indode *design.json* under "scs-button":
+    ```
+    <copy>
+    /* Adding button styles */
+				        { 
+                    "name": "CP_Default",
+                    "class": "scs-button-style-4"
+                },
+                { 
+                    "name": "CP_Mobile_Default",
+                    "class": "scs-button-style-5"
+                },
+                { 
+                    "name": "CP_Mobile_AltaSmall",
+                    "class": "scs-button-style-6"
+                }
+    </copy>
+    ```
+  ![](images/5-designjson.png " ")
+
+Add the images and buttons to navigate within the page:
+
+1. From the left sidebar, drag and drop a *Component Group* below the banner and add a *Title*. Click on the title and type "You may be looking for..." and align the text to *Center*. 
+  ![](images/5-title.png " ")
+
+2. From the left sidebar, drag and drop a *Three Coloumns* under *Section Layouts* below the banner. Adjust the General> Custom settings as follows: 
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | First Column Width (%)	| 10 |
+  | Second Column Width (%) | 80 |
+  | Third Column Width (%) | 10 |
+
+3. Now, add 4 images to the second coloumn.
+
+- Upload the first image and update the settings as follows:
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Image | OBIC_Industries_Chemicals_detailed_rgb.svg |
+  | Alignment	| Center |
+  | Set Width | 10.6875rem |
+  ![](images/5-imgsetting.png " ")
+- Copy the style
+  ![](images/5-copystyle.png " ")
+- Upload the 2nd image: OBIC_Business_Contract-Approval_detailed_rgb.svg and paste the effects. 
+  ![](images/5-pasteeffects.png " ")
+- Repeat the above steps for the following images: 
+  - OBIC_Business_Presentation_F-detailed_rgb.svg 
+  - OBIC_Industries_Chemicals_detailed_rgb.svg
+- Save the update. 
+- Add a *Spacer* component below the images. 
+
+4. Display Content List for *Specialization*:
+
+- Add another component group for displaying the Specializations. 
+- Add a *Title*. Click on the title and type "Specializations" and align the text to *Center*. 
+
+  
+
+
+
+
 
