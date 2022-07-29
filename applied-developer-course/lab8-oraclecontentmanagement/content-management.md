@@ -109,6 +109,7 @@ Create Taxonomies:
   - Add Category - Blogs
   - Add Sibling - Health Talks
   - Add Sibling - Testimonials
+  - Add Sibling - Specializations
   - Select the following checkbox to allow publishing the taxonomy and click the *Done* button.
   ![](images/3-allowpublish.png " ")  
 
@@ -146,7 +147,6 @@ We will now see the process to create the assets in a repository:
   - Specialization name: Emergency Care
   - Click the *Save* and *Done* button.
  ![](images/4-specer.png.png " ")
-
 3. Repeat step 1 and 2 for the following specializations: 
   - Name: Cardiology, Specialization name: Cardiology
   - Name: Neurology, Specialization name: Neurology
@@ -155,6 +155,8 @@ We will now see the process to create the assets in a repository:
   - Name: Surgery, Specialization name: Surgery
   - Name: Stroke Care, Specialization name: Strxoke Care
   - Name: Spiritual Care, Specialization name: Spiritual Care
+4. Select category - (CareClinicsInfo > Specializations)
+ ![](images/4-specilization.png " ")
 
 *Personal Information:*
 
@@ -450,8 +452,32 @@ Add the images and buttons to navigate within the page:
 
 4. Display Content List for *Specialization*:
 
-- Add another component group for displaying the Specializations. 
+- Add another component group for displaying the Specializations and add the background *color* #cad9dd.
+  ![](images/5-bgcolor.png " ")
+- We will now add the anchor tag for navigating within the page:
+  - Drag and drop *SE-Anchor* from Custom Components into the Component group.
+  - Now go to the *Custom settings* and update the Anchor name as *Specializations*.
 - Add a *Title*. Click on the title and type "Specializations" and align the text to *Center*. 
+- Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Content Type | Specialization |
+  | Categories	| CCI>Specializations |
+  | List View | Three Coloumns |
+  ![](images/5-spec.png " ")
+
+5. Display Content List for *Blogs*:
+- Add another component group for displaying the Blogs and add the background *color* #8aadbf.
+- We will now add the anchor tag for navigating within the page:
+  - Drag and drop *SE-Anchor* from Custom Components into the Component group.
+  - Now go to the *Custom settings* and update the Anchor name as *Blogs*.
+- Add a *Title*. Click on the title and type "Specializations" and align the text to *Center*. 
+- Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Content Type | Specialization |
+  | Categories	| CCI>Specializations |
+  | List View | Three Coloumns |
 
   
 
