@@ -339,7 +339,7 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 	```
     <copy>
 	availability_domain = var.availability_domain_name
-	<copy>
+	</copy>
 	```
 	
 	![](./images/task7/image7.png " ")
@@ -348,7 +348,7 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 
 	![](./images/task7/image8.png " ")
 
-9. Create new ORM Stack from the file **Compute-Instance-Template-New.zip**. Click on the **Create Stack**. Be sure you are in the **CareClinics** Compartment.
+9. Create a new ORM Stack from the file **Compute-Instance-Template-New.zip**. Click on the **Create Stack**. Be sure you are in the **CareClinics** Compartment.
 
 	![](./images/task7/image9.png " ")
 
@@ -398,7 +398,7 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 
 ## Task 8: Advanced Feature remote-exec
 
-[Using Remote Exec Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/usingremoteexec.htm)
+With Resource Manager, you can use Terraform's remote exec functionality to execute scripts or commands on a remote computer. You can also use this technique for other provisioners that require access to the remote resource.  More information can be found at [Using Remote Exec Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/usingremoteexec.htm).
 
 1. Using a text editor, lets create the following Terraform Configuration files
 
@@ -419,6 +419,8 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 	![](./images/task8/image1.png " ")
 
 3. Create the **remote-exec.tf** file
+
+	**Note:**  Here you will notice the **inline** command **touch** is executed after connecting to the Compute Instance's **public IP address** as user **OPC** with a **private SSH key**.
 
 	```
     <copy>
@@ -514,6 +516,44 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 
 ## Task 9: Destroy all OCI Resources
 
+1. We will now leverage the **Destroy** functionality in Terraform to delete the OCI Services provisioned earlier.
+
+	**Note:** Executing a **Destroy** does NOT delete the ORM Stack (Terraform Configuration Files), but rather will delete the OCI Services provisioned during the **Plan** job. The ORM Stacks can be leveraged again to provision the same OCI services at a future time.
+
+2. Navigate to Resource Manager's Stacks page. Be sure you are in the **CareClinics** Compartment. We created OCI Services in 3 ORM Stacks which are highlighted in Red below. Click on the Stack **Compute-Instance-Template-New**.
+
+	![](./images/task9/image1.png " ")
+
+3. Click on **Destroy**, then **Destroy** in the pop-out.
+
+	![](./images/task9/image2.png " ")
+
+4. If you navigate over to the Compute Instances Page quickly, you will see the instance is in a State of **Terminating**.
+
+	![](./images/task9/image3.png " ")
+
+5. Once the **Destroy** Job is **SUCCEEDED**, if you examine the **Logs**, you will see the 3 services originally created by this Stack are now deleted.
+
+	![](./images/task9/image4.png " ")
+
+	![](./images/task9/image5.png " ")
+
+6. Let's repeat this process for Stack **Compute-Terraform**. Click on **Destroy**, then **Destroy** in the pop-out.
+
+	![](./images/task9/image6.png " ")
+
+7. Once the **Destroy** job is **SUCCEEDED**, you will see the Compute Instance has a state of **Terminated**.
+
+	![](./images/task9/image7.png " ")
+
+8. Let's repeat this process for Stack **VCN-Terraform**. Click on **Destroy**, then **Destroy** in the pop-out.
+
+	![](./images/task9/image8.png " ")
+
+9. Once **SUCCEEDED**, you can examine the **Logs** and see the 6 resources created by the stack have been destroyed.
+
+	![](./images/task9/image9.png " ")
+
 ## Homework: Create an OCI Service Using ORM - Terraform
 
 1. The plan is to remove **Task 6: Create an ORM Stack using the Discover Feature** from above and it will be the homework.
@@ -525,6 +565,3 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 [Oracle Resource Manager Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/home.htm)
 
 [Terraform Documentation for Oracle Cloud Infrastructure (OCI)](https://registry.terraform.io/providers/oracle/oci/latest/docs)
-
-
-
