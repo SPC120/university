@@ -283,15 +283,15 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 
 1. Navigate to Resource Manager's **Stacks** page and click on the stack **Compute Instance-Template**. Be sure you are in the **CareClinics** Compartment.
 
-	![](images/task7/image1.png " ")
+	![](./images/task7/image1.png " ")
 
 2. Click **Download** to download the Terraform Configuration (Scripts) to your local machine.
 
-	![](images/task7/image2.png " ")
+	![](./images/task7/image2.png " ")
 
 3. Once downloaded, locate the ZIP file, and extract it to your local file system. The ORM Stack file name should look similar to this one below. It will contain the following files.
 
-	![](images/task7/image3.png " ")
+	![](./images/task7/image3.png " ")
 
 	* **main.tf** - Contains the Provider along with all OCI Resources that will be provisioned.
 	* **outputs.tf** - Allows you to define what outputs are displayed in the Oracle Cloud Infrastructure Console. 
@@ -306,7 +306,7 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 	</copy>
     ```
 
-	![](images/task7/image4.png " ")
+	![](./images/task7/image4.png " ")
 
 5. Edit **schema.yaml** using your desired text editor under the **requiredConfig** section and add the following line
 
@@ -316,7 +316,7 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 	</copy>
     ```
 
-	![](images/task7/image5.png " ")
+	![](./images/task7/image5.png " ")
 
 6. Edit **schema.yaml** using your desired text editor under the **variables** section and add the following lines
 
@@ -332,77 +332,231 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 	</copy>
     ```
 
-	![](images/task7/image6.png " ")
+	![](./images/task7/image6.png " ")
 
 7. Edit **main.tf** using your desired text editor under the **variables** section and add the following line **AND** comment out the existing **availability_domain** line.
 
 	```
     <copy>
 	availability_domain = var.availability_domain_name
-	<copy>
+	</copy>
 	```
 	
-	![](images/task7/image7.png " ")
+	![](./images/task7/image7.png " ")
 
 8. Create a new ZIP file with the name **Compute-Instance-Template-New.zip**. Make sure it contains the following files. Some of which you just updated.
 
-	![](images/task7/image8.png " ")
+	![](./images/task7/image8.png " ")
 
-9. Create new ORM Stack from the file **Compute-Instance-Template-New.zip**. Click on the **Create Stack**. Be sure you are in the **CareClinics** Compartment.
+9. Create a new ORM Stack from the file **Compute-Instance-Template-New.zip**. Click on the **Create Stack**. Be sure you are in the **CareClinics** Compartment.
 
-	![](images/task7/image9.png " ")
+	![](./images/task7/image9.png " ")
 
 10. Select **My configuration**, select **.Zip file** and drag/drop the file **Compute-Instance-Template-New.zip.** Also, scroll down and enter the Stack Name of **Compute-Instance-Template-New** and verify the Compartment is **CareClinics** and click **Next**
 
-	![](images/task7/image10.png " ")
+	![](./images/task7/image10.png " ")
 
-	![](images/task7/image11.png " ")
+	![](./images/task7/image11.png " ")
 
 11. Enter the name **Compute-Template**, select the **-AD-3** Availability Domain, select the **CareClinicVCN** and select the Subnet **Public Subnet-CareClinicVCN (Regional)**.
 
 	**Note:** The **[Always-Free](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm)** shape **VM.Standard.E2.1.Micro** is only available in the **AD-3** Availability Domain.
 
-	![](images/task7/image12.png " ")
+	![](./images/task7/image12.png " ")
 
 12. Select **Assign Public IP**, drag/drop the SSH Public Key **cloudshellkey.pub** and click **Next**
 
-	![](images/task7/image13.png " ")
+	![](./images/task7/image13.png " ")
 
 13. Click **Create**
 
-	![](images/task7/image14.png " ")
+	![](./images/task7/image14.png " ")
 
 14. Click **Plan**, then **Plan**
 
-	![](images/task7/image15.png " ")
+	![](./images/task7/image15.png " ")
 
 15. After a **SUCCEEDED** Plan, Click **Stack Details**
 
-	![](images/task7/image16.png " ")
+	![](./images/task7/image16.png " ")
 
 16. Click **Apply**, then **Apply**
 
-	![](images/task7/image17.png " ")
+	![](./images/task7/image17.png " ")
 
 17. Once the **Apply** Job has **SUCCEEDED**, click on **Outputs**, here you can see the **public** and **private** **IP Address** of the Compute Instance that was just provisioned.
 
-	![](images/task7/image18.png " ")
+	![](./images/task7/image18.png " ")
 
 18. You can also click on **Job resources** and see the 3 Cloud Services provisioned by this ORM Stack. Click on **Compute-Template**.
 
-	![](images/task7/image19.png " ")
+	![](./images/task7/image19.png " ")
 
-19. You are now in the **Compute-\>Instances-\>Instance details** page. Here you can also see details such as **Public IP Address, VCN, Availability Domain**, etc.
+19. You are now in the **Compute->Instances->Instance details** page. Here you can also see details such as **Public IP Address, VCN, Availability Domain**, etc.
 
-	![](images/task7/image20.png " ")
+	![](./images/task7/image20.png " ")
 
-## Task 8: Advanced Feature: remote-exec
+## Task 8: Advanced Feature remote-exec
 
-[Using Remote Exec Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/usingremoteexec.htm)
+With Resource Manager, you can use Terraform's remote exec functionality to execute scripts or commands on a remote computer. You can also use this technique for other provisioners that require access to the remote resource.  More information can be found at [Using Remote Exec Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/usingremoteexec.htm).
+
+1. Using a text editor, lets create the following Terraform Configuration files
+
+	- **remote-exec.tf**	- This will contain the Terraform resource remote-exec
+	- **variables.tf**		- This will contain the required variables
+	- **schema.yaml** 		- This file facilitates variable entry when creating and editing ORM Stacks
+
+2. Create the **variables.tf** file
+
+	```
+    <copy>
+	provider "oci" {}
+	variable "host_public_ip" {}
+	variable "ssh_private_key" {}
+	</copy>
+	```
+
+	![](./images/task8/image1.png " ")
+
+3. Create the **remote-exec.tf** file
+
+	**Note:**  Here you will notice the **inline** command **touch** is executed after connecting to the Compute Instance's **public IP address** as user **OPC** with a **private SSH key**.
+
+	```
+    <copy>
+	resource "null_resource" "remote-exec" {
+	  provisioner "remote-exec" {
+		connection {
+		  agent       = false
+		  timeout     = "30m"
+		  host        = "${var.host_public_ip}"
+		  user        = "opc"
+		  private_key = "${var.ssh_private_key}"
+		}
+	  
+		inline = [
+		  "touch ~/IMadeAFile.Right.Here"
+		]
+	  } 
+	}
+	</copy>
+    ```
+
+	![](./images/task8/image2.png " ")
+
+4. Create the **schema.yaml** file
+
+	```
+    <copy>
+	  title: "Update a Compute instance using remote-exec"
+	  stackDescription: ${Messages.solutionsHub.solutions.computeInstance.stackDescription()}
+	  schemaVersion: 1.1.0
+	  version: "20200301"
+	  locale: "en"
+
+	  variableGroups:  
+	  - title: ${Messages.solutionsHub.requiredConfig()}
+		visible: true  
+		variables:
+		- host_public_ip
+		- ssh_private_key
+
+	  variables:
+		host_public_ip:
+		  type: string
+		  required: true
+		  title: "Enter Compute IP Address"
+		  description: "Enter the Public IP Address of the Compute Instance from Task 7"
+		ssh_private_key:
+		  type: text
+		  multiline: true
+		  required: true
+		  title: "Enter a Private Key"
+		  description: "Enter the value from the cloudshellkey file"
+	</copy>
+    ```
+
+	![](./images/task8/image3.png " ")
+
+5. Zip the three files you just created into a file called **remote-exec.zip**.
+
+	![](./images/task8/image4.png " ")
+
+6. Navigate to Resource Manager's Stacks page and click **Create Stack**. Be sure you are in the **CareClinics** Compartment.
+
+	![](./images/task8/image5.png " ")
+
+7. On the **Create Stack** page, select **My Configuration**, select **.Zip file,** drag/drop the file **remote-exec.zip**, accept all the other default values and click **Next.**
+
+	![](./images/task8/image6.png " ")
+
+8. Enter the Compute Instance **Public IP Address** from Task 7. Also enter the SSH Private Key from the file **cloudshellkey** and click **Next**
+
+	![](./images/task8/image7.png " ")
+
+9. Click **Create**
+
+	![](./images/task8/image8.png " ")
+
+10. Click **Plan** and **Plan**
+
+	![](./images/task8/image9.png " ")
+
+11. The status of the Plan will become **SUCCEEDED**
+
+	![](./images/task8/image10.png " ")
+
+12. You will see in the **Logs**, Terraform connected to the Compute Instance and completed the **Inline** command.
+
+	![](./images/task8/image11.png " ")
+
+13. If you SSH into the compute Instance using a local command shell, you will see the file **IMadeAFile.Right.Here** was created successfully.
+
+	![](./images/task8/image12.png " ")
 
 ## Task 9: Destroy all OCI Resources
 
+1. We will now leverage the **Destroy** functionality in Terraform to delete the OCI Services provisioned earlier.
+
+	**Note:** Executing a **Destroy** does NOT delete the ORM Stack (Terraform Configuration Files), but rather will delete the OCI Services provisioned during the **Plan** job. The ORM Stacks can be leveraged again to provision the same OCI services at a future time.
+
+2. Navigate to Resource Manager's Stacks page. Be sure you are in the **CareClinics** Compartment. We created OCI Services in 3 ORM Stacks which are highlighted in Red below. Click on the Stack **Compute-Instance-Template-New**.
+
+	![](./images/task9/image1.png " ")
+
+3. Click on **Destroy**, then **Destroy** in the pop-out.
+
+	![](./images/task9/image2.png " ")
+
+4. If you navigate over to the Compute Instances Page quickly, you will see the instance is in a State of **Terminating**.
+
+	![](./images/task9/image3.png " ")
+
+5. Once the **Destroy** Job is **SUCCEEDED**, if you examine the **Logs**, you will see the 3 services originally created by this Stack are now deleted.
+
+	![](./images/task9/image4.png " ")
+
+	![](./images/task9/image5.png " ")
+
+6. Let's repeat this process for Stack **Compute-Terraform**. Click on **Destroy**, then **Destroy** in the pop-out.
+
+	![](./images/task9/image6.png " ")
+
+7. Once the **Destroy** job is **SUCCEEDED**, you will see the Compute Instance has a state of **Terminated**.
+
+	![](./images/task9/image7.png " ")
+
+8. Let's repeat this process for Stack **VCN-Terraform**. Click on **Destroy**, then **Destroy** in the pop-out.
+
+	![](./images/task9/image8.png " ")
+
+9. Once **SUCCEEDED**, you can examine the **Logs** and see the 6 resources created by the stack have been destroyed.
+
+	![](./images/task9/image9.png " ")
+
 ## Homework: Create an OCI Service Using ORM - Terraform
+
+1. The plan is to remove **Task 6: Create an ORM Stack using the Discover Feature** from above and it will be the homework.
 
 ## Additional Resources
 
@@ -411,6 +565,3 @@ We are now going to revisit the ORM Stack we created in **Task 5**.  In this tas
 [Oracle Resource Manager Documentation](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/home.htm)
 
 [Terraform Documentation for Oracle Cloud Infrastructure (OCI)](https://registry.terraform.io/providers/oracle/oci/latest/docs)
-
-
-
