@@ -465,8 +465,7 @@ Add the images and buttons to navigate within the page:
   | Categories	| CCI>Specializations |
   | List View | Three Coloumns |
   ![](images/5-spec.png " ")
-
-5. Display Content List for *Blogs*:
+ßß5. Display Content List for *Blogs*:
 - Add another component group for displaying the Blogs and add the background *color* #8aadbf.
 - We will now add the anchor tag for navigating within the page:
   - Drag and drop *SE-Anchor* from Custom Components into the Component group.
