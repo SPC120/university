@@ -37,7 +37,7 @@ In this lab, you will learn how to:
 - Sync the site theme. 
   ![](images/0-synctheme.png " ")
 - Go ahead and check your local folder.
-  ![](images/0-local.png" ")
+  ![](images/0-local.png " ")
 
 
 
@@ -119,6 +119,9 @@ Create Taxonomies:
 4. Confirm to proceed Promotion. 
   ![](images/3-promoteconfirm.png " ") 
 
+5. Publish the Taxonomy.
+  ![](images/3-publish.png " ") 
+
 Add the Taxonomy and Content types to the Repository:
 
 1. Edit the repository by adding the Specialization content type and CareClinicsInfo taxonomy to the CareClinics Repository.
@@ -153,7 +156,7 @@ We will now see the process to create the assets in a repository:
   - Name: Radiology, Specialization name: Radiology
   - Name: Rehabilitation, Specialization name: Rehabilitation
   - Name: Surgery, Specialization name: Surgery
-  - Name: Stroke Care, Specialization name: Strxoke Care
+  - Name: Stroke Care, Specialization name: Stroke Care
   - Name: Spiritual Care, Specialization name: Spiritual Care
 4. Select category - (CareClinicsInfo > Specializations)
  ![](images/4-specilization.png " ")
@@ -184,6 +187,7 @@ We will now see the process to create the assets in a repository:
 1. Select NewsArticle from the dropdown. 
 2. Content Item Properties: 
   - Name: Justin Lester
+  - Description (Optional): Patient with COVID-19, pneumonia and heart failure survives with the help of ECMO.
   - Author: Justin Lester
   - Date: 07/09/2022
   - Content: Patient with COVID-19, pneumonia and heart failure survives with the help of ECMO.
@@ -193,6 +197,7 @@ We will now see the process to create the assets in a repository:
   - Click the *Save* and *Done* button.
 3. Repeat step 1 and 2 to create another Content Item: 
   - Name: Kathy Maden
+  - Description (Optional): Kathy came to Clinics Hospital for a total right hip replacement using an anterior approach. The next day, she was able to return home. Within three days of her surge...
   - Author: Kathy Maden
   - Date: 03/01/2022
   - Content: Kathy came to Clinics Hospital for a total right hip replacement using an anterior approach. The next day, she was able to return home. Within three days of her surge...
@@ -258,7 +263,7 @@ Add all assets to the channel:
 1. Select all assets and select the target channel as CareClinics in the properties bar on the right.
   ![](images/4-allassets.png " ")
 
-## Task 5: Edit your website
+## Task 5: Create Home Page for the Care Clinics Website
 
 In this task, you'll see how easy it is to build your healthcare portal using Site Builder. 
 
@@ -318,11 +323,67 @@ Build the Home Page:
   
 - Save the update. 
 
-4. Let's move on to the Body slot:
+4. Let's use out-of-the-box components to fill in the Footer slot
+  - In the left sidebar, click Components icon and then click Seeded to show the list of out-of-the-box components available with Oracle Content Management.
+  - In the left sidebar, look for an out-of-the-box component called Component Group. Drag and drop it into the Footer slot.
+  - Click the component group's menu icon Component group's menu icon and then click Settings. Update the settings as follows: 
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Color      | #333333 |
+
+    ![](images/5-cgcolor.png " ")
+  - Drag and drop Image from the seeded components into the Component Group.
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Image      | Powered_by_OCE.png |
+  | Alignment   | left |
+  | Set Width | 300 |
+
+  - Now, let’s add a navigation menu to the home page using the Minimal-NavMenu custom component. Drag and drop a Minimal-NavMenu component into the component group, to the right side of the Image component. 
+  
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Top | 0.9vw |
+  | Bottom | 0.9vw |
+  | Left | 6vw | 
+  | Right |	0 |
+- From the left sidebar, drag and drop a Social Bar component into the component group, to the right side of the Image component.
+- Complete the settings for the Social Bar component in the General tab.
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Top | 1.8vw |
+  | Bottom | 1.8vw |
+  | Left | 0.3vw | 
+  | Right |	6vw |
+
+- In the General tab, click Icons and then click an icon name to complete the settings.
+
+  | Property	| Value |
+  | ----------- | ----------- | 
+  | URL	| - https://www.facebook.com/Oracle/ (for Facebook)
+  |     | - https://www.linkedin.com/company/oracle/ (for LinkedIn)
+  |      | - https://twitter.com/Oracle (for Twitter)
+  |       |- https://www.youtube.com/oracle/ (for YouTube)|
+  | Target | 	Open in New Window | 
+
+  ![](images/5-fb.png " ")
+
+- Save the component group with the name *Minimal-Footer* so that you can reuse this component on multiple pages.
+  ![](images/5-minimlfooter.png " ")
+  
+- Save the update. 
+
+
+5. Let's move on to the Body slot:
 
 Create a banner: 
 
 - From the left sidebar, drag and drop a Component Group into the Body slot. We’ll create a banner using this component group and the components (which we’ll be adding into it).
+- From the section layout, drag and drop *Two Columns* within the Component Group.
+
+ ![](images/5-sectionlayout.png " ")
 
 General Settings:
 
@@ -357,7 +418,7 @@ General Settings:
 
   "We aim to provide the best of care for all of our patients.
 
-  Care Clinics is committed to providing excellent care that is convenient and accessible. Our focus on patient safety and quality is grounded in evidence-based medicine and is delivering better outcomes for our patients every day.". 
+  Care Clinics is committed to providing excellent care that is convenient and accessible. Our focus on patient safety and quality is grounded in evidence-based medicine and is delivering better outcomes for our patients every day."
 
 General Settings:
   | Property      | Value |
@@ -366,12 +427,14 @@ General Settings:
   | Bottom | 50px |
   | Left | 7vw | 
   | Right |	6vw |
+
   ![](images/5-bannercomplete.png " ")
+
 - *Save* the update.
 
 Edit your theme:
 
-1. Open the *BlackSiteTemplateTheme* which you synced in your local system in your favorite IDE.
+1. Open the *CareClinicsTemplate* which you synced in your local system in your favorite IDE.
 2. Go to the *designs/default* folder and open *design.css*. 
 3. Add the following code inside *design.css*: 
     ```
@@ -400,8 +463,7 @@ Edit your theme:
 4. Add the following code indode *design.json* under "scs-button":
     ```
     <copy>
-    /* Adding button styles */
-				        { 
+				        ,{ 
                     "name": "CP_Default",
                     "class": "scs-button-style-4"
                 },
@@ -422,7 +484,7 @@ Add the images and buttons to navigate within the page:
 1. From the left sidebar, drag and drop a *Component Group* below the banner and add a *Title*. Click on the title and type "You may be looking for..." and align the text to *Center*. 
   ![](images/5-title.png " ")
 
-2. From the left sidebar, drag and drop a *Three Coloumns* under *Section Layouts* below the banner. Adjust the General> Custom settings as follows: 
+2. From the left sidebar, drag and drop a *Three Columns* under *Section Layouts* below the banner. Adjust the General> Custom settings as follows: 
 
   | Property      | Value |
   | ----------- | ----------- |
@@ -452,35 +514,180 @@ Add the images and buttons to navigate within the page:
 
 4. Display Content List for *Specialization*:
 
-- Add another component group for displaying the Specializations and add the background *color* #cad9dd.
+- Create a content layout for Specialization.
+  - Open the side bar to go to the Developer tab and click on *View all Components* button. 
+  - Now click on *Create* dropdown button to *Create a content layout*.
+  ![](images/5-contentlayout.png " ")
+- Now, go to the Content under the Administration in the side bar, select the *Asset types* from the drop down, Select Specialization and navigate to Content Layout tab and pick Specialization-overview from the dropdown.
+  ![](images/5-specializationoverview.png " ")
+- Go back to the site to add another component group for displaying the Specializations and add the background *color* #cad9dd.
   ![](images/5-bgcolor.png " ")
 - We will now add the anchor tag for navigating within the page:
-  - Drag and drop *SE-Anchor* from Custom Components into the Component group.
+  - Drag and drop *SE2-Anchor* from Custom Components into the Component group.
   - Now go to the *Custom settings* and update the Anchor name as *Specializations*.
 - Add a *Title*. Click on the title and type "Specializations" and align the text to *Center*. 
 - Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+
   | Property      | Value |
   | ----------- | ----------- |
   | Content Type | Specialization |
   | Categories	| CCI>Specializations |
-  | List View | Three Coloumns |
+  | List View | Three Columns |
+  
   ![](images/5-spec.png " ")
-ßß5. Display Content List for *Blogs*:
+- Sync the generated content layout to the local machine. 
+  ![](images/5-speclocal.png " ")
+- Now open the content layout in VS Code or your favorite IDE and update the layout.html page.
+
+*layout.html*
+
+```
+    <copy>
+  {{#fields}}
+  <ul class="Specialization">
+  <!-- <li><h2>specialization_name</h2></li> -->
+  <!-- <li><p>{{specialization_name}}</p></li> -->
+
+  {{#scsData.detailPageLink}}
+  <li><a href="{{scsData.detailPageLink}}" title="Go to detail page"><span class="detail- page">{{specialization_name}}</span></a></li>
+  {{/scsData.detailPageLink}}
+  </ul>
+  {{/fields}}
+    </copy>
+    ```
+  
+*Design.css*
+
+```
+    <copy>
+    .Specialization li {
+          list-style: none;
+          font-size: 30px;
+          font-style: normal;
+          font-variant-caps: normal;
+          color: #333;
+          font-weight: 200;
+          margin: 0em 0em 1em 0em;
+          text-align: center;
+    }
+    </copy>  
+```
+
+- You will observe the following changes in the Home Page.
+![](images/5-specdisplay.png " ")
+
+5. Display Content List for *Blogs*:
+- Create a page for Blog Details. 
+  - Click on the navigation on the top left and select Pages>Add Page. 
+  ![](images/5-pages.png " ")
+  - Enter the following details while creating a Blog Details page:
+  ![](images/5-blogdetails.png " ")
+  ![](images/5-testimonial2.png " ")
+  - Drag and drop *Content PlaceHolder Settings* update the settings as follows: 
+  ![](images/5-blogdetailsplaceholder.png " ")  
 - Add another component group for displaying the Blogs and add the background *color* #8aadbf.
 - We will now add the anchor tag for navigating within the page:
   - Drag and drop *SE-Anchor* from Custom Components into the Component group.
   - Now go to the *Custom settings* and update the Anchor name as *Blogs*.
-- Add a *Title*. Click on the title and type "Specializations" and align the text to *Center*. 
+- Add a *Title*. Click on the title and type "Blogs" and align the text to *Center*. 
 - Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+
+
   | Property      | Value |
   | ----------- | ----------- |
-  | Content Type | Specialization |
-  | Categories	| CCI>Specializations |
-  | List View | Three Coloumns |
+  | Content Type | SE2-Story |
+  | Categories	| CCI>Blogs |
+  | Item View | Summary Card View |
+  | List View | Three Columns |
 
+  ![](images/5-blogs.png " ")
+  ![](images/5-summary.png " ")
+
+5. Display Content List for *Health Talks*:
+- Create a page for Health Talks Details. 
+  - Click on the navigation on the top left and select Pages>Add Page. 
+  ![](images/5-pages.png " ")
+  - Enter the following details while creating a Health Talk Details page:
+  ![](images/5-healthtalkdetails.png " ")
+  ![](images/5-testimonial2.png " ")
+  - Drag and drop *Content PlaceHolder Settings* update the settings as follows: 
+  ![](images/5-se2_placeholder.png " ")  
+- Add another component group for displaying the Health Talks and add the background *color* #4b6576.
+- We will now add the anchor tag for navigating within the page:
+  - Drag and drop *SE-Anchor* from Custom Components into the Component group.
+  - Now go to the *Custom settings* and update the Anchor name as *Health Talks*.
+- Add a *Title*. Click on the title and type "Health Talks", align the text to *Center*, select the text to change the *color* of the font to *white*. 
+- Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Content Type | SE2-Story |
+  | Categories	| CCI>Health Talks |
+  | Item View | Summary Card View |
+  | List View | Three Columns |
+  
+  ![](images/5-healthtalk.png " ")
   
 
+6. Display Content List for *Testimonials*:
 
+- Create a page for Testimonial Details. 
+  - Click on the navigation on the top left and select Pages>Add Page. 
+  ![](images/5-pages.png " ")
+  - Enter the following details while creating a Testimonial page:
+  ![](images/5-testimonial.png " ")
+  ![](images/5-testimonial2.png " ")
+  - Drag and drop *Content PlaceHolder Settings* update the settings as follows: 
+  ![](images/5-contentplaceholder.png " ")  
+  - Add the "Minimal-Header" component group for the header and "Minimal-Footer" component group for the footer.
+ - Add another component group for displaying the Testimonials.
+ - We will now add the anchor tag for navigating within the page:
+  - Drag and drop *SE-Anchor* from Custom Components into the Component group.
+  - Now go to the *Custom settings* and update the Anchor name as *Testimonials*.
+ - Add a *Title*. Click on the title and type "Testimonials", align the text to *Center*.
+ - Add YouTube video component within the component group and add the link: https://www.youtube.com/watch?v=8hCvvJz-yGs
+ ![](images/5-youtube.png " ")  
+ - Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Content Type | NewsArticle |
+  | Categories	| CCI>Testimonials |
+  | Item View | Summary |
+  | List View | Verticle |
+  | Page to Display Individual Item | TESTIMONIAL DETAILS |
+
+  ![](images/5-completetestimonial.png " ")
+
+7. Enable Page Navigation: 
+
+- Add the button from Seeded components under the image and update its properties as follows: 
+  - General Settings: 
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Width | 10.9375rem |
+  | Top | 0.9375rem |
+  | Bottom | 5 | 
+  | Left | 5 |
+  | Right | 5 |
+
+  ![](images/5-anchorgen.png " ")
+
+  - Style:
+  ![](images/5-anchorstyle.png " ")
+  - Trigger Action: 
+  ![](images/5-trigger.png " ")
+
+- Copy and paste the style and follow the same steps for Blogs, Health Talks and Testimonials.
+
+*Note:* Make sure to update the Action Triggers in the Link tab.
+
+  ![](images/5-buttons.png " ")
+
+*Note:* Go ahead and commit the changes. 
+
+  ![](images/5-commit.png " ")
 
 
 
