@@ -77,7 +77,7 @@ The service offers sync and async APIs to analyze images, with data requirements
 | API | Description | Supported Input Format |
 | -------- |:-------:| -----:|
 | sync API (analyzeImage, analyzeDocument) | Analyzes individual images |<p>* JPG, PNG, (PDF and Tiff for analyzeDocument) <br>*Up to 8 MB<br> *Single image input<br></p>|
-| async API/jobs/startImageAnalysisjob/jobs/start | Analyze multiple images or multi-page PDFs |<p>* JPG, PNG (PDF and Tiff for analyzeDocument)<br>* Up to 2000 images input<br> * Supports multi-page PDF<br></p>| 
+| async API/jobs/startImageAnalysisjob/jobs/start | Analyze multiple images or multi-page PDFs | <p>* JPG, PNG (PDF and Tiff for analyzeDocument)<br>* Up to 2000 images input<br> * Supports multi-page PDF<br></p>| 
 
 
 ## Task 2: Upload Data to Object Storage 
@@ -88,5 +88,87 @@ a. First, From the OCI Services menu, click Object Storage.
 
 ![](images/cloud-storage-bucket.png " ")
 
+b. Then, Select Compartment from the left dropdown menu. Choose the compartment matching your name or company name.
+
+![](images/compartment.png " ")
+
+c. Next click Create Bucket
+
+![](images/bucket.png " ")
+
+d. Next, fill out the dialog box:
+
+* Bucket Name: Provide a name
+* Storage Tier: STANDARD
+
+e. Then click Create
+
+![](images/createBucket.png " ")
+
+2. Upload image files into Storage Bucket
+
+a. Switch to OCI Window and click the Bucket Name.
+b. Bucket detail window should be visible. Click Upload
+
+![](images/upload.png " ")
+
+c. Click on Upload and then browse to file which you desire to upload.
+
+![](images/uploaded.png " ")
+
+More details on Object storage can be found on this page. [Object Storage Upload Page](https://oracle-livelabs.github.io/oci-core/object-storage/workshops/freetier/index.html?lab=object-storage) to see how to upload.
 
 ## Task 3: Demo Vision Service using the OCI Console
+
+1. Navigate to the Vision Page of OCI Console
+
+![](images/navigate-to-ai-vision-menu.png " ")
+
+2. Use Document AI features
+
+a. On the Vision page, select “Document AI” on the left navigation menu and provide a document or image from OCI object storage. You can also upload from local storage. In order to upload image from Object Storage Bucket, you will need image's URL Path.
+
+![](images/template.png " ")
+
+b. Image URL path can be found in the Object Storage Bucket where your image resides. Navigate to the bucket to locate object details that has the image URL path, as shown below. 
+
+![](images/obj-details.png " ")
+![](images/path.png " ")
+
+
+c.  This invokes analyzeDocument API after the image is provided. Raw text extracted by our pre-trained multi-tenant model is displayed on the right.
+
+![](images/document-ai.png " ")
+
+
+| Feature | Description | Details on Console |
+| -------- |:-------:| -----:|
+| OCR (Optical Character Recognition) |Locates and digitizes text information from images |Text will appear under the "raw text" header of the results pane of the console [Reference](images/raw-text.png)|
+| Document Image Classification |Classifies documents into different types based on their visual appearance, high-level features, and extracted keywords |Classification along with confidence score appears directly under "Results" pane [Reference](images/results.png)|
+|Language Classification|Classifies the language of document based on visual features |Classification along with confidence score appears under document classification in Results pane [Reference](images/results.png)|
+|Table extraction|Extracts content in tabular format, maintaining row/column relationships of cells| Toggle to the Table tab to get table information |
+|Searchable PDF output|Embeds a transparent layer on top of document image in PDF format to make it searchable by keywords|You need to test on a PDF document to use this feature. When you've selected a PDF, the searchable PDF button will be clickable. Clicking on it will download an OCR PDF to your computer. [Reference](images/pdf.png)|
+
+
+3. Use Image Analysis Features
+
+a. On the Vision page, select “Image Classification” or "Object Detection" on the left navigation menu and provide an image from local storage or OCI object storage. This invokes analyzeImage API after the image is provided.
+
+
+![](images/img-classification.png " ")
+
+
+b. Features you can test out:
+
+| Feature | Description | Details on Console |
+| -------- |:-------:| -----:|
+| Image classification | Categorizes object(s) within an image | Select "Image Classification." Labels and confidence scores will appear under the Results pane. [Reference](images/img-detection.png)|
+| Object detection | Locates and identifies objects within an image | Select "Object Detection." Objects, confidence score, and highlighted bounding box will all appear under the Results pane. Clicking on one of the labels on the results pane will also highlight where on the image that object was detected.|
+
+Congratulations on completing this lab!
+
+Proceed to the next section. 
+
+
+
+
