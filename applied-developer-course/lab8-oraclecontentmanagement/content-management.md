@@ -689,5 +689,5 @@ Add the images and buttons to navigate within the page:
 
   ![](images/5-commit.png " ")
 
-
+## Task 6: Create a page for the Patient Dashboard
 
