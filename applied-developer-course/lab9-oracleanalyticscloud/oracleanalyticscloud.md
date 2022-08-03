@@ -1,4 +1,4 @@
-# Build a Digital Assistant
+# Hospital Admin Insights from Oracle Analytics Cloud
 ## Introduction
 
 In this lab, we will build a Digital Assistant for patients to schedule an appointment online with the Doctor.
