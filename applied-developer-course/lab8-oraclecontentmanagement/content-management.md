@@ -691,3 +691,41 @@ Add the images and buttons to navigate within the page:
 
 ## Task 6: Create a page for the Patient Dashboard
 
+1. In Site Builder, set the switch Edit icon to Edit mode. Enter a name (Ex: PatientDashboard) for the update and click OK.
+2. Add a page with the name *PATIENT DASHBOARD*, toggle *Override* under the Page url, select the Page Layout as *Patient.html* and *Save* the changes.
+  ![](images/6-dashboard.png " ")
+2. Drag and drop the *Minimal-Header* component group from the Custom Components section which we created in the previous task in the Header section. 
+  ![](images/6-minheader.png " ")
+3. Drag and drop the *Minimal-Footer* component group from the Custom Components section which we created in the previous task in the Footer section. 
+  ![](images/6-minfooter.png " ")
+
+Create a banner: 
+
+- From the left sidebar, drag and drop a Component Group into the Body slot. We’ll create a banner using this component group and the components (which we’ll be adding into it).
+- Add the background image to the Component Group(PatientDashboard>patientdashboardbackground.jpg).
+ ![](images/6-background.png " ")
+
+Background Settings: 
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Image | patientdashboardbackground.jpg |
+  | Position | Center center |
+  | Scale | Stretch | 
+
+- From the section layout, drag and drop *Two Columns* within the Component Group.
+ ![](images/5-sectionlayout.png " ")
+- Add a spacer from the seeded components into the first coloumn. 
+- Place the *title* below the spacer in the first column and update the text as follows: 
+"Personalized care when and where you need it..."
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Top | 3vw |
+  | Bottom | 1.8vw |
+  | Left | 7vw | 
+  | Right |	6vw |
+- Add a spacer from the seeded components into the first coloumn below the title. 
+![](images/6-banner.png " ")
+- *Save* the update.
+
