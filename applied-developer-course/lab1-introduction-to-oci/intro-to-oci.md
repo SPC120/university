@@ -345,3 +345,118 @@ For homework you will:
 - Create a Block Volume
 - Attach the Block Volume to your instance
 - Mount the Block Volume
+
+## Homework Solution: Attach a Block Volume to your Compute Image
+
+A common usage of Block Volume is adding storage capacity to an Oracle Cloud Infrastructure instance. Once you have launched an instance and set up your cloud network, you can create a block storage volume through the Console or API. Once created, the volume can be attached to an instance using a volume attachment. Once the volume is attached, you connect to the volume from your instance's guest OS using iSCSI or paravirtualized mode. The volume can then be mounted and used by your instance.
+
+1. Create a Block Volume.
+
+    Navigate to the Block Volume Service:
+
+    ![](./images/062.png " ")
+
+    ![](./images/063.png " ")
+
+    Create a Block Volume.
+
+    ![](./images/064.png " ")
+
+    - Name: CareClinic\_Block\_Volume
+    - Compartment: CareClinics
+    - Size (Custom): 50GB
+    - Backup Policy:  Gold
+    - Availability Domain:  This **MUST** be the same as your compute instance.  If you took the defaults when you created the compute instance this would be AD1
+    - All other parameters leave as default
+    - **Note:** Size must be between 50 GB and 32 TB. You can choose in 1 GB increments within this range. The default is 1024 GB
+
+    ![](./images/065.png " ")
+
+    **About block volume backup policies:** There are three predefined backup policies: Bronze, Silver, and Gold. Each backup policy has a set backup frequency and retention period.
+
+    - **Bronze Policy:** The bronze policy includes monthly incremental backups, run on the first day of the month. These backups are retained for twelve months. This policy also includes a full backup, run yearly on January 1st. Full backups are retained for five years.
+
+    - **Silver Policy:** The silver policy includes weekly incremental backups that run on Sunday. These backups are retained for four weeks. This policy also includes monthly incremental backups, run on the first day of the month and are retained for twelve months. Also includes a full backup, run yearly on January 1st. Full backups are retained for five years.
+
+    - **Gold Policy:** The gold policy includes daily incremental backups. These backups are retained for seven days. This policy also includes weekly incremental backups that run on Sunday and are retained for four weeks. Also includes monthly incremental backups, run on the first day of the month, retained for twelve months, and a full backup, run yearly on January 1st. Full backups are retained for five years.
+
+    ![](./images/066.png " ")
+
+    ![](./images/067.png " ")
+
+2. Attach a Block Volume to our compute Instance.
+
+    Once the Block Volume is created, you can attach it to CareClinic VM instance you earlier in this lab. When you attach a block volume to a VM instance, you have two options for attachment type, iSCSI or paravirtualized.
+
+    **iSCSI:** iSCSI attachments are the only option when connecting block volumes to bare metal instances. Once the volume is attached, you need to log in to the instance and use the iscsiadm command-line tool to configure the iSCSI connection
+
+    **Paravirtualized:** Paravirtualized attachments are now an option when attaching volumes to VM instances. For VM instances launched from Oracle-Provided Images, you can select this option for Linux-based images published. Once you attach a volume using the paravirtualized attachment type, it is ready to use. You do not need to run any additional commands. However, due to the overhead of virtualization, this reduces the maximum IOPS performance for larger block volumes. See Paravirtualized Attachment Performance for more information.
+
+    Go to the Compute Instances Menu, and navigate to the VM instance you created before. Select the instance.
+
+    ![](./images/068.png " ")
+
+    Select **Attached Block Volumes** in the lower left, and then select **Attach Block Volume**.
+
+    ![](./images/069.png " ")
+
+    ![](./images/070.png " ")
+
+    Click **Select volume** and choose the following options:
+
+    - Volume: Select the volume created
+    - Device Path: Select /dev/oracleoci/oraclevdb
+    - Attachment mode: iSCSI
+    - **Click Attach**
+    - Click **Close** to the following warning message.
+
+    ![](./images/071.png " ")
+
+    ![](./images/072.png " ")
+
+3. Format and mount the Block Volume.
+
+    Once the volume is attached, you can click on the menu to the right and then click **iSCSI commands and information**.
+
+    ![](./images/073.png " ")
+
+    Open the Cloud Shell and connect to the compute instance with ssh.
+
+    ![](./images/074.png " ")
+
+    ![](./images/075.png " ")
+
+     Click Copy to copy all connect commands. Run all these commands by pasting them in the cloud shell:
+    
+    ![](./images/076.png " ")
+
+    Once the disk is attached, you can run the following commands to format the disk and mount it.
+
+    ```
+    <copy>
+    ls -l /dev/oracleoci/oraclevd*
+    sudo mkfs -t ext4 /dev/oracleoci/oraclevdb
+    sudo mkdir /mnt/disk1
+    sudo mount /dev/oracleoci/oraclevdb /mnt/disk1
+    df -h
+    </copy>
+    ```
+       ![](./images/077.png " ")
+
+    **Note:** When mounting a storage volume for the first time, you can format the storage volume and create a single, primary partition that occupies the entire volume by using fdisk command (Caution: Using fdisk to format the disk deletes any data on the disk).
+
+4. Terminate the compute image.
+
+    Navigate to the instance and select delete.
+
+    ![](./images/059.png " ")
+
+    ![](./images/060.png " ")
+
+5. Terminate the Block Volume.
+
+    ![](./images/078.png " ")
+
+    ![](./images/079.png " ")
+
+    ![](./images/080.png " ")
