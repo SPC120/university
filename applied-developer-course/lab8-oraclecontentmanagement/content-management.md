@@ -685,7 +685,7 @@ Add the images and buttons to navigate within the page:
 
   ![](images/5-buttons.png " ")
 
-*Note:* Go ahead and commit the changes. 
+- Go ahead and commit the changes. 
 
   ![](images/5-commit.png " ")
 
@@ -707,7 +707,7 @@ Create a banner:
 
 Background Settings: 
 
-  | Property      | Value |
+  | Property    | Value |
   | ----------- | ----------- |
   | Image | patientdashboardbackground.jpg |
   | Position | Center center |
@@ -725,7 +725,22 @@ Background Settings:
   | Bottom | 1.8vw |
   | Left | 7vw | 
   | Right |	6vw |
-- Add a spacer from the seeded components into the first coloumn below the title. 
+- Add a spacer from the seeded components into the first column below the title. 
 ![](images/6-banner.png " ")
 - *Save* the update.
+
+<<Under construction>>
+
+## Task 7: Configure the Care Clinics Chatbot on the Patient's Dashboard page
+
+1. Open your ODA instance and copy ODA URI without https: and Channel ID in the notepad.
+  ![](images/6-copyoda.png " ")
+2. Open the *CareClinicsTemplate* which you synced in your local system in your favorite IDE.
+2. Go to the *assets/js* folder and open *settings.js*. 
+3. Update the ODA URI and Channel ID as follows:
+ ![](images/6-code.png " ")
+4. Test your chatbot.
+ ![](images/6-webchannel.png " ")
+
+## Task 8: Homework
 
