@@ -102,26 +102,21 @@ Estimated lab time: 2 hours
     ![](images/image12.png  " ")
 
 6. Sign Out from Admin.
+     ![](images/image14_0.png  " ")
 
+7. click Sign in.
      ![](images/image14.png  " ")
 
-7. Sign in back with Alpha as username and AppD3v0ps01_ as password.
+8. Sign in back with Alpha as username and AppD3v0ps01_ as password.
 
      ![](images/image15.png  " ")
      ![](images/image17.png  " ")
 
-8. Create the database user alpha by executing the following SQL Statements.
-    ```
-        <copy>create user alpha identified by "AppD3v0ps01_";
-        grant dwrole to alpha;
-        grant connect, resource to alpha;
-        grant unlimited tablespace to alpha;
-        </copy>
-        ```
+9. Now you log Signed in as Alpha and Click SQL Execute queries and scripts, and create database objects.
+    
+     ![](images/image9_1.png  " ")
 
-    ![](images/image19.png  " ")
-
-7. In the same SQL Developer Web Worksheet, execute the following SQL Statement to create the table users in the schema alpha.
+10. In the same SQL Developer Web Worksheet, execute the following SQL Statement to create the table users in the schema alpha.
     ```
         <copy>CREATE TABLE USERS(
         "ID" VARCHAR2(32 BYTE) DEFAULT ON NULL SYS_GUID(),
@@ -132,7 +127,7 @@ Estimated lab time: 2 hours
         "CREATED_ON" TIMESTAMP (6) DEFAULT ON NULL CURRENT_TIMESTAMP,
         CONSTRAINT "USER_PK" PRIMARY KEY ("ID"));
 
-        CREATE TABLE ALPHA.REQUESTS(
+        CREATE TABLE REQUESTS(
         "ID" VARCHAR2(32 BYTE) DEFAULT ON NULL SYS_GUID() PRIMARY KEY,
         "CREATED_ON" TIMESTAMP (6) DEFAULT ON NULL CURRENT_TIMESTAMP,
         "REQUEST" BLOB
@@ -141,7 +136,7 @@ Estimated lab time: 2 hours
 
     ![](images/image20.png  " ")
 
-8. To verify the table was created, Refresh the browser and select the ALPHA user. You will see the USERS table.
+11. To verify the table was created, Refresh the browser and select the ALPHA user. You will see the USERS table.
 
     ![](images/image21.png  " ")
 ## Task 3: Create Oracle Kubernetes Cluster
@@ -180,7 +175,7 @@ Estimated lab time: 2 hours
 
 8. To start working with the Cluster, click Access Cluster.
 
-    ![](images/image30.png  " ")
+    ![](images/image30_1.png  " ")
 
 9. Click Cloud Shell Access
     
@@ -215,7 +210,12 @@ Estimated lab time: 2 hours
     ![](images/image35.png  " ")
     ![](images/image36.png  " ")
 
-2. Change the DBusername, DBpassword and DBurl base64 coded in the user-svc-secret.yaml file. user-svc-secret.yaml files is applied to Kubernetes cluster, so that the ATP DB username, password and DBurl are configured with the application container. Go to OCI console, and click on cloud shell, once it is ready with your user directory, convert the values and save it in your notepad.
+2. Change app.yaml file using EDITOR and replace your docker image url as follows.
+
+    ![](images/image44_4.png  " ")
+    ![](images/image44_5.png  " ")
+
+3. Change the DBusername, DBpassword and DBurl base64 coded in the user-svc-secret.yaml file. user-svc-secret.yaml files is applied to Kubernetes cluster, so that the ATP DB username, password and DBurl are configured with the application container. Go to OCI console, and click on cloud shell, once it is ready with your user directory, convert the values and save it in your notepad.
 
     ```
         <copy> echo -n Alpha | base64 </copy>
@@ -233,42 +233,53 @@ Estimated lab time: 2 hours
 
     ![](images/image37.png  " ")
 
-3. select user-svc-secret.yaml file and edit the parameter values under data block for dbUser, dbPassword and dbUrl that you have encoded to base64
+4. select user-svc-secret.yaml file via EDITOR and edit the parameter values under data block for dbUser, dbPassword and dbUrl that you have encoded to base64.  
 
-    ```
-        <copy> vi vi user-svc-secret.yaml </copy>
-        ```
+    ![](images/image37_0.png  " ")
 
-4. Open user-svc-secret.yaml file and enter ***i*** to edit this file and replace Base64 encoded values to dbUser, dbPassword and dbUrl.
+5. Click **Save All**
+
+    ![](images/image37_1.png  " ")
+
+## Task 5: Download Database Wallet File 
+
+
+1. Go back to Autonomous Database you created using search bar by typing **CareClinicsDB**.
+
+   ![](images/image39_0.png  " ")
+
+2. Click **DB Connection**
    
-   ![](images/image38.png  " ")
-
-
-
-5. You need product-catalog ATP ocid, admin password. This step will download the wallet.zip file and store it in required location. Replace these in this format.
-Note: 
-***oci db autonomous-database generate-wallet --autonomous-database-id ATP ocid --password password --file Wallet_ATP Database name.zip***
-
     ![](images/image39.png  " ")
 
-    ```
-        <copy>
-        oci db autonomous-database generate-wallet --autonomous-database-id ocid1.autonomousdatabase.oc1.iad.abuwcljto2uskxs53rn5iuiw7doebwidhoh4p3dwc336qllbiwv5f --password AppD3v0ps01_ --file Wallet_ProductCatalog.zip
+3. Click **Download Wallet** fiile.
 
-        unzip -o Wallet_ProductCatalog.zip -d build-resource/wallet
-        </copy>
+    ![](images/image39_2.png  " ")
+
+4. Give required password for download wallet file.
+
+    ![](images/image39_3.png  " ")
+
+5. Drag and drop wallet zip file to **Cloud Shell** and wait to upload. 
+
+    ![](images/image39_4.png  " ")
+
+6. This will upload into your home directory and you need to extract into application development wallet folder. Copy and paste following command.
+
+    ```
+        <copy> unzip Wallet_CareClinicDB.zip -d user-catalog/build-resource/wallet/ </copy>
         ```
 
-    ![](images/image40.png  " ")
+    ![](images/image39_5.png  " ")
 
 
-## Task 5: Containerize Java/Helidon RESTful microservice application and push it Oracle Cloud Infrastructure Registry
+## Task 6: Containerize Java/Helidon RESTful microservice application and push it Oracle Cloud Infrastructure Registry
 
 1. Go to Oracle Cloud Main page and click user icon. 
 
     ![](images/image41.png  " ")
 
-2. Click *** Auth Tokens *** and Click *** Generate Tokens ***. Give any description (ex: token) and click Generate Token.
+2. Click ***Auth Tokens*** and Click ***Generate Tokens***. Give any description (ex: token) and click Generate Token.
     ![](images/image42.png  " ")
 
 
@@ -277,7 +288,7 @@ Note:
     ![](images/image43.png  " ")
     
 
-4. Login to Docker using above Auth Tokens as password and enter username as your cloud username. 
+4. Login to Docker using above Auth Tokens as password and enter username as your cloud username. For username, press Enter.
 
     ```
         <copy> docker login iad.ocir.io </copy>
@@ -285,14 +296,48 @@ Note:
 
     ![](images/image44.png  " ")
 
-5. Copy and paste following command to deploy this micro-service into Kubernetes Cluster.
+5. Copy and paste following command
 
     ```
-            <copy> kubectl -f app.yaml </copy>
+        <copy> docker build -t user-catalog . </copy>
+        ```
+
+    ![](images/image44_0.png  " ")
+
+6. Copy and paste following command to view deployed docker image.
+
+    ```
+        <copy> docker images </copy>
+        ```
+
+    ![](images/image44_1.png  " ")
+
+7. Copy **IMAGE ID** from above step and replace your image id for following command.
+
+    ```
+        <copy> docker tag IMAGE_ID iad.ocir.io/TENANCY/user-catalog </copy>
+        ```
+    Note: Your tenancy object storage namespace can be copied from here.
+    ![](images/image44_2.png  " ")
+
+8. Copy and paste following command to push it Oracle Cloud Infrastructure Registry
+
+    ```
+        <copy> docker push  iad.ocir.io/TENANCY/user-catalog </copy>
+        ```
+
+    ![](images/image44_3.png  " ")
+
+
+10. Copy and paste following command to deploy this micro-service into Kubernetes Cluster.
+
+    ```
+            <copy> kubectl create -f app.yaml </copy>
             ```
 
+    ![](images/image45.png  " ")
 
-## Task 6: Test RESTful endpoints 
+## Task 7: Test RESTful endpoints 
 1.  Copy following command and paste it to Cloud Shell to view deployed REST web-services
 
     ```
