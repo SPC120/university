@@ -11,10 +11,6 @@
             "filename": "../lab2-introduction-to-application-development/intro-app-dev.md"
         },
         {
-            "title": "Terraform and Resource Manager",
-            "filename": "../lab3-terraform-and-resourcemanager/terraform.md"
-        },
-        {
             "title": "Oracle APEX and ADW",
             "filename": "../lab4-oracleapex-and-adw/apex-adw.md"
         },
@@ -41,6 +37,10 @@
         {
             "title": "Data Science",
             "filename": "../lab10-datascience/datascience.md"
+        },
+        {
+            "title": "Resource Manager and Terraform",
+            "filename": "../lab3-terraform-and-resourcemanager/terraform.md"
         }
     ]
 }
