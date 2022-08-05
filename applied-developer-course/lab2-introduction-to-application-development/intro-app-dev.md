@@ -241,6 +241,14 @@ Estimated lab time: 2 hours
 
     ![](images/image37_1.png  " ")
 
+6. Copy and paste following command to create secrets.
+
+    ```
+        <copy> kubectl create -f user-svc-secret.yaml </copy>
+        ```
+
+    ![](images/image37_2.png  " ")
+
 ## Task 5: Download Database Wallet File 
 
 
@@ -328,8 +336,19 @@ Estimated lab time: 2 hours
 
     ![](images/image44_3.png  " ")
 
+9. Navigate to Oracle Cloud Infrastructure Registry using Cloud Console.
 
-10. Copy and paste following command to deploy this micro-service into Kubernetes Cluster.
+    ![](images/image1.png  " ")
+
+10. Select Developer Services and Container Registry
+    
+    ![](images/image44_6.png  " ")
+    
+11. After that select **root** compartment and make uploaded docker repository to public.
+
+    ![](images/image44_7.png  " ")
+    
+12. Copy and paste following command to deploy this micro-service into Kubernetes Cluster.
 
     ```
             <copy> kubectl create -f app.yaml </copy>
@@ -341,18 +360,25 @@ Estimated lab time: 2 hours
 1.  Copy following command and paste it to Cloud Shell to view deployed REST web-services
 
     ```
+            <copy> kubectl get pods </copy>
+            ```
+    ```
             <copy> kubectl get svc </copy>
             ```
 
-2. Replace IP address from endpoint and paste it URL to test your endpoint.
+    ![](images/image46.png  " ")
+
+2. Replace IP address from endpoint and paste it URL to test your endpoint. The HTTP Status 200 (OK) status code indicates that the request has been processed successfully on the server. 
 
     ```
             <copy> curl -iX GET http://<ip_address>:8080/user </copy>
             ```
 
+    ![](images/image47.png  " ")
+
+
 ## Homework: Perform RESTful operations.
 
-1. Perform List All users (curl -iX GET http://<ip_address>:8080/user/list)
-2. Perform save new user (curl -iX POST -H "Content-Type: application/json" -d '{"firstName": "ABC", "lastName": "XYZ", "username": "alpha", , "password": "abc123" }' http://<ip_address>:8080/user/save                            
-)
-3. Delete new user (curl -iX DELETE  http://localhost:8080/user/<id>) Note: ID is returned in Location header in question 2.
+1. Perform List All users **curl -iX GET http://<ip_address>:8080/user/list**
+2. Perform save new user **curl -iX POST -H "Content-Type: application/json" -d '{"firstName": "ABC", "lastName": "XYZ", "username": "alpha", , "password": "abc123" }' http://[ip_address]:8080/user/save**
+3. Delete new user **curl -iX DELETE  http://localhost:8080/user/[id]**Note: ID is returned in Location header in question 2.
