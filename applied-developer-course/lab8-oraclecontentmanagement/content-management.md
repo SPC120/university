@@ -23,7 +23,8 @@ In this lab, you will learn how to:
 
 1. Download the folder: 
 2. Install your favorite IDE (Preferred - Visual Studio Code)
-3. Follow the below steps to download the Oracle Content in your local machine:
+3. Go to the Documents folder under Collaboration and upload the *Lab Reports* Folder. The folder contains a few sample documents. (Add screenshot)
+4. Follow the below steps to download the Oracle Content in your local machine:
 - Click the *Avatar* icon on th top right of the page and select *Download Apps*.
 - Copy the *Service Url* from the page.
   ![](images/0-downloadapps.png " ")
@@ -171,12 +172,12 @@ We will now see the process to create the assets in a repository:
 - Image: InsuranceCard.jpeg
 - Select category (PatientInfo(PAT)>InsuranceCard)
  ![](images/4-ic.png " ") 
-- Email: Enter your email- Ex: sp@careclinics.org
+- Email: Enter your email- Ex: saipriya.thirvakadu@oracle.com
 3. Repeat step 1 and 2 to create another Content Item: 
 - Name: Covid Vaccination Proof
 - Image: covidvaccination.jpeg 
 - Select category - (PatientInfo(PAT)- VaccinationProof)
-- Email: Enter your email- Ex: sp@careclinics.org
+- Email: Enter your email- Ex: saipriya.thirvakadu@oracle.com
 4. Ensure the Vaccination Proof and Insurance Card is added to the right category.
  ![](images/4-bioasset.png " ") 
 
@@ -729,8 +730,63 @@ Background Settings:
 ![](images/6-banner.png " ")
 - *Save* the update.
 
-<<Under construction>>
+Create a VBCS Component to view the Patient Visit Details: 
 
+1. Copy the live VBCS web application url which you created in your previous lab.
+2. We will now enable VBCS integration in Oracle Content Management.
+  - Click the *Integrations* tab under *Administration* section and toggle allow Visual Builder Cloud Service Integration.
+  ![](images/5-integrations.png " ")
+  - Paste your VBCS url here (https://<<VBCS url>>/ic/builder)
+  ![](images/5-vbcsurl.png " ")
+2. Now, Go to the Developer tab in the side bar and select *View all components* under the components section. 
+3. Select the Create drop down from the top right of the page and click *Create Visual Builder Component*. 
+  ![](images/5-vbcs.png " ")
+4. Enter the following details in the Dialog box and hit the *Create* button. 
+Name: EmbedVBCS, Visual Builder Web Application URL: <<VBCS Live URL>>
+ ![](images/5-createVB.png " ")
+5. After successful creation of the VBCS component, let us add the component to the web page. 
+  - Go to the *Patient Dashboard" page and edit the update. 
+  - Add the component group below the banner from the Seeded components.
+  - Add Two columns from the Section layout into the Component group you just created.
+  - Set the width of first column as 70% and second column as 30%.
+  ![](images/5-patientdash2col.png " ")
+  - Now, add the *title* component in the first column and set the title as *Patient Visit Details*. Set the properties of the title as follows:
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Top | 3vw |
+  | Bottom | 1.8vw |
+  | Left | 2vw | 
+  | Right |	6vw |
+
+  ![](images/5-pdtitle.png " ")
+  - Now, go ahead and embed the *EmbedVBCS* component below the title.
+  ![](images/5-embedvb.png " ")
+
+Display Medical Reports:
+
+1. Add the *Title* component from the Seeded components and set the title as *Medical Reports*. 
+2. Let us copy the style from the title *Patient Visit Details* and paste the style for *Medical Reports*
+ ![](images/5-pastestyle.png " ")
+3. Add the Documents Manager component from the Seeded components under the title which your just added.
+4. Select the Lab Reports folder, provide Site Visitor Access: Viewer and disable the upload, move, edit and delete access for the Documents. 
+ ![](images/5-lab.png " ") 
+ ![](images/5-access.png " ")
+5. Set the height as follows: 
+ ![](images/5-doc.png " ")
+
+Display Health Cards: 
+
+1. Add the *Title* component from the Seeded components and set the title as *Health Cards*. 
+2. Let us copy the style from the title *Patient Visit Details* and paste the style for *Health Cards* 
+3. Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Content Type | Bio |
+  | List View | Vertical |
+
+  ![](images/5-hc.png " ")
 ## Task 7: Configure the Care Clinics Chatbot on the Patient's Dashboard page
 
 1. Open your ODA instance and copy ODA URI without https: and Channel ID in the notepad.
@@ -742,5 +798,12 @@ Background Settings:
 4. Test your chatbot.
  ![](images/6-webchannel.png " ")
 
+Patient Dashboard: 
+ ![](images/6-patientdash.png " ")
+
+Congratulations you have successfully built a healthcare portal using Oracle Content Management. 
+
 ## Task 8: Homework
+
+<<Under Construction>>
 
