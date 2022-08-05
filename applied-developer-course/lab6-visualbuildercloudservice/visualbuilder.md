@@ -472,6 +472,35 @@ Once that is done, you should see a notification saying that photo was taken suc
 
 3. Build a web application with a table containing patient visit data from the ATP database (Patient_visit table). Refer to [this link](https://www.youtube.com/watch?v=9DNBAh0UTeY&t=941s&ab_channel=OracleDevelopers) to learn how to create a web application.
 
+Step-by-Step Instructions to Complete the Homework Assignment
+
+1. For HW 3, you will be creating a web app but the overall application will stay the same. So click the **plus** on web app and give it a name. Open **main-start** and drag and drop a table component to the page.
+
+   ![](images/homework/001.png " ")
+
+2. Go to service connections, add a service connection. Similar to Task 2 Service connection 2. Add a **GET** method ORDS endpoint.
+
+   ![](images/homework/002.png " ")
+
+   ![](images/homework/003.png " ")
+
+3. Go back to **main-start**, click on the **table** and on the right side properties, under **Quick Start** click on **Add Data**.
+
+   ![](images/homework/004.png " ")
+
+4. Select the newly added ORDS endpoint, select the columns you want to display on the table.
+
+   ![](images/homework/005.png " ")
+
+5. In the last step, assign **User Email** under the System to the **email** URIParameters.
+
+   ![](images/homework/006.png " ")
+
+6. Click play and test the app. If the patient visits table in ATP contains your email address then this app will pull data and show it on the page.
+
+   ![](images/homework/007.png " ")
+
+
 ## Troubleshoot Tips
 
 ### Using Dev Tools
