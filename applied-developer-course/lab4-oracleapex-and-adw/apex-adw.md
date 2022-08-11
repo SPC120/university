@@ -136,9 +136,8 @@ Estimated lab time: 2 hours
 
 10. Repeat this step for 5 more tables (Exclude the PATIENT\_DOCUMENTS and the PATIENT\_INSURANCE tables)
 
-**Note:** After each load, click view table to return to the object browser
+    **Note:** After each load, click view table to return to the object browser
 
-    
     ![](images/image22.png " ")­­
 
 11. There should now be data in 6/8 tables
@@ -170,10 +169,10 @@ Estimated lab time: 2 hours
 
 1. Create new Page!
 
-*Note:* This is on version APEX 21.2, 22.1 will look slightly different.
+    *Note:* This is on version APEX 22.1, it may look slightly different to the current version
 
     
-    ![](images/image28.png " ")
+    ![](images/image28.png " ") 
 
 2. Select **Classic Report**
 
@@ -209,7 +208,7 @@ Estimated lab time: 2 hours
 
 8. Select the **P6\_Documents** page item, and change the **MIME Type Column**, **Filename Column**, and **BLOB Last Updated Column**, and Save. 
 
-*Note: *You will need to type these out to match exactly to the database columns.
+    *Note:* You will need to type these out to match exactly to the database columns.
 
     
     ![](images/image38.png " ")
@@ -221,11 +220,11 @@ Estimated lab time: 2 hours
 
 10. Scroll down and change the Type to **SQL Query** and add this code under. 
  
- ```
+    ```
     <copy>
     Select PV.PATIENT_VISIT_ID || ' - ' || P.FIRST_NAME || ' ' || P.LAST_NAME d, PATIENT_VISIT_ID r from PATIENT_VISIT PV, PATIENT P where PV.PATIENT_ID = P.PATIENT_ID
     </copy>
-```
+    ```
 
     
     ![](images/image40.png " ")
@@ -457,7 +456,6 @@ Construct Themes Tables: To build themes for your documents you will first need 
     ```
 
 
-    
     ![](images/image68.png " ")
 
 24. Create Themes index for the documents currently in the PATIENT\_DOCUMENTS table
