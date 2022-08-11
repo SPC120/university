@@ -7,9 +7,9 @@ Oracle Cloud Infrastructure (OCI) Resource Manager is an Oracle-managed service 
 
 Please take a couple minutes to watch the following Introduction to Resource Manager.
 
-[![Watch Recource Manager Overview](./images/intro_youtube.png " ")](https://youtu.be/ghOW03Dkrdg)
+[](youtube:ghOW03Dkrdg)
 
-**Estimated lab time: 120 minutes**
+Estimated time: 2 hours
 
 ### Objectives
 
@@ -148,51 +148,51 @@ Please reference the below Presentation for the Instructor's Material
 
 1. Navigate to the **Compute** Services group and select **Instances**
 
-	![](./images/task4/image1.png " ")
+	![Compute Instances](./images/task4/compute-instances.png " ")
 
 2. Be sure the **CareClinics** Compartment is selected and click **Create instance**
 
-	![](./images/task4/image2.png " ")
+	![Create Instance](./images/task4/create-instance.png " ")
 
 3. Enter the name **testCompute**, accept the defaults under the sections **Image and Shape** and **Networking**
 
-	![](./images/task4/image3.png " ")
+	![Instance Name](./images/task4/instance-name.png " ")
 
 4. In the **Add SSH keys** section, drop the public SSH Key **cloudshellkey.pub** you created earlier in **Task 4: Use the Oracle Cloud Shell to Create SSH keys** of the **Introduction to OCI** Lab
 
-	![](./images/task4/image4.png " ")
+	![SSH Keys](./images/task4/ssh-keys.png " ")
 
 5. Accept the defaults under section **Boot Volume** and click **Save as Stack**
 
-	![](./images/task4/image5.png " ")
+	![Save as Stack](./images/task4/save-as-stack.png " ")
 
 6. You are now redirected to ORM **Create Stack** page. Enter the name **Compute-Terraform**, be sure the **CareClinics** compartment is still selected and click **Next**
 
-	![](./images/task4/image6.png " ")
+	![Create Stack](./images/task4/create-stack.png " ")
 
 7. There are no Terraform Variables defined, so click **Next**
 
-	![](./images/task4/image7.png " ")
+	![Stack Variables](./images/task4/stack-variables.png " ")
 
 8. This time we will create AND apply the ORM Stack at the same time. To do this, enable the **Run Apply** option and click **Create**.
 
-	![](./images/task4/image8.png " ")
+	![Create and Apply Stack](./images/task4/create-apply-stack.png " ")
 
 9. The Resource Manager Apply job is now executing, the status will go from **ACCEPTED** to **IN PROGRESS** to **SUCCEEEDED**.
 
-	![](./images/task4/image9.png " ")
+	![Stack Apply Succeeded](./images/task4/stack-apply-succeeded.png " ")
 
 10. Examining the **Logs**, you will see **1** resource was added
 
-	![](./images/task4/image10.png " ")
+	![Stack Apply Logs](./images/task4/stack-apply-logs.png " ")
 
 11. Examining the **Job Resources**, you can see the **Attribute** details for **testCompute** by clicking **Show**. Here you will see the **Public** and **Private IP Addresses** assigned to the compute instance.
 
-	![](./images/task4/image11.png " ")
+	![Stack Resources](./images/task4/stack-resources.png " ")
 
 12. If you click on the Resource Name **testCompute**, this will open the **Instance details** page. Here you can see the all the details related to this compute instance.
 
-	![](./images/task4/image12.png " ")
+	![Compute Instance Details](./images/task4/compute-instance-details.png " ")
 
 13. Using the desired command prompt, we can test the SSH connection to the newly compute instance by issuing the below command. You will use the private key **cloudshellkey** you created earlier along with **Public IP address** and the user **opc**
 
@@ -202,48 +202,47 @@ Please reference the below Presentation for the Instructor's Material
 	</copy>
     ```
 
-	![](./images/task4/image13.png " ")
-
+	![SSH Into Compute Instance](./images/task4/ssh-into-instance.png " ")
 
 ## Task 5: Create an ORM Stack using the Template Feature
 
 1. Navigate to Resource Manager's Stacks page and click **Create Stack**. Be sure you are in the **CareClinics** Compartment.
 
-	![](./images/task5/image1.png " ")
+	![Create Stack](./images/task5/create-stack.png " ")
 
 2. On the **Create Stack** page, select **Template**, be sure the **CareClinics** compartment is selected, click on **Select Template** to select the desired OCI resource to create.
 
-	![](./images/task5/image2.png " ")
+	![Select Template](./images/task5/select-template.png " ")
 
 3. On the **Browse templates** pop-out, select the **Service** tab, **Compute Instance**, click the expand icon to read what will be deployed. Lastly, click the **Select Template** button to proceed.
 
 	**Note:** You can also select **Quickstarts** and **Architecture** templates for deploying out-of-the-box OCI environments.
 
-	![](./images/task5/image3.png " ")
+	![Select Compute Template](./images/task5/select-compute-template.png " ")
 
 4. Scroll down and enter the Stack name **Compute Instance-Template.** Be sure you are in the **CareClinics** Compartment and click **Next**.
 
-	![](./images/task5/image4.png " ")
+	![Stack Name](./images/task5/stack-name.png " ")
 
 5. Enter the compute instance name **ComputeTemplate**, select the **CareClinicVCN** VCN, select the subnet **Public Subnet-CareClinicVCN (Regional)** under the **Required Configuration** section
 
-	![](./images/task5/image5.png " ")
+	![Instance Display Name and Select Subnet](./images/task5/instance-name-subnet.png " ")
 
 6. Scroll down and enable **Assign Public IP** and choose the SSH Key file **cloudshellkey.pub** under the **Optional Configuration** section and click **Next**.
 
-	![](./images/task5/image7.png " ")
+	![Public IP and SSH Keys](./images/task5/public-ip-ssh-keys.png " ")
 
 7. Click **Create** on the Review screen
 
-	![](./images/task5/image8.png " ")
+	![Review and Create Stack](./images/task5/review-create-stack.png " ")
 
 8. The ORM Stack is now created. Let's run a **Plan** and see what would be created if we were to Apply it. Click on the **Plan** button on top of the page, then click **Plan** on the pop-out.
 
-	![](./images/task5/image9.png " ")
+	![Stack Plan](./images/task5/stack-plan.png " ")
 
 9. The status of the plan job will change from **IN PROGRESS** to **SUCCEEDED**. Click on **Logs** and scroll to the bottom. You will notice, 3 items will be created, and **OCI Compute Instance**, **OCI Boot Volume** and **OCI Boot Volume Attachment**.
 
-	![](./images/task5/image10.png " ")
+	![Stack Plan Succeeded](./images/task5/plan-succeeded.png " ")
 
 10. At this point, if you were to **Apply** this ORM stack, it would fail since the **VM.Standard.E2.1.Micro** Compute Shapes are only available in **Availability Domain 3 (AD3)** and this ORM Stack was written to leverage **AD1**. In **Task 6**, we will download the **Terraform Configuration** and edit it accordingly to allow the Availability Domain to be selected.
 
@@ -251,7 +250,7 @@ Please reference the below Presentation for the Instructor's Material
 	Error: Service error:NotAuthorizedOrNotFound. shape VM.Standard.E2.1.Micro not found. http status code: 404.
 	```
 
-	![](./images/task5/image11.png " ")
+	![Stack Apply](./images/task5/stack-apply.png " ")
 
 ## Task 6: Download an ORM Stack, Review and Enhance it
 
