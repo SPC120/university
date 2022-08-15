@@ -22,148 +22,147 @@ Estimated lab time: 2 hours
 1.  Login to your Oracle Cloud Tenancy and open the side menu
 
     
-    ![](images/image1.png  " ")
+    ![Welcome to the OCI Dashboard](images/OCI-Dashboard.png  " ")
 
 2.  Navigate Autonomous Transaction Processing
 
     
-    ![](images/image2.png  " ")
+    ![Autonomous Transaction Processing](images/Autonomous-Database.png  " ")
 
 3.  Select the correct compartment (Ex: Care Clinic) and click **Create an Autonomous Database**
 
     
-    ![](images/image3.png  " ")
+    ![Create ATP Database](images/Initial-Create-Database.png  " ")
 
 4.  Give a prefered Display Name (Ex: CareClinicsDB) and click **Transaction Processing** for the workload type
 
     
-    ![](images/image4.png " ")
+    ![Give new Database a preffered Display Name](images/Input-Display-Name.png " ")
 
 5.  Create the ADMIN password for the DB, following the database password requirements. Leave everything else as default
 
     *Note:* Make sure to save this password, you will need it later in this lab
 
     
-    ![](images/image5.png  " ")
+    ![Set Admin Password](images/Set-Password.png  " ")
 
 6.  Click **Create Autonomous Database**
 
     
-    ![](images/image6.png  " ")
+    ![Create Autonomous Database](images/Create-Database.png  " ")
 
 7.  Database provisioning will take about 5 minutes. Once the Lifecycle State is ***Available***, you can continue to the next task
 
     
-    ![](images/image7.png " ")
+    ![Database Provisioning](images/Database-Provisioning.png " ")
 
 ## Task 2: Create an APEX Workspace
 1.  Under Tools, click **Oracle APEX**
 
     
-    ![](images/image8.png " ")
+    ![Navigate to Oracle APEX](images/Open-APEX.png " ")
 
 2.  Enter ADMIN password (Step 5) and sign in
 
     
-    ![](images/image9.png " ")
+    ![Open the Admin Console](images/Admin-Console.png " ")
 
 3. Create a new Workspace
 
     
-    ![](images/image10.png " ")
+    ![Create a new Workspace](images/Create-Workspace.png " ")
 
 4. Create a Database User and new password for this user (Ex: CareClinic)
 
-    *Note:* Make sure to save this database user password, you will need it later
+    *Note:* Make sure to save this database user/password, you will need it later
 
     
-    ![](images/image11.png " ")
+    ![Create a new Database User](images/Create-Database-User.png " ")
 
 5. After creating the workspace, click **CARECLINIC** to sign out of the admin(internal) workspace and into the workspace that you have just created
 
     
-    ![](images/image12.png " ")
+    ![Sign out of Admin Workspace](images/Navigate-New-Workspace.png " ")
 
 ## Task 3: Upload Sample Data and Create a new Application
 
 1. Enter password for new dabase user (Ex: CareClinic) and sign into the workspace
 
     
-    ![](images/image13.png " ")
+    ![Sign into the New Workspace](images/New-Workspace.png " ")
 
-2. This is the oracle apex workspace running on inside the database you created. Let's visit the SQL Workshop!
+2. This is the oracle apex workspace running on the database you created earlier. Let's visit the SQL Workshop!
 
     
-    ![](images/image14.png " ")
+    ![Navigate to SQL Workshop](images/Workspace-Home.png " ")
 
 3. Inside the SQL Workshop > Object Browser to view any objects in the databse. 
 
     *Note:* It should be empty i.e no tables currently in the databse. Uploading a DDL script will create the table structure you need, and then you can inset the data from .csv files
 
     
-    ![](images/image15.png " ")
+    ![Object Browser](images/Object-Browser.png " ")
 
 4. Go to SQL Scripts and upload the contents of the <a href="files/Create_Tables.sql">Create\_Tables.sql</a> file. This will build the table structure of the tables required. 
 
 
     
-    ![](images/image16.png " ")
+    ![Navigate to SQL Scripts](images/SQL-Scripts.png " ")
 
 5. Upload the script
 
     
-    ![](images/image17.png " ")
+    ![Upload the SQL Script](images/Upload-SQL-Script.png " ")
 
 6. Once uploaded, run the script
 
     
-    ![](images/image18.png " ")
+    ![Run the SQL Script](images/Run-Script.png " ")
 
-7. Ensure the statements are processed with no errors **REPLACE Screen Capture HERE down**
+7. Ensure the statements are processed with no errors 
+    
+    ![Script Processed](images/Script-Processed.png " ")
+
+8. Return to the object browser. You are now able to view all 8 tables that were just created in the object browser. Now you will need to upload the data into them
 
     
-    ![](images/image19.png " ")
-
-8. You are now able to view all 8 tables that were just created in the object browser. Now you will need to upload the data into them
-
-    
-    ![](images/image20.png " ")
+    ![Tables have been created](images/Tables-Created.png " ")
 
 9. Click **Load Data** and upload the respective .csv file for HEALTHCARE\_FACILITY. The full data set can be found <a href="files/CareClinicData.zip">here.</a>
 
     
-    ![](images/image21.png " ")
+    ![Load Data into HealthCare Facility Table](images/Load-Data-1.png " ")
 
-10. Repeat this step for 5 more tables (Exclude the PATIENT\_DOCUMENTS and the PATIENT\_INSURANCE tables)
+10. Repeat this step for 5 more tables. All settings can be left as defualt. (Exclude the **PATIENT\_DOCUMENTS** and the **PATIENT\_INSURANCE** tables)
 
-    **Note:** After each load, click view table to return to the object browser
+    *Note:* After each load, click view table to return to the object browser
 
-    ![](images/image22.png " ")­­
+    ![Loading Data into Tables](images/Load-Data-2.png " ")­­
 
 11. There should now be data in 6/8 tables
 
     
-    ![](images/image23.png " ")
+    ![View Data](images/View-Data.png " ")
 
 12. Let's create a new application using the Healthcare\_Facility Table
 
     
-    ![](images/image24.png " ")
+    ![Create new application](images/Create-New-Application.png " ")
 
 13. Give your application a name, and click create application. You can leave everything else as defult!
 
     
-    ![](images/image25.png " ")
+    ![Name your application](images/Application-Name.png " ")
 
 14. Run the application and sign in with your database user (Step 11)!
 
     
-    ![](images/image26.png " ")
+    ![Run your new application](images/Run-Application.png " ")
 
 15. These are two sample pages created for you that show the **Health Care Facility** table. Let's click Application 100 and create a page to upload our sample documents to our **Patients Documents** Table
 
     
-    ![](images/image27.png " ")
+    ![Defult Application Pages](images/Default-Pages.png " ")
 
 ## Task 4: Add Pages to Application
 
@@ -172,53 +171,55 @@ Estimated lab time: 2 hours
     *Note:* This is on version APEX 22.1, it may look slightly different to the current version
 
     
-    ![](images/image28.png " ") 
+    ![Create new application page](images/New-Page-1.png " ") 
 
 2. Select **Classic Report**
 
     
-    ![](images/image29.png " ")
+    ![Select Classic Report](images/Classic-Report.png " ")
 
 3. Select **Include Form Page** and give both the classic report and form page unique names. Select the source for this report as the **PATIENT\_DOCUMENTS** table
 
+    *Note:* Its important to note that the report and form are being created on pages 5 and 6 respectivly. These will be referenced later in this lab.
+
     
-    ![](images/image30.png " ")
+    ![Set Classic Report Attributes](images/Classic-Report-Attributes.png " ")
 
 4. Keep the Primary Key Column as ID(Number)
 
     
-    ![](images/image31.png " ")
+    ![Set Primary Key](images/Set-Primary-Key.png " ")
 
 5. Let's hide some columns we do not want showing in the report. You can Ctrl/Cmd+Click these columns and change their type to Hidden Column
 
     
-    ![](images/image35.png " ")
+    ![Hide Report Columns](images/Hide-Report-Columns.png " ")
 
 6. Select the DOCUMENT Column and in the right side pannel change the **Mime Type**, **Filename Column**, and **Last Updated Column** to match the columns in our **Patient\_Documents** table!
 
     *Note:* Don't forget to save!
 
     
-    ![](images/image36.png " ")
+    ![Update Document Column for Report](images/Update-Document-Column.png " ")
 
 7. You will need to repeat the same steps for the form page (Page 6). Change the unwanted columns to type **Hidden**
 
     
-    ![](images/image37.png " ")
+    ![Hide Form Columns](images/Hide-Form-Columns.png " ")
 
 8. Select the **P6\_Documents** page item, and change the **MIME Type Column**, **Filename Column**, and **BLOB Last Updated Column**, and Save. 
 
     *Note:* You will need to type these out to match exactly to the database columns.
 
     
-    ![](images/image38.png " ")
+    ![Update Document Column for Form](images/Update-Document-Column-Form.png " ")
 
 9. Let's create a Popup LOV on our **P6\_PATIENT\_VISIT\_ID**. This will help you assign the correct **Patiend Visit ID** for the documents you are going to upload.
 
     
-    ![](images/image39.png " ")
+    ![Change type to Popup LOV](images/Create-Popup-LOV.png.png " ")
 
-10. Scroll down and change the Type to **SQL Query** and add this code under. 
+10. Scroll down and change the Type to **SQL Query** and add this query under. 
  
     ```
     <copy>
@@ -227,66 +228,66 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image40.png " ")
+    ![Define List of Values](images/Define-List-Query.png " ")
 
 11. Go back to Page 5 and run the application 
 
     *Note:* Modal Pages cannot be run directly from the page designer, for example Page 6
 
     
-    ![](images/image41.png " ")
+    ![Run the application to view changes](images/View-Application-Changes-1.png " ")
 
 12. Sign into the application, if prompeted, and click **Create** to inset new record into Patient\_Documents Table. All sample documents can be found <a href="files/Patient_Documents.zip">here.</a>
 
     
-    ![](images/image42.png " ")
+    ![Test Document Upload](images/Test-PDF-Upload.png " ")
 
 13. Upload all 6 PDF documents ensuring that the **Patient Visit ID** matches the document name that is being uploaded
 
     
-    ![](images/image43.png " ")
+    ![Upload all 6 sample documents](images/Upload-Samples.png " ")
 
 14. Now there will be 6 documents in the Patient\_Document Table. 
 
     
-    ![](images/image44.png " ")
+    ![Verify Documents Uploaded Properly](images/Documents-Uploaded.png " ")
 
 15. This will also be reflected in the SQL Workshop -\> Object Browser -\> Patient\_Document !
 
     
-    ![](images/image45.png " ")
+    ![View Table in Object Browser](images/View-Data-Object-Browser.png " ")
 
 ## Task 5: Explore Oracle Text
 
 1. Return to the Cloud Console, and inside the ATP DB you created, click **Database Actions**
 
     
-    ![](images/image46.png " ")
+    ![View your cloud console](images/View-Cloud-Console.png " ")
 
 2. Click Database Users!
 
     
-    ![](images/image47.png " ")
+    ![Navigate to Database Users](images/Database-Users.png " ")
 
-3. Edit the new user you have created!
-
-    
-    ![](images/image48.png " ")
-
-4. Under Granted Roles, search for "CTX" and check "CTXAPP" and apply changes.!
+3. Edit the new user you have created Ex: CareClinic
 
     
-    ![](images/image49.png " ")
+    ![Edit the new user](images/Edit-New-User.png " ")
 
-5. To verify the role was granted, return to Database Actions.!
+4. Under Granted Roles, search for "CTX" and check "CTXAPP" and apply changes
 
     
-    ![](images/image50.png " ")
+    ![Grant User CTXAPP Role](images/Grant-User-Roles.png " ")
+
+5. In order to verify the role was granted, return to Database Actions
+
+    
+    ![Navigate to Database Actions](images/Database-Actions.png " ")
 
 6. Under Development, click **SQL**
 
     
-    ![](images/image51.png " ")
+    ![Navigate into SQL Web Developer](images/SQL-Developer.png " ")
 
 7. Execute the following query, ensuring to chage the statement to match your database user that was created in Task 2 
 
@@ -297,37 +298,37 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image52.png " ")
+    ![Execute SQL Query](images/Execute-SQL-Query.png " ")
 
-8. Return to **Database Actions**, and click into **Database Users**. Enable REST on the Databse User you created by clicking the more actions and enabling rest!
-
-    
-    ![](images/image53.png " ")
-
-9. Open a new window by clicking below and sign in with the user that was created (Step 11)!
+8. Return to **Database Actions**, and click into **Database Users**. Enable REST on the Databse User you created by clicking the more actions and enabling rest
 
     
-    ![](images/image54.png " ")
+    ![Enabling Rest for new Users](images/Enable-REST-1.png " ")
 
-10. Open SQL Web Developer!
+9. Open a new window by clicking below and sign in with the user that was created (Step 11)
 
     
-    ![](images/image55.png " ")
+    ![Switch Database Users](images/Switching-DB-Users.png " ")
+
+10. Open SQL Web Developer
+
+    
+    ![Navigate to SQL Web Developer](images/Navigate-SQL-Web-Developer.png " ")
 
 11. Enable REST on both **PATIENT** and **PATIENT\_INSURANCE** tables by right clicking them. Leave all settings as defult!
 
     
-    ![](images/image56.png " ")
+    ![Enable REST for Tables](images/Enable-REST.png " ")
 
 12. Ensure are both tables now have REST Enables, you will need this later for the other labs
 
     
-    ![](images/image57.png " ")
+    ![Verify Last Step](images/Verify-REST-Enabled.png " ")
 
 13. Now visit the APEX workspace. Go to **SQL Commands** under SQL Workshop
 
     
-    ![](images/image58.png " ")
+    ![Visit SQL Commands](images/SQL-Commands.png " ")
 
 14. Create an Index on the Patient\_Documents Table, where the visit summaries are stored
 
@@ -338,9 +339,9 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image59.png " ")
+    ![Index Patient Document Table](images/Create-Auto-Index.png " ")
 
-15. Run the following query implementing Oracle Text. Oracle Text returns all documents (previously indexed) that satisfy the expression along with a relevance score for each document. You can use the scores to order the documents in the result set. If you would like to read more about Oracle Text, more information can be found <a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/ccapp/understanding-oracle-text-application-development.html#GUID-CF13C01A-F5E6-4EF5-839B-C09CF0024D5E">here</a>
+15. Run the following query utilizing Oracle Text. Oracle Text returns all documents (previously indexed) that satisfy the expression along with a relevance score for each document. You can use the scores to order the documents in the result set. If you would like to read more about Oracle Text, more information can be found <a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/ccapp/understanding-oracle-text-application-development.html#GUID-CF13C01A-F5E6-4EF5-839B-C09CF0024D5E">here</a>
 
     In this first example we are looking for all documents who have the work MRN inside the after visit summary. The CONTAINS operator must always be followed by the > 0 syntax, which specifies that the score value returned by the CONTAINS operator must be greater than zero for the row to be returned.
 
@@ -351,7 +352,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image60.png " ")
+    ![Run Basic Query](images/Base-Query.png " ")
 
 16. Find all documents that have the word ABC with a score \> 1 and also contains the word Medical Center.
 
@@ -362,7 +363,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image61.png " ")
+    ![Document Query - Double Word Search](images/ABC-MedicalCenter.png " ")
 
 17. This is a proximity search to look for the word ADULT near the word EXERCISES
 
@@ -373,7 +374,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image62.png " ")
+    ![Proximity Search](images/Proximity-Search.png " ")
 
 18. Fuzzy Search on a term, this gives the ability to find the work medications in the document without correct spelling. !
 
@@ -384,7 +385,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image63.png " ")
+    ![Fuzzy Search](images/Fuzzy-Search.png " ")
 
 19. Soundex Search on a term, giving the ability to find words that sound like the term provided, in this case "pressure". !
 
@@ -395,7 +396,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image64.png " ")
+    ![Soundex Search](images/Soundex-Search.png " ")
 
 20. Stem search on a term. For example if we are looking for documents with that stem of Jounal, then it will return words like Journaling
 
@@ -406,7 +407,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image65.png " ")
+    ![Stem Search](images/Stem-Search.png " ")
 
 21. Accumulation Search on two or more terms. This is looking for both terms in the document and assigning a score. Higher if both terms are present.!
 
@@ -417,7 +418,7 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image66.png " ")
+    ![Accumulation Search](images/Accumulation-Search.png " ")
 
 22. You can also weight each term as seen here. The word phyiscal carries 3x the weight of the work exercises. 
 
@@ -428,35 +429,19 @@ Estimated lab time: 2 hours
     ```
 
     
-    ![](images/image67.png " ")
+    ![Weighted Accumulation Search](images/Weighted-Accumulation-Search.png " ")
 
 23. Those are some of the basic queries within Oracle Text. 
-Construct Themes Tables: To build themes for your documents you will first need to create a table to hold the themes. Run each statement individually by highlingting the the statement then click Run.
+
+    Construct Themes Tables: To build themes for your documents you will first need to create a table to hold the themes. Run each statement individually by highlingting the the statement then click Run.
 
     ```
     <copy>
     create table themes (query_id number, theme varchar2(2000), weight number);
     </copy>
     ```
-    ```
-    <copy>
-    begin
-	for x in (select ID from PATIENT_DOCUMENTS) loop
-    ctx_doc.themes ('searchMyDocs', x.ID, 'themes', x.ID, full_themes => false);
-    end loop;
-    end;
-    </copy>
-    ```
-    ```
-     <copy>
-	select r.title, r.filename, t.theme, t.weight from PATIENT_DOCUMENTS r, themes t
-    where r.id = t.query_id and weight > 25
-    order by id asc;
-     </copy>
-    ```
-
-
-    ![](images/image68.png " ")
+  
+   ![Creating Themes Table](images/Themes-Table.png " ")
 
 24. Create Themes index for the documents currently in the PATIENT\_DOCUMENTS table
 
@@ -471,7 +456,7 @@ Construct Themes Tables: To build themes for your documents you will first need 
     ```
 
     
-    ![](images/image69.png " ")
+    ![Create Themes Index](images/Themes-Index.png " ")
 
 25. Query all themes. Show all themes with weight over 25
 
@@ -484,7 +469,7 @@ Construct Themes Tables: To build themes for your documents you will first need 
     ```
 
     
-    ![](images/image70.png " ")
+    ![Query Themes Table](images/Query-Themes.png " ")
 
 26. Repeat for the Gist Table. 
 
@@ -510,7 +495,7 @@ Construct Themes Tables: To build themes for your documents you will first need 
      </copy>
     ```
     
-    ![](images/image71.png " ")
+    ![Create Gist Table and Index](images/Gist-Table.png " ")
 
 27. Repeat for the Filtered Docs Table
 
@@ -538,7 +523,7 @@ Construct Themes Tables: To build themes for your documents you will first need 
     ```
 
     
-    ![](images/image72.png " ")
+    ![Create Filtered Docs Table and Index](images/Filtered-Docs.png " ")
 
 28. Finally repeat for the Full Themes tables
     
@@ -567,12 +552,12 @@ Construct Themes Tables: To build themes for your documents you will first need 
     ```
 
     
-    ![](images/image73.png " ")
+    ![Create Full Themes Table and Index](images/Full-Themes.png " ")
 
 29. We can vertify all 4 tables were created by visitng the Object Browser
 
     
-    ![](images/image74.png " ")
+    ![Verify Tables in object browser](images/Verify-Tables-Created.png " ")
 
 ## Task 6: Implement Oracle Text for End Users
 
