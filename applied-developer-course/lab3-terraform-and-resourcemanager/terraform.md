@@ -1,4 +1,3 @@
-<!-- Updated August 3, 2022 -->
 # Introduction to Oracle Resource Manager (ORM) and Terraform
 
 ## Introduction
