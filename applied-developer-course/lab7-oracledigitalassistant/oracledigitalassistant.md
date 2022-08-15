@@ -1,7 +1,7 @@
 ﻿# Build a Digital Assistant
 ## Introduction
 
-In this lab, we will build a Digital Assistant for patients to schedule an appointment online with the Doctor.
+This lab walks you through the steps to quickly provision and build a Digital Assistant for Care Clinics to assist the Patients to Register and Schedule an appointment with the Doctor in minutes. 
 
 Estimated Time: 2 hours
 ### Objectives
@@ -20,12 +20,11 @@ Before we get started:
 
 - Download the Skill template - <a href="files/CareClinics_Template.zip">download</a> 
 
-- Install your favorite IDE (VScode - preferable)
+- Install your favorite IDE (VScode - preferable). 
 
 - Install NodeJS in your local machine.
 
-
-(Add documentation - ORDS)
+- ORDS endpoint URL to register a patient created in the APEX lab.
 
 ## Task 1: Create a Digital Assistant Instance and Import the Skill
 1. Log in to the Oracle Cloud at cloud.oracle.com. Cloud Account Name is howarduniversity. Click “Next”.
@@ -649,6 +648,7 @@ bots-node-sdk init carecliniccs --component-name registerpatient
 
 ```
 <copy>
+// Custom Component
 'use strict';
 const fetch = require("node-fetch")
 
@@ -666,7 +666,8 @@ module.exports = {
       latitude: { required: true, type: 'string' }, 
       phonenumber: {required: true, type: 'string'}, 
       ordsUrl: {required: true, type: 'string'}, 
-      keepTurn: {required: false, type: 'string'}
+      keepTurn: {required: false, type: 'string'}, 
+      patient_id: {required: false, type: 'string'}
     },
 
     supportedActions: ['success', 'failure']
@@ -683,12 +684,13 @@ module.exports = {
     const { phonenumber } = context.properties()
     const { zipcode } = context.properties()
     const { ordsUrl } = context.properties()
+    const { patient_id } = context.properties()
 
     var myHeaders = new fetch.Headers();
     myHeaders.append("Content-Type", "application/json");
-
+    var pid = Math.floor(Math.random() * 100) + 30000;
     var raw = JSON.stringify({
-      "patient_id": Math.floor(Math.random() * 100) + 30000,
+      "patient_id": pid,
       "first_name": first_name,
       "last_name": last_name,
       "address": address,
@@ -714,7 +716,8 @@ module.exports = {
         return response.json();    
       })
       .then((data) => {    
-        context.reply("Registered the user successfully!"); 
+        context.reply("Registered the user successfully! "); 
+        context.variable(patient_id,pid);
         context.transition('success');
         context.keepTurn(true);
         done();
@@ -746,6 +749,14 @@ npm pack
 
   ![](images/4-ordsurl.png)
 
+- Declare a variable to store the output (Patient ID) from the Custom Component:
+
+```
+<copy>
+    patient_id: "string"
+</copy>
+```
+
 - Paste the following YAML code in the dialog flow below *registerPatient*.
 
 ```
@@ -763,6 +774,7 @@ npm pack
       longitude: ${RegisterPatientBag.value.Location.longitude}
       latitude: ${RegisterPatientBag.value.Location.latitude} 
       phonenumber: ${RegisterPatientBag.value.PhoneNumber}
+      patient_id: patient_id
       keepTurn: true
     transitions: 
       actions: 
@@ -972,7 +984,7 @@ npm pack
           attachmentTitle: "Use the following QR code to upload your health insurance card from your phone"
           attachmentUrl: "<<QRcode>>"      
           headerText: "Upload Health Insurance"
-          footerText: "Use your camera app on your phone to scan the QR code"
+          footerText: "Use your camera app on your phone to scan the QR code and enter the following id: ${patient_id.value}"
     transitions:
       next: confirmUpload
 
@@ -1019,11 +1031,12 @@ npm pack
       metadata:
         responseItems:
           - type: "text"
-            text: "We will send you a link to the email shortly! Please upload the insurance card in 2-3 business days."
+            text: "We will send you a link in a SMS shortly! Please upload the insurance card in 2-3 business days."
     transitions:
       next: "exitFlow"  
 </copy>
 ```
+
 
 ## Task 5: Create a Web Channel
 
@@ -1053,7 +1066,11 @@ Congratulations! You have successfully completed this lab.
 
 ## Homework: Create a Custom Component
 
-Go ahead and create a custom component to send out an email with the VBCS url using the Oracle Digital Assistant if the Patient chooses to upload the insurance card later.
+Go ahead and create a custom component to send out an SMS with the VBCS url using the Oracle Digital Assistant if the Patient chooses to upload the insurance card later.
 
-Hint: You can go ahead use your gmail smtp server to send out an email 
+References: 
+- https://docs.oracle.com/en/cloud/paas/digital-assistant/tutorial-application-initiated/index.html
+- https://docs.oracle.com/en/cloud/paas/digital-assistant/use-chatbot/text-only-channels.html#GUID-02ED95CA-44D8-401B-A3CA-401E66E25D82
+
+
 
