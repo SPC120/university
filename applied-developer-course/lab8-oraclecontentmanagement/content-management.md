@@ -715,7 +715,7 @@ Background Settings:
   | Scale | Stretch | 
 
 - From the section layout, drag and drop *Two Columns* within the Component Group.
- ![](images/5-sectionlayout.png " ")
+ ![](images/6-sectionlayout.png " ")
 - Add a spacer from the seeded components into the first coloumn. 
 - Place the *title* below the spacer in the first column and update the text as follows: 
 "Personalized care when and where you need it..."
@@ -735,21 +735,21 @@ Create a VBCS Component to view the Patient Visit Details:
 1. Copy the live VBCS web application url which you created in your previous lab.
 2. We will now enable VBCS integration in Oracle Content Management.
   - Click the *Integrations* tab under *Administration* section and toggle allow Visual Builder Cloud Service Integration.
-  ![](images/5-integrations.png " ")
+  ![](images/6-integrations.png " ")
   - Paste your VBCS url here (https://<<VBCS url>>/ic/builder)
-  ![](images/5-vbcsurl.png " ")
+  ![](images/6-vbcsurl.png " ")
 2. Now, Go to the Developer tab in the side bar and select *View all components* under the components section. 
 3. Select the Create drop down from the top right of the page and click *Create Visual Builder Component*. 
-  ![](images/5-vbcs.png " ")
+  ![](images/6-vbcs.png " ")
 4. Enter the following details in the Dialog box and hit the *Create* button. 
 Name: EmbedVBCS, Visual Builder Web Application URL: <<VBCS Live URL>>
- ![](images/5-createVB.png " ")
+ ![](images/6-createVB.png " ")
 5. After successful creation of the VBCS component, let us add the component to the web page. 
   - Go to the *Patient Dashboard" page and edit the update. 
   - Add the component group below the banner from the Seeded components.
   - Add Two columns from the Section layout into the Component group you just created.
-  - Set the width of first column as 70% and second column as 30%.
-  ![](images/5-patientdash2col.png " ")
+  - Set the width of first column as 75% and second column as 25%.
+  ![](images/6-patientdash2col.png " ")
   - Now, add the *title* component in the first column and set the title as *Patient Visit Details*. Set the properties of the title as follows:
 
   | Property      | Value |
@@ -759,51 +759,126 @@ Name: EmbedVBCS, Visual Builder Web Application URL: <<VBCS Live URL>>
   | Left | 2vw | 
   | Right |	6vw |
 
-  ![](images/5-pdtitle.png " ")
+  ![](images/6-pdtitle.png " ")
   - Now, go ahead and embed the *EmbedVBCS* component below the title.
-  ![](images/5-embedvb.png " ")
+  ![](images/6-embedvb.png " ")
 
 Display Medical Reports:
 
 1. Add the *Title* component from the Seeded components and set the title as *Medical Reports*. 
 2. Let us copy the style from the title *Patient Visit Details* and paste the style for *Medical Reports*
- ![](images/5-pastestyle.png " ")
+ ![](images/6-pastestyle.png " ")
 3. Add the Documents Manager component from the Seeded components under the title which your just added.
 4. Select the Lab Reports folder, provide Site Visitor Access: Viewer and disable the upload, move, edit and delete access for the Documents. 
- ![](images/5-lab.png " ") 
- ![](images/5-access.png " ")
+ ![](images/6-lab.png " ") 
+ ![](images/6-access.png " ")
 5. Set the height as follows: 
- ![](images/5-doc.png " ")
+ ![](images/6-doc.png " ")
 
-Display Health Cards: 
+## Task 7: Use Recommendations to display Health Cards
 
-1. Add the *Title* component from the Seeded components and set the title as *Health Cards*. 
+*Recommendations* are a way to provide personalized experiences for website visitors by showing assets based on audience attributes such as location or areas of interest. In this scenario, we want to display the Health cards of the on patient's email id. 
+
+Create Audience Attribute: 
+
+*Audience attributes* are what recommendations use to find and display that personalized content. Here, we will go ahead and create a custom attribute for logged in user.
+
+1. Click *Content* from the Administration section of the side menu.
+2. Select *Audience Attributes* from the Content page menu.
+3. Click *Custom* to view a list of available custom attributes.
+  ![](images/7-attribute.png " ")
+4. Click Create.
+5. Now, enter the name of the Custom Attribute *patientemail*.
+ ![](images/7-createattr.png " ")
+
+Create a Recommendation: 
+
+1. Click Recommendations in the side menu and select the repository to use.
+2. Click Create.
+3. Enter a name for the recommendation. It cannot contain the following characters: ' ; " : ? < > % *
+  | Property      | Value |
+  | ----------- | ----------- |
+  | Name | ProfileUpdate |
+  | API Name | ProfileUpdate |
+  | Content Type | Bio |
+  | Channels | CareClinicsOCM |
+
+4. Click Create.
+  ![](images/7-recomm.png " ")
+5. We will now configure the rules. 
+  - Drag and drop the *Email* field from the Content Fields to Recommendation rules.
+  - Set Email > Equal to > Attribute where 
+    - Attribute Category > Custom
+    - Custom Attribute > patientemail
+  - Click the Done button.
+  - Save the recommendation.
+  ![](images/7-rules.png " ")
+
+Update the page layout in the theme: 
+
+We will capture the patient's email using 'https://*url*.cec.ocp.oraclecloud.com/system/api/v1/me' and set the audience attribute using *SCSRenderAPI* namespace. 
+
+*Syntax*:
+
+setAudienceAttribute(name, value, optionsopt) → {Boolean}: Sets an audience attribute value given a name and value. Audience attributes set on the URL will take precedence over values set by JavaScript unless options.force equals true.
+
+1. Copy the url of the website <url>.cec.ocp.oraclecloud.com
+2. Open the *CareClinicsTemplate* which you synced in your local system in your favorite IDE.
+
+    ```
+    <copy>
+        <script type="text/javascript">
+            var apiUrl = 'https://<url>.cec.ocp.oraclecloud.com/system/api/v1/me';
+            fetch(apiUrl).then(response => {
+              return response.json();
+            }).then(data => {
+              // Work with JSON data here
+              console.log("Email: "+data.email);
+              SCSRenderAPI.setAudienceAttribute("custom.patientemail", data.email);
+            }).catch(err => {
+              // Do something for an error here
+            });
+        </script>  
+    </copy>
+    ```
+  ![](images/7-code.png " ")
+
+
+Update the web page: 
+
+1. In the Patient Dashboars, add the *Title* component from the Seeded components and set the title as *Health Cards*. 
 2. Let us copy the style from the title *Patient Visit Details* and paste the style for *Health Cards* 
-3. Drag and drop the *Content List* from the left navigation bar into the component group below the Title and update the settings as follows:
+3. Drag and drop the *Recommendation* from the left navigation bar into the component group below the Title and update the settings as follows:
 
   | Property      | Value |
   | ----------- | ----------- |
-  | Content Type | Bio |
+  | Recommendation | ProfileUpdate |
   | List View | Vertical |
 
   ![](images/5-hc.png " ")
-## Task 7: Configure the Care Clinics Chatbot on the Patient's Dashboard page
+4. After you hit the preview button and refresh the page, you will notice the recommendations personalized for you.
+
+  ![](images/7-bio.png " ")
+
+## Task 8: Configure the Care Clinics Chatbot on the Patient's Dashboard page
 
 1. Open your ODA instance and copy ODA URI without https: and Channel ID in the notepad.
-  ![](images/6-copyoda.png " ")
+  ![](images/8-copyoda.png " ")
 2. Open the *CareClinicsTemplate* which you synced in your local system in your favorite IDE.
 2. Go to the *assets/js* folder and open *settings.js*. 
 3. Update the ODA URI and Channel ID as follows:
- ![](images/6-code.png " ")
+ ![](images/8-code.png " ")
 4. Test your chatbot.
- ![](images/6-webchannel.png " ")
-
-Patient Dashboard: 
+ ![](images/8-webchannel.png " ")
+5. Go ahead and commit the changes. 
  ![](images/6-patientdash.png " ")
 
 Congratulations you have successfully built a healthcare portal using Oracle Content Management. 
 
 ## Task 8: Homework
 
-<<Under Construction>>
+Add the details page for Specialization.
+
+*Reference*: Go through Task 5 to create a details page for Specializations. 
+
 
