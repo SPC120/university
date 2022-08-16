@@ -564,9 +564,9 @@ Estimated lab time: 2 hours
 1. Now let's create a new page to let end users view document gists with 1 click. Create Page, and select **Classic Report**
 
     
-    ![](images/image75.png " ")
+    ![Create Classic New Report for Gist ](images/Create-Classic-Report.png " ")
 
-2. Give the Classic Report a name, and select Modal Dialog,t his will allow the page to be a pop-up instead of a redirect. Finally select the source as SQL Query and enter the query as shown
+2. Give the Classic Report a name, and select Modal Dialog, this will allow the page to be a pop-up instead of a redirect. Finally select the source as SQL Query and enter the query as shown
 
     ```
     <copy>
@@ -575,59 +575,59 @@ Estimated lab time: 2 hours
     ```
     *Note:* Ensure that this new page is page number 7 in-order for the query to populate properly
 
-    ![](images/image77.png " ")
+    ![Document Gist Creation](images/Document-Gist-Creation.png " ")
 
 3. On the new page, rename the Title of the content body on the right pane to 
-**&P7_Title. Gist**.
-Create two page items, **P7\_QUERY\_ID** and **P7\_TITLE**, by right-clicking on the content body region, and selecting **Create Page Item**
+    **&P7_Title. Gist**.
+    Create two page items, **P7\_QUERY\_ID** and **P7\_TITLE**, by right-clicking on the content body region, and selecting **Create Page Item**
 
     
-    ![](images/image78.png " ")
+    ![Adding Page New Items](images/Page-7-Gist-1.png " ")
 
 4. Set the Type of both new page items to **Hidden**
 
     
-    ![](images/image79.png " ")
+    ![Hide Page Unwanted Page Items](images/Page-7-Gist-2.png " ")
 
 5. Save and return to page 5 by using the page navigation. Right-Click Columns and **Create Virual Column** on your report
 
     
-    ![](images/image80.png " ")
+    ![Create a Virtual Column](images/Create-Virtual-Column.png " ")
 
 6. While Selecting the new virtual column you created, change the Heading to **Document Gist**. Under Link, click **No Link Defined** to define a new link for this virtual column. Set the link to page 7. Under Set Items, ensure you add both **P7\_Query\_ID** and **P7\_TITLE**, with values of **\#ID\#** and **\#TITLE\#** respectivly. Note: Use the menu to the right of the text box makes this easier.
 
     
-    ![](images/image81.png " ")
+    ![Creating Column Link](images/Gist-Column-Link.png " ")
 
 7. Add a Link Text by expanding the menu and selecting any of the defult optoions shown.
 
     
-    ![](images/image82.png " ")
+    ![Create A Link Text for New Column](images/Link-Text.png " ")
 
 8. Save and Run the application. Test this new feature by clicking on the pencil icon under Document Gist.
 
     
-    ![](images/image83.png " ")
+    ![Save and Run your Application](images/Test-Link-1.png " ")
 
 9. You now have a gist of the PDF documents with just one click. Now lets see how we can replicate this to add Fildered Docs in plain text to the table as well.
 
     
-    ![](images/image84.png " ")
+    ![View the Modal Page you have created](images/Test-Gist-Link-2.png " ")
 
 10. Navigate to Page 7 using the developent tool bar below. Choose the "+" icon and select Page as Copy. Select **Page in this application**
 
     
-    ![](images/image85.png " ")
+    ![Create a Page Copy](images/Page-Copy.png " ")
 
 11. Select the new page as page 8, and provide a new page name. On the next page select **Do not associate with a navigation menu entry**
 
     
-    ![](images/image86.png " ")
+    ![Enter new Classic Report Attributes](images/Page-Copy-2.png " ")
 
 12. Give the Page Region a new name and copy
 
     
-    ![](images/image87.png " ")
+    ![Name the new Region Copy](images/Region-Copy.png " ")
 
 13. You now have a new page (Page 8) where you can alter the SQL query to reflect that of Full Text. Let's create another virtual column link to this page
 
@@ -638,27 +638,27 @@ Create two page items, **P7\_QUERY\_ID** and **P7\_TITLE**, by right-clicking on
     </copy>
     ```
 
-    ![](images/image88.png " ")
+    ![Update SQL Query](images/Full-Text-Query.png " ")
 
 14. Save and return to Page 5. Right- Click columns and Create Virtual Column
 
     
-    ![](images/image89.png " ")
+    ![Create a Virtual Column](images/Second-Virtual-Column.png " ")
 
-15. Make changes similar to before. Set the link to page 8. Under Set Items, ensure you add both **P8\_Query\_ID** and **P8\_TITLE**, with values of **\#ID\#** and **\#TITLE\#** respectivly.
+15. Make changes similar to before in step 6. Set the link to page 8. Under Set Items, ensure you add both **P8\_Query\_ID** and **P8\_TITLE**, with values of **\#ID\#** and **\#TITLE\#** respectivly.
 
     
-    ![](images/image90.png " ")
+    ![Create Column Link](images/Virtual-Column-Link.png " ")
 
 16. Change the link text to a defult icon. Save and run the page
 
     
-    ![](images/image91.png " ")
+    ![Change Column Link Icon](images/Full-Text-Icon.png " ")
 
 17. By clicking the manifying glass icon we can see the full text for that individual document
 
     
-    ![](images/image92.png " ")
+    ![View Application Changes](images/Completed-Application.png " ")
 
 Congratulations! You have successfully completed this lab.
 
