@@ -10,15 +10,55 @@ Estimated lab time: 2 hours
 
 ### Objectives
 
+- Create Compartment
 - Create a new APEX workspace 
 - Build a web application
 - Explore Oracle Text 
 
 ### Prerequisites
 
-- This lab requires completion of the **Get Started** section in the Contents menu on the left.
+- Access to an OCI tenancy.
 
-## Task 1: Create Autonomous Transaction Processing Database
+## Task 1: Access The OCI Console
+
+1. Log in to the Oracle Cloud.  
+    
+    At the time this workshop was being created OCI was updating it's support for federated identity management, and so the log-in screens will be different from these screen shots.  This [blog](https://blogs.oracle.com/cloudsecurity/post/oci-federation-with-oci-iam-identity-domains) and this [whitepaper](https://www.oracle.com/a/ocom/docs/security/what-oci-iam-customers-should-expect.pdf) explains the current (June 2022) and near future approach to federating OCI users and groups, which most developer customers will likely adopt.
+
+    ![Login to your Cloud Tenancy](./images/Tenancy-Login.png " ")
+
+    ![Enter User Credentials](./images/Tenancy-Login-2.png " ")
+
+2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.  Note you can search for a service across all the menu items and also pin your favorites.  When you're done reviewing the menu items click the X to close the window.
+
+    ![Welcome to Oracle Cloud Tenancy](./images/Tenancy-Home.png " ")
+
+    ![Quickly Navigate through your Tenancy](./images/Tenancy-Navigation.png " ")   
+     
+3. Navigate to the Region drop down.  You will have a default region and can subscribe to others, depending on the initial regions assigned to you.  Note that Oracle has many regions around the world.  You can use these regions to co-locate applications and their user communities, and implement disaster recovery strategies.
+
+    ![Oracle Regions](./images/Oracle-Regions.png " ")
+
+    [Oracle Regions](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+
+
+
+## Task 2: Create a Compartment
+
+1. Compartments are the primary means to organize, segregate, and manage access to OCI resources.  Every tenancy has a root compartment under which you create additional sub-compartments and sub-sub compartments (maximum six levels deep).  Compartments are tenancy-wide across regions. When you create a compartment, it is available in every region that your tenancy is subscribed to. You can get a cross-region view of your resources in a specific compartment with the tenancy explorer. See [Viewing All Resources in a Compartment](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/compartmentexplorer.htm#Viewing_All_Resources_in_a_Compartment).  We will create a compartment called **CareClinics** for this course/workshop and create all related services in this compartment.  Navigate to the menu in the upper left and select Identity and Security, and then Compartments.
+
+    ![Navigate to Identity and Security](./images/Identity-Security.png " ")
+
+    ![Navigate to Compartments](./images/Compartments.png " ")
+
+    Create the new compartment.
+
+    ![Create new Compartment](./images/New-Compartment.png " ")
+
+    ![Name the new Compartment and Create](./images/Compartment-Name.png " ")
+
+
+## Task 3: Create Autonomous Transaction Processing Database
 1.  Login to your Oracle Cloud Tenancy and open the side menu
 
     
@@ -56,7 +96,7 @@ Estimated lab time: 2 hours
     
     ![Database Provisioning](images/Database-Provisioning.png " ")
 
-## Task 2: Create an APEX Workspace
+## Task 4: Create an APEX Workspace
 1.  Under Tools, click **Oracle APEX**
 
     
@@ -84,7 +124,7 @@ Estimated lab time: 2 hours
     
     ![Sign out of Admin Workspace](images/Navigate-New-Workspace.png " ")
 
-## Task 3: Upload Sample Data and Create a new Application
+## Task 5: Upload Sample Data and Create a new Application
 
 1. Enter password for new dabase user (Ex: CareClinic) and sign into the workspace
 
@@ -164,7 +204,7 @@ Estimated lab time: 2 hours
     
     ![Defult Application Pages](images/Default-Pages.png " ")
 
-## Task 4: Add Pages to Application
+## Task 6: Add Pages to Application
 
 1. Create new Page!
 
@@ -257,7 +297,7 @@ Estimated lab time: 2 hours
     
     ![View Table in Object Browser](images/View-Data-Object-Browser.png " ")
 
-## Task 5: Explore Oracle Text
+## Task 7: Explore Oracle Text
 
 1. Return to the Cloud Console, and inside the ATP DB you created, click **Database Actions**
 
@@ -559,7 +599,7 @@ Estimated lab time: 2 hours
     
     ![Verify Tables in object browser](images/Verify-Tables-Created.png " ")
 
-## Task 6: Implement Oracle Text for End Users
+## Task 8: Implement Oracle Text for End Users
 
 1. Now let's create a new page to let end users view document gists with 1 click. Create Page, and select **Classic Report**
 
