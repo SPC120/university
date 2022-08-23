@@ -1,6 +1,6 @@
 # Hospital Admin Insights from Oracle Analytics Cloud
 ## Introduction
-Up to this point in the course, you have used, manipulated, and analyzed all kinds of hospital and patient data. Now, we arrive to the visualization and sharing of data insights through Oracle Analytics Cloud. 
+Up to this point in the course, you have worked with and manipulated all kinds of hospital and patient data. Now, we will perform some data analysis on the patient data gathered into the Autonomous Data Warehouse. In this lab you will learn how to visualization and sharing of data insights through Oracle Analytics Cloud. 
 
 ### Objectives
 
@@ -12,17 +12,16 @@ In this lab, you will:
 
 ## Pre-requisites 
 
-You must have an **IDCS user**  set up
+* You must have an **IDCS user** set up. If you have completed the "Introduction to OCI" Lab, you already have an IDCS user.
 
 
-## Task 1: Create an Oracle Analytics Cloud (OAC) Instance & Enable Auto-Insights
-# Provisioning your Oracle Analytics Cloud (OAC) instance
+## Task 1: Provision an Oracle Analytics Cloud (OAC) Instance & Enable Auto-Insights
 
-## Introduction
+### Introduction
 
 This section describes the process of deploying **Oracle Analytics Cloud** instances on Oracle Cloud Infrastructure Gen 2, which is the default for newly provisioned accounts in **EMEA** and **US**.
 
-Your Oracle Cloud Free Tier account will use the Oracle Cloud Free Trial **credits** while this instance is provisioned, as Oracle Analytics Cloud is not part of the **Always Free** cloud services.
+Your Oracle Cloud Free Tier account will use the Oracle Cloud Free Trial **credits** when this instance is provisioned, as Oracle Analytics Cloud is not part of the **Always Free** cloud services.
 
 Provisioning an Oracle Analytics Cloud instance can take over **40 minutes**.
 
@@ -33,14 +32,13 @@ Watch our short video that explains how to provision your Oracle Analytics Cloud
 Estimated workshop Time 15 minutes.
 
 ### Objectives
-- Create an Oracle Analytics Cloud Instance
+- Name and Initiate an Oracle Analytics Cloud Instance
+- Enable Auto-Insights under Analytics Settings
 
-## Task 1: Create an Oracle Analytics Cloud (OAC) Instance
-
-Return to the Oracle Cloud Infrastructure Console accessing from **Oracle Home Page** (oracle.com) and sign in into your cloud account.
+0. TO BEGIN: Return to the Oracle Cloud Infrastructure Console accessing from **Oracle Home Page** (oracle.com) and sign in into your cloud account.
 Click in **View Account** and **Sign in to Cloud**.
 
-![Oracle Console SignIn](./images/cloud-signin.png)
+    ![Oracle Console SignIn](./images/cloud-signin.png)
 
 1. Click on the menu icon on the left. Verify that you are signed in as a **Single Sign On** (Federated user) user by selecting the **Profile** icon in the top right hand side of your screen. If your username is shown as:
 
@@ -119,8 +117,9 @@ Click in **View Account** and **Sign in to Cloud**.
 ## Task 2: Connect OAC to Autonomous Data Warehouse (ADW)
 
 
-
 ## Task 3: Create Data Mapping Between ADW Tables in OAC
+
+
 ## Task 4: Create a Workbook in OAC
 ## Task 5: Explain & Language Narrative Features for quick insights
 ## Task 6: Table & Map Visualization
