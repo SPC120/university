@@ -17,64 +17,48 @@ In this lab, you will:
 
 ## Task 1: Provision an Oracle Analytics Cloud (OAC) Instance & Enable Auto-Insights
 
-### Introduction
+> Note: Provisioning an Oracle Analytics Cloud instance can take over **40 minutes**. In preparatioon, you may watch [this](youtube:ZAqXlhivQCg) short video on provisioning an Oracle Analytics Cloud instance.
 
-This section describes the process of deploying **Oracle Analytics Cloud** instances on Oracle Cloud Infrastructure Gen 2, which is the default for newly provisioned accounts in **EMEA** and **US**.
+0. Navigate to the Oracle Cloud Infrastructure Console accessing from **Oracle Home Page** ([oracle.com](oracle.com)). Click in **View Account** and **Sign in to Cloud**.
 
-Your Oracle Cloud Free Tier account will use the Oracle Cloud Free Trial **credits** when this instance is provisioned, as Oracle Analytics Cloud is not part of the **Always Free** cloud services.
+    ![View Accounts Sign In](./images/Task-1/0-oracle-com.png)
 
-Provisioning an Oracle Analytics Cloud instance can take over **40 minutes**.
+1. Enter your **Cloud Account Name** (Tenant Name), hit **Next**, and sign in with your cloud login.
+    ![Enter Cloud Account](./images/Task-1/1-sign-on.png)
 
-Watch our short video that explains how to provision your Oracle Analytics Cloud instance:
+    **Verify that you are logged in as an OCI user** 
 
-[](youtube:ZAqXlhivQCg)
+    Check that your username is shown as:
 
-Estimated workshop Time 15 minutes.
-
-### Objectives
-- Name and Initiate an Oracle Analytics Cloud Instance
-- Enable Auto-Insights under Analytics Settings
-
-0. TO BEGIN: Return to the Oracle Cloud Infrastructure Console accessing from **Oracle Home Page** (oracle.com) and sign in into your cloud account.
-Click in **View Account** and **Sign in to Cloud**.
-
-    ![Oracle Console SignIn](./images/cloud-signin.png)
-
-1. Click on the menu icon on the left. Verify that you are signed in as a **Single Sign On** (Federated user) user by selecting the **Profile** icon in the top right hand side of your screen. If your username is shown as:
-
-    - oracleidentitycloudservice/&lt;your username&gt;
+    -  oracleidentitycloudservice/&lt;your username&gt;
     
-    Then you are **connected** as a **Single Sign On** user.
+    Then you are **signed in** as a **Single Sign-on** user.
 
-    ![Federated User](./images/federated-user.png)
+    ![OCI User](./images/Task-1/1-oci-user.png)
 
-    If your username is shown as:
+    If your user does not contain the identity provider (**oracleidentitycloudservice**) then you are logged in as a **Oracle Cloud Infrastructure** user. In this case, please logout and re-authenticate using **Single Sign On** instead.
 
-    -  &lt;your username&gt;
-    
-    Then you are **signed in** as an **Oracle Cloud Infrastructure** user.
-
-    ![OCI User](./images/oci-user.png)
-
-    If your user does not contain the identity provider (**oracleidentitycloudprovider**), please logout and select to authenticate
-    using **Single Sign On**.
-
-    ![Oracle Console SignIn](./images/console-signin.png)
+    ![Oracle Console SignIn](./images/Task-1/1-console-signin.png)
     To be capable of using **Oracle Analytics Cloud** we need to Sign-On as a **Single Sign-On** (SSO) user.
 
-    For more information about federated users, see [User Provisioning for Federated Users](https://docs.cloud.oracle.com/en-us/iaas/Content/Identity/Tasks/usingscim.htm).
+    ![Oracle Console SSO](./images/Task-1/1-sso.png)
 
-2. Return to the **Home Console Page** and navigate to **Analytics & AI** section and then **Analytics Cloud**.
+    *For more information about federated users, see [User Provisioning for Federated Users](https://docs.cloud.oracle.com/en-us/iaas/Content/Identity/Tasks/usingscim.htm).*
 
-    ![Oracle Analytics Console](https://raw.githubusercontent.com/oracle/learning-library/master/common/images/console/analytics-oac.png " ")
+2. From the **Home Console Page**, navigate to **Analytics & AI**  and select **Analytics Cloud**. This is how you will always navigate to your list of Analytics Cloud instances.
+
+    ![Oracle Cloud Console](./images/Task-1/1-console.png)
+
+    ![Oracle Analytics Console](./images/Task-1/1-console-menu.png)
 
     > **Note**: You must be connected as a **Single Sign On** (**Federated user**) user to a tenancy, which has available cloud credits to see this menu item. Local OCI users are not able to do this.
 
 3. Select **Create Instance**.
 
+    ![OAC Create Instance](./images/Task-1/3-create-instance.png)
+
     Complete the form using the following information:
 
-    
     - **Instance Name**: `WORKSHOPADWOAC`
         ```
         <copy>WORKSHOPADWOAC</copy>
@@ -93,26 +77,45 @@ Click in **View Account** and **Sign in to Cloud**.
 
     - **Edition**: Enterprise Edition "Deploy an instance with enterprise modeling, reporting, and data visualization"
 
-        ![Oracle Analytics Console](./images/1-3-edition.png)
+    ![Oracle Analytics Console](./images/Task-1/3-edition.png)
+
 
 4. Select **Create**.
 
-    ![OAC Instance Creation](./images/1-4-create-instance.png)
-
 5. On the **Confirmation** screen, select **Create**.
 
-    The Analytics instance page will be displayed with a status of **CREATING**.
+     The Analytics instance page will be displayed with a status of **CREATING**.
 
-    ![OAC Instance Creating](./images/oac-creating.png)
+    ![OAC Instance Creating](./images/Task-1/5-creating.png)
 
-    ***Reminder***: Provisioning an Oracle Analytics Cloud instance can take over **40 minutes**.
+    > ***Reminder***: Provisioning an Oracle Analytics Cloud instance can take over **40 minutes**.
 
-6. The Analytics instance page will be displayed with a status of **ACTIVE**.
+6. Once the Analytics instance page displays a status of **ACTIVE** (green), select the **Analytics Home Page**. 
 
-    ![OAC Instance Active](./images/oac-active.png)
+    ![OAC Instance Active](./images/Task-1/6-active.png)
 
-7. Activate Auto Insights...
+    The home page of your new analytics instance will open in a new tab.
 
+     ![OAC Homepage](./images/Task-1/6-analytics-home-menu.png)
+
+7. To ensure that **Auto Insights** is enabled, select the hamburger menu and navigate to the **Console**.
+
+     ![OAC Homepage](./images/Task-1/7-home-menu.png)
+
+8. From this page you can do anythign from *manage users*, to *create backups*, to *schedyle emails* containing analytics reports. For our purposes, we will choose the **System Settings** page.
+
+     ![OAC Console](./images/Task-1/8-oac-console.png)
+
+9. Select **Performance and Compatibility** from the outline meny, and confirm that **Auto Insights** is **ON** ![ON](./images/on.png)
+
+    ![Auto Insights](./images/Task-1/9-auto-insights.png)
+
+10. Navigate back to the OAC Home Page
+
+    ![Back 1](./images/Task-1/10-back1.png)
+    ![Back 2](./images/Task-1/10-back2.png)
+    ![Back 3](./images/Task-1/10-back3.png)
+    
 
 ## Task 2: Connect OAC to Autonomous Data Warehouse (ADW)
 
