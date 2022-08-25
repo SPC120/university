@@ -1,4 +1,4 @@
-# Oracle Data Science Platform - Train ML model
+# Build ML model using Oracle Data Science Platform 
 
 ## Introduction 
 
@@ -29,7 +29,7 @@ In this lab, you will:
 -	Familiarity with OCI Object Storage is desirable, but not required
 
 
-## Task 1: Configure prerequisites for the service
+## Task 1: Configure prerequisites for the OCI Data Science service
 
 This guide shows how to use the Resource Manager to provision the prerequisites for the OCI Data Science service. This includes the configuration network (VCN) and security configuration (groups, dynamic groups and policies).
 
@@ -58,7 +58,7 @@ You may have to log in first in case you were not logged into to Oracle Cloud In
 
 4. In the section "Vault Configuration" uncheck "Enable Vault Support".
 
-![](images/newimage6.png " ")
+![](images/enable-vault.png " ")
 
 5. In the section "Functions/API Gateway Configuration", uncheck "Provision Functions and API Gateway".
 
@@ -66,7 +66,7 @@ You may have to log in first in case you were not logged into to Oracle Cloud In
 
 6. Click "Next".
 
-![](images/newimage7.png " ")
+![](images/next.png " ")
 
 7. Make sure that that the "Run Apply" option is checked.
 
@@ -179,6 +179,8 @@ pip Install oracle_ads==2.5.9
 
 2. Download [004_build_model.ipynb](https://objectstorage.us-ashburn-1.oraclecloud.com/p/GvsWfwwmCYRsnHLmjunWS2BInvFrV9njLw5MZYR1PR9SD73RU6yamkNqbM81ANcH/n/orasenatdpltintegration03/b/CareClinics-bucket/o/004_build_model.ipynb). Run 004_build_model.ipynb to create , catalog and deploy a ML model using Oracle ADS
 
+
+Congratulations on completing the lab!
 
 
 
