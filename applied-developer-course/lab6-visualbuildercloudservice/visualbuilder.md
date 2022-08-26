@@ -24,27 +24,27 @@ Estimated lab time: 2 hours
 3. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
 4. Click **Developer Services --> Visual Builder**.
 
-   ![](images/task1/1.png " ")
+   ![](images/task1/oci-menu-vbcs.png " ")
 
 5. Select the **CareClinics** compartment and then click **Create Instance**.
 
-   ![](images/task1/2.png " ")
+   ![](images/task1/compartment.png " ")
 
 6. Type in the name for your VBCS instance. For example: **CareClinicVB**. Then click **Create Visual Builder Instance**.
 
-   ![](images/task1/3.png " ")
+   ![](images/task1/create-vbcs-instance.png " ")
 
 7. It will take a couple of minutes to create the instance. Once the status changes to active, click on the **Service Homepage** button.
 
-   ![](images/task1/4.png " ")
+   ![](images/task1/vbcs-instance-details.png " ")
 
 8. This will take you to the landing page for Visual builder cloud service. Then click on **New Application** to create an application.
 
-   ![](images/task1/5.png " ")
+   ![](images/task1/vbcs-landing-page.png " ")
 
 9. Enter an application name and click **Finish**. This will create your application and take you to the application builder landing page.
 
-   ![](images/task1/6.png " ")
+   ![](images/task1/vbcs-create-application.png " ")
 
 ## Task 2: Configure Service Connections
 
@@ -55,18 +55,18 @@ In this task, we will create 4 service connections. Prior to creating service co
 1. Log in to the Oracle Cloud at cloud.oracle.com. Cloud Account Name is howarduniversity. Click “Next”.
 2. Click on “Direct Sign-In” and enter your Cloud Account email and password.
 3. Once you are logged in, click on the avatar icon on the top right corner.
-   ![](images/task2/8.png " ")
+   ![](images/task2/oci-user-icon.png " ")
 
 4. Click on **API Keys** and then **Add API Key**.
-   ![](images/task2/9.png " ")
+   ![](images/task2/oci-user-api-keys.png " ")
 
 5. Click on **Generate API Key Pair**.
 6. Download the keys to your system and store them at a secure location.
 7. Click Add.
-   ![](images/task2/10.png " ")
+   ![](images/task2/oci-user-api-keys-generate.png " ")
 
 8. Copy the Configuration File Preview and paste this in a notepad text file. We will use this while adding a service connection to OCI services.
-   ![](images/task2/11.png " ")
+   ![](images/task2/oci-signature-config-file-overview.png " ")
 
 ### Service Connection 1: Object Storage
 
@@ -84,25 +84,25 @@ Note: In above API we will replace region, namespaceName, bucketName and objectN
 
 1. Go back to VBCS application. Click on **services** in left panel and then click on **plus sign** to add new service connection
 
-   ![](images/task2/7.png " ")
+   ![](images/task2/vbcs-service-connections.png " ")
 
 2. Select **Define by Endpoint** to add REST endpoints
-   ![](images/task2/12.png " ")
+   ![](images/task2/vbcs-service-connections-endpoint.png " ")
 
 3. Enter the Object Storage URL. Method will be **PUT** since we will upload image to Object Storage. Click **Next**
-   ![](images/task2/13.png " ")
+   ![](images/task2/vbcs-service-connections-configuration.png " ")
 
 4. By default you will be in **Overview** tab. Change **Service Name**
-   ![](images/task2/14.png " ")
+   ![](images/task2/vbcs-service-connections-name.png " ")
 
 5. Click on **Server**, under Server Variables change region variable to your region, here we are using Ashburn region and we will change the authentication to `Oracle Cloud Infrastructire API signature 1.0`
-   ![](images/task2/15.png " ")
+   ![](images/task2/vbcs-service-connections-server-config.png " ")
 
 6. Click on **pencil icon** to add API key ( < tenancyocid >/< userocid >/< fingerprint >) and Private Key. Click **Save**
-   ![](images/task2/16.png " ")
+   ![](images/task2/vbcs-service-connections-credentials.png " ")
 
 7. Click on **Request > Body** and change Media Type to `application/octet-stream`
-   ![](images/task2/17.png " ")
+   ![](images/task2/vbcs-service-connections-body.png " ")
 
 ### Service Connection 2: ORDS Autonomous Database
 
@@ -112,19 +112,19 @@ Repeat the above process to create another service connection to fetch user info
 
 1. Here we will have get method and hint will be get one. Click **Next**.
 
-   ![](images/task2/18.png " ")
+   ![](images/task2/vbcs-service-connections-2a-config.png " ")
 
 2. Rename the service if you want and go to test, and enter id value and click on send request. Once we get 200 response, click **save as example response** and then click **Create**.
 
-   ![](images/task2/19.png " ")
+   ![](images/task2/vbcs-service-connections-2a-test.png " ")
 
 3. We need to add another endpoint under the same server to create an entry in the ATP DB for the patient's insurance details. Therefore, click **+Endpoint**.
 
-   ![](images/task2/20.png " ")
+   ![](images/task2/vbcs-service-connections-2b-add.png " ")
 
 4. This time the method is **POST**, url is as per your configuration of the ATP ORDS Endpoint and action hint is **CREATE**. Then click **Save**.
 
-   ![](images/task2/21.png " ")
+   ![](images/task2/vbcs-service-connections-2b-configure.png " ")
 
 ### Service Connection 3: Vision Service
 
@@ -163,7 +163,7 @@ https://vision.aiservice.us-ashburn-1.oci.oraclecloud.com/20220125/actions/analy
 
 Note: Replace the values of namespaceName, bucketName and objectName in above upload.
 
-![](images/task2/59.png " ")
+![](images/task2/vbcs-service-connections-3-body.png " ")
 
 ## Task 3: Create Mobile Application
 
@@ -476,29 +476,29 @@ Step-by-Step Instructions to Complete the Homework Assignment
 
 1. For HW 3, you will be creating a web app but the overall application will stay the same. So click the **plus** on web app and give it a name. Open **main-start** and drag and drop a table component to the page.
 
-   ![](images/homework/001.png " ")
+   ![](images/homework/main-start-table.png " ")
 
 2. Go to service connections, add a service connection. Similar to Task 2 Service connection 2. Add a **GET** method ORDS endpoint.
 
-   ![](images/homework/002.png " ")
+   ![](images/homework/vbcs-service-connection-ords-endpoint.png " ")
 
-   ![](images/homework/003.png " ")
+   ![](images/homework/vbcs-service-connection-ords-endpoint-added.png " ")
 
 3. Go back to **main-start**, click on the **table** and on the right side properties, under **Quick Start** click on **Add Data**.
 
-   ![](images/homework/004.png " ")
+   ![](images/homework/main-start-table-add-data.png " ")
 
 4. Select the newly added ORDS endpoint, select the columns you want to display on the table.
 
-   ![](images/homework/005.png " ")
+   ![](images/homework/main-start-table-select-columns.png " ")
 
 5. In the last step, assign **User Email** under the System to the **email** URIParameters.
 
-   ![](images/homework/006.png " ")
+   ![](images/homework/main-start-table-data-input-to-rest-call.png " ")
 
 6. Click play and test the app. If the patient visits table in ATP contains your email address then this app will pull data and show it on the page.
 
-   ![](images/homework/007.png " ")
+   ![](images/homework/app-test.png " ")
 
 
 ## Troubleshoot Tips
